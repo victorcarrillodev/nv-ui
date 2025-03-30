@@ -1,0 +1,1 @@
+pnpm dlx commitlint --edit || (echo '\e[1;31m❌ Error en commitlint - no se pudo hacer el commit\e[0m' >&2; exit 1)

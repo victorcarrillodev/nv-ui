@@ -1,0 +1,7 @@
+echo "\n\n 🪄  \e[1;34mIniciando el formateado de prettier...\e[0m\n"
+
+pnpm format
+
+echo "\n\n 🧩  \e[1;34mIniciando linter...\e[0m\n"
+
+pnpm lint
