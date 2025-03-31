@@ -1,14 +1,19 @@
-#!/bin/sh
+# Evitar bucles verificando si estamos en un push forzado
+if git log -1 --pretty=%B | grep -q "\[skip-push\]"; then
+  echo "🛑 Se detectó [skip-push], saltando pre-push..."
+  exit 0
+fi
+
 echo "\n\n ⏳  \e[1;34mGenerando CHANGELOG.md...\e[0m\n"
 pnpm changelog  # Genera el changelog con standard-version
 
 echo "\n\n 📦  \e[1;34mAgregando archivos al commit del release...\e[0m\n"
 git add CHANGELOG.md package.json
 
-# Si hay cambios, los agregamos al último commit sin cambiar su mensaje
+# Si hay cambios, los agregamos al último commit sin modificar su mensaje
 if ! git diff --cached --quiet; then
-  git commit --amend --no-edit
+  git commit --amend --no-edit -m "$(git log -1 --pretty=%B) [skip-push]"
 fi
 
 echo "\n\n 🚀  \e[1;34mHaciendo push...\e[0m\n"
-git push --force-with-lease
+git push
