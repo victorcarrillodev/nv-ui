@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.6](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.4.7...v0.4.6) (2025-03-31)
+
+
+### Features
+
+* **theme:** :sparkles: se agrega tema base ([e5bc217](https://github.com/VictorManuelCarrillo/vue-ui/commit/e5bc2173bf559ae8f5812719bcc7a7b35473b196))
+
 ### [0.4.7](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.4.6...v0.4.7) (2025-03-31)
 
 ### [0.4.5](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.4.2...v0.4.5) (2025-03-31)
