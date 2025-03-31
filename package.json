@@ -15,7 +15,8 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "release": "bumpp --commit --push --tag"
+    "release": "bumpp --commit --push --tag",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
     "vue": "^3.5.13"
@@ -33,6 +34,8 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "bumpp": "^10.1.0",
+    "conventional-changelog": "^6.0.0",
+    "conventional-changelog-cli": "^5.0.0",
     "cypress": "^14.1.0",
     "eslint": "^9.21.0",
     "eslint-plugin-cypress": "^4.2.0",
