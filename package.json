@@ -15,7 +15,7 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "release": "bumpp --commit --push --tag",
+    "release": "bumpp --commit --push --tag && pnpm changelog && it add CHANGELOG.md && git commit --amend --no-edit",
     "changelog": "standard-version --skip.bump --skip.commit --skip.tag"
   },
   "dependencies": {
