@@ -1,3 +1,5 @@
 echo "\n\n ⏳  \e[1;34mGenerando CHANGELOG.md...\e[0m\n"
+
 npm run changelog
+
 git add CHANGELOG.md
