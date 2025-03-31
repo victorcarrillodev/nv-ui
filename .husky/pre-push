@@ -1,1 +1,14 @@
-git commit --amend --no-edit
+#!/bin/sh
+echo "\n\n ⏳  \e[1;34mGenerando CHANGELOG.md...\e[0m\n"
+pnpm changelog  # Genera el changelog con standard-version
+
+echo "\n\n 📦  \e[1;34mAgregando archivos al commit del release...\e[0m\n"
+git add CHANGELOG.md package.json
+
+# Si hay cambios, los agregamos al último commit sin cambiar su mensaje
+if ! git diff --cached --quiet; then
+  git commit --amend --no-edit
+fi
+
+echo "\n\n 🚀  \e[1;34mHaciendo push...\e[0m\n"
+git push --force-with-lease
