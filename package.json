@@ -16,8 +16,7 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "release": "bumpp --commit --push --tag",
-    "changelog": "standard-version --skip.bump --skip.commit --skip.tag",
-    "commit": "npx cz"
+    "changelog": "standard-version --skip.bump --skip.commit --skip.tag"
   },
   "dependencies": {
     "vue": "^3.5.13"
@@ -35,9 +34,7 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "bumpp": "^10.1.0",
-    "commitizen": "^4.3.1",
     "cypress": "^14.1.0",
-    "cz-gitmoji": "^0.0.7",
     "eslint": "^9.21.0",
     "eslint-plugin-cypress": "^4.2.0",
     "eslint-plugin-vue": "~10.0.0",
@@ -60,10 +57,5 @@
       "cypress",
       "esbuild"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-gitmoji"
-    }
   }
 }
