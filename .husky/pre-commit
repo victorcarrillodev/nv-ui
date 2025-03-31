@@ -5,3 +5,9 @@ pnpm format
 echo "\n\n 🧩  \e[1;34mIniciando linter...\e[0m\n"
 
 pnpm lint
+
+echo "\n\n ⏳  \e[1;34mGenerando CHANGELOG.md...\e[0m\n"
+pnpm changelog
+
+git add CHANGELOG.md
+git add package.json
