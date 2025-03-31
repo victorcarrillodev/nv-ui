@@ -1,3 +1,7 @@
+echo "\n\n 🔍  \e[1;34mVerificando Lint del proyecto...\e[0m\n"
+
 pnpm lint
+
+echo "\n\n 🪄  \e[1;34mFormateando código...\e[0m\n"
 
 pnpm format
