@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.3](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.4.2...v0.4.3) (2025-03-31)
+
+
+### Bug Fixes
+
+* **ci:** :green_heart: prueba de CI ([a678038](https://github.com/VictorManuelCarrillo/vue-ui/commit/a67803882d04afa471317aca01b0b698785e52a3))
+
+### [0.4.3](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.4.2...v0.4.3) (2025-03-31)
+
+
+### Bug Fixes
+
+* **ci:** :green_heart: prueba de CI ([a678038](https://github.com/VictorManuelCarrillo/vue-ui/commit/a67803882d04afa471317aca01b0b698785e52a3))
+
 ### [0.4.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.2.0...v0.4.1) (2025-03-31)
 
 
