@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.3.5](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.3.3...v0.3.5) (2025-03-31)
 
+
+### Features
+
+* **types:** :sparkles: se agregan types para theme ([378ce30](https://github.com/VictorManuelCarrillo/vue-ui/commit/378ce30ff185980ec4aff869d588797a983b8b0f))
+
+### [0.3.5](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.3.3...v0.3.5) (2025-03-31)
+
+### [0.3.5](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.3.3...v0.3.5) (2025-03-31)
+
+### [0.3.5](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.3.3...v0.3.5) (2025-03-31)
+
 ### [0.3.4](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.3.3...v0.3.4) (2025-03-31)
 
 ### [0.3.4](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.3.3...v0.3.4) (2025-03-31)
