@@ -2,7 +2,14 @@
 
 ## Structure
 ```bash
-build: :tada: primer commit
+<type>(<scope>): :<gitmoji>: <short description>
+
+<long description>
+
+<breaking changes>
+```
+```bash
+build(inicio): :tada: primer commit
 
 primer subida al repo del proyecto
 ```
