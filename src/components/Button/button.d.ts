@@ -7,8 +7,9 @@ import type { ThemeColors } from '../../types/theme';
  * @property disabled - Estado deshabilitado del botón
  */
 export interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'text';
-  disabled?: boolean;
+  filled?: boolean;
+  outlined?: boolean;
+  text?: boolean;  disabled?: boolean;
   // Puedes añadir más props según necesidades:
   // size?: 'small' | 'medium' | 'large'
   // loading?: boolean
@@ -21,8 +22,9 @@ export interface ButtonProps {
  * ya que se establecen valores por defecto en el componente
  */
 export interface ButtonClassesOptions {
-  variant: 'primary' | 'secondary' | 'text';
-  disabled: boolean;
+  filled?: boolean;
+  outlined?: boolean;
+  text?: boolean;  disabled: boolean;
 }
 
 /**
