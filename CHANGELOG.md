@@ -1,3 +1,12 @@
+## [0.14.3](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.2...v0.14.3) (2025-04-01)
+
+
+### Bug Fixes
+
+* **styles:** :bug: se corrigen errores ([949edbb](https://github.com/VictorManuelCarrillo/vue-ui/commit/949edbbcfbe00a97e04dd62e86b23cc32d7c5424))
+
+
+
 ## [0.14.2](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.1...v0.14.2) (2025-04-01)
 
 
