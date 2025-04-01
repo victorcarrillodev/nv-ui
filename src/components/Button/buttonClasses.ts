@@ -1,9 +1,9 @@
-import { computed } from 'vue'
-import type { ComputedRef } from 'vue'
-import type ButtonProps from './button'
+import { computed } from 'vue';
+import type { ComputedRef } from 'vue';
+import type ButtonProps from './button';
 
 // Cache para memoización (WeakMap no previene garbage collection)
-const classCache = new WeakMap<ButtonProps, ComputedRef<string[]>>()
+const classCache = new WeakMap<ButtonProps, ComputedRef<string[]>>();
 
 /**
  * Generates reactive CSS classes for a Button component with memoization
@@ -17,71 +17,64 @@ const classCache = new WeakMap<ButtonProps, ComputedRef<string[]>>()
  * // Llamadas posteriores con mismas options: retorna caché
  * const sameClasses = useButtonClasses({ variant: 'primary', disabled: true })
  */
-export const useButtonClasses = (
-  options: ButtonProps
-): ComputedRef<string[]> => {
+export const useButtonClasses = (options: ButtonProps): ComputedRef<string[]> => {
   // Verificar caché primero
-  const cached = classCache.get(options)
-  if (cached) return cached
+  const cached = classCache.get(options);
+  if (cached) return cached;
 
   // Crear nuevo computed si no está en caché
   const classes = computed(() => {
-    const classes = [
-      'ui-button',
-      `ui-button--${options.variant}`,
-    ]
+    const classes = ['ui-button', `ui-button--${options.variant}`];
 
     if (options.disabled) {
-      classes.push('ui-button--disabled')
+      classes.push('ui-button--disabled');
     }
 
-    return classes
-  })
+    return classes;
+  });
 
   // Almacenar en caché
-  classCache.set(options, classes)
+  classCache.set(options, classes);
 
-  return classes
-}
+  return classes;
+};
 
 /**
  * Optimized class concatenation with memoization
  * @param {(string | Record<string, boolean>)[]} classes - Array of class definitions
  * @returns {string} - Space-separated class string
  */
-export const classesToString = (
-  classes: (string | Record<string, boolean>)[]
-): string => {
+export const classesToString = (classes: (string | Record<string, boolean>)[]): string => {
   // Cache simple para strings (útil en renders repetidos)
-  const cacheKey = JSON.stringify(classes)
+  const cacheKey = JSON.stringify(classes);
   if (classesToString.cache[cacheKey]) {
-    return classesToString.cache[cacheKey]
+    return classesToString.cache[cacheKey];
   }
 
   const result = classes
-    .flatMap(classDef =>
+    .flatMap((classDef) =>
       typeof classDef === 'string'
         ? classDef
         : Object.entries(classDef)
             .filter(([, val]) => val)
-            .map(([key]) => key)
+            .map(([key]) => key),
     )
-    .join(' ')
+    .join(' ');
 
   // Almacenar en caché (limitando tamaño)
   if (Object.keys(classesToString.cache).length < 100) {
-    classesToString.cache[cacheKey] = result
+    classesToString.cache[cacheKey] = result;
   }
 
-  return result
-}
+  return result;
+};
 
 // Cache para classesToString (simple objeto)
-classesToString.cache = Object.create(null)
+classesToString.cache = Object.create(null);
 
 // Tipado extendido para ButtonProps (recomendado)
 type ButtonProps = {
-  variant: 'primary' | 'secondary' | 'text' // <- Valores específicos
-  disabled?: boolean
-  size?: 'sm' | 'md' | 'lg' // <- Nueva prop opcional
-}
+  variant: 'primary' | 'secondary' | 'text'; // <- Valores específicos
+  disabled?: boolean;
+  size?: 'sm' | 'md' | 'lg'; // <- Nueva prop opcional
+};
