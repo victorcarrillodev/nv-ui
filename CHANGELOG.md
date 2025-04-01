@@ -1,3 +1,12 @@
+## [0.14.5](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.4...v0.14.5) (2025-04-01)
+
+
+### Performance Improvements
+
+* **button:** :alembic: se mejora rendimiento ([3dfac2c](https://github.com/VictorManuelCarrillo/vue-ui/commit/3dfac2c3613555dd2b149b285f6f9d9901fcd1e2))
+
+
+
 ## [0.14.4](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.3...v0.14.4) (2025-04-01)
 
 
