@@ -1,14 +1,14 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 // Importaciones de utilidades y tipos
-import { useButtonStyles } from './useButtonStyles'
-import { useButtonClasses } from './buttonClasses'
-import type { ButtonProps } from './button'
+import { useButtonStyles } from './useButtonStyles';
+import { useButtonClasses } from './buttonClasses';
+import type { ButtonProps } from './button';
 
 // define el nombre del button
 defineOptions({
-  name: 'nv-button'
-})
+  name: 'nv-button',
+});
 
 /**
  * Definición de props con valores por defecto
@@ -17,9 +17,9 @@ defineOptions({
  * @property {boolean} disabled - Estado deshabilitado
  */
 const props = withDefaults(defineProps<ButtonProps>(), {
-  variant: 'primary',  // Valor por defecto: 'primary'
-  disabled: false,    // Valor por defecto: false
-})
+  variant: 'primary', // Valor por defecto: 'primary'
+  disabled: false, // Valor por defecto: false
+});
 
 // 1. Gestión de clases CSS
 /**
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const buttonClasses = useButtonClasses({
   variant: props.variant,
   disabled: props.disabled,
-})
+});
 
 // 2. Gestión de estilos dinámicos
 /**
@@ -41,7 +41,8 @@ const buttonClasses = useButtonClasses({
 useButtonStyles({
   variant: props.variant,
   disabled: props.disabled,
-  colors: {  // Estos valores deberían venir del sistema de temas
+  colors: {
+    // Estos valores deberían venir del sistema de temas
     primary: '',
     secondary: '',
     background: '',
@@ -49,7 +50,7 @@ useButtonStyles({
     text: '',
     border: '',
   },
-})
+});
 </script>
 
 <template>
