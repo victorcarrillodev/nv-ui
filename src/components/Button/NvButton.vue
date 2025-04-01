@@ -5,11 +5,6 @@ import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './buttonClasses';
 import type { ButtonProps } from './button';
 
-// define el nombre del button
-defineOptions({
-  name: 'nv-button',
-});
-
 /**
  * Definición de props con valores por defecto
  *
