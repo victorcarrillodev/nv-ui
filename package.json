@@ -16,7 +16,6 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "release": "bumpp --commit --push --tag",
-    "changelogg": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "changelog": "sh scripts/changelog.sh"
   },
   "dependencies": {
