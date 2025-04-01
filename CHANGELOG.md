@@ -1,3 +1,12 @@
+# [0.11.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.10.0...v0.11.0) (2025-04-01)
+
+
+### Features
+
+* **button:** :sparkles: se agrega generador de clases ([3bcbae7](https://github.com/VictorManuelCarrillo/vue-ui/commit/3bcbae79ed0dfa3902ad60b36b259a20c148b70b))
+
+
+
 # [0.10.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.9.1...v0.10.0) (2025-04-01)
 
 
