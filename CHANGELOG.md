@@ -1,3 +1,12 @@
+# [0.12.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.11.1...v0.12.0) (2025-04-01)
+
+
+### Features
+
+* **button:** :sparkles: se agrega composable ([55a9704](https://github.com/VictorManuelCarrillo/vue-ui/commit/55a970465478a376d523a0afe95dcdc85031313e))
+
+
+
 ## [0.11.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.11.0...v0.11.1) (2025-04-01)
 
 
