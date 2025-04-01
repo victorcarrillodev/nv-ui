@@ -19,7 +19,7 @@ export interface ButtonProps {
  * Contiene las mismas propiedades que ButtonProps pero sin opcionales
  * ya que se establecen valores por defecto en el componente
  */
-export type ButtonClassesOptions = ButtonProps
+export type ButtonClassesOptions = ButtonProps;
 
 /**
  * Opciones para el generador de estilos
