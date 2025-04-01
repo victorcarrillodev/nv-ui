@@ -1,3 +1,12 @@
+# [0.14.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.13.1...v0.14.0) (2025-04-01)
+
+
+### Features
+
+* **merge:** :twisted_rightwards_arrows: se hace merge ([efa255c](https://github.com/VictorManuelCarrillo/vue-ui/commit/efa255cf0b5eb4b2a78c4ca03941b0782eeced60))
+
+
+
 ## [0.13.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.13.0...v0.13.1) (2025-04-01)
 
 
