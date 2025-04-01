@@ -1,3 +1,12 @@
+## [0.13.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.13.0...v0.13.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **button:** :bug: se arreglan fallas ([b053536](https://github.com/VictorManuelCarrillo/vue-ui/commit/b0535367da31eb700428c25567a0067a8fff8591))
+
+
+
 # [0.13.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.12.0...v0.13.0) (2025-04-01)
 
 
