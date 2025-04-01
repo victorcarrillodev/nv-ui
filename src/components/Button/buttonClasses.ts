@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import type { ComputedRef } from 'vue';
-import type ButtonProps from './button';
+import type {ButtonProps} from './button';
 
 // Cache para memoización (WeakMap no previene garbage collection)
 
@@ -61,12 +61,3 @@ export const classesToString = (classes: (string | Record<string, boolean>)[]): 
 
 // Cache para classesToString (simple objeto)
 classesToString.cache = Object.create(null);
-
-// Tipado extendido para ButtonProps (recomendado)
-type ButtonProps = {
-  filled?: boolean;
-  outlined?: boolean;
-  text?: boolean;
-  disabled?: boolean;
-  size?: 'sm' | 'md' | 'lg'; // <- Nueva prop opcional
-};
