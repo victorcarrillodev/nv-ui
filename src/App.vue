@@ -29,6 +29,8 @@ const ThemedComponent = {
 <template>
   <ThemeProvider default-mode="light">
     <ThemedComponent />
-    <nv-button>ola</nv-button>
+    <nv-button outlined>ola</nv-button>
+    <nv-button filled>ola</nv-button>
+    <nv-button text>ola</nv-button>
   </ThemeProvider>
 </template>

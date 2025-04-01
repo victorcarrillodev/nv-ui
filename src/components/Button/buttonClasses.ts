@@ -24,7 +24,11 @@ export const useButtonClasses = (options: ButtonProps): ComputedRef<string[]> =>
 
   // Crear nuevo computed si no está en caché
   const classes = computed(() => {
-    const classes = ['ui-button', `ui-button--${options.variant}`];
+    const classes = ['ui-button'];
+
+    if (options.filled) classes.push('ui-button--filled');
+    if (options.outlined) classes.push('ui-button--outlined');
+    if (options.text) classes.push('ui-button--text');
 
     if (options.disabled) {
       classes.push('ui-button--disabled');
@@ -74,7 +78,8 @@ classesToString.cache = Object.create(null);
 
 // Tipado extendido para ButtonProps (recomendado)
 type ButtonProps = {
-  variant: 'primary' | 'secondary' | 'text'; // <- Valores específicos
-  disabled?: boolean;
+  filled?: boolean;
+  outlined?: boolean;
+  text?: boolean;   disabled?: boolean;
   size?: 'sm' | 'md' | 'lg'; // <- Nueva prop opcional
 };

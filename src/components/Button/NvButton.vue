@@ -12,8 +12,9 @@ import type { ButtonProps } from './button';
  * @property {boolean} disabled - Estado deshabilitado
  */
 const props = withDefaults(defineProps<ButtonProps>(), {
-  variant: 'primary', // Valor por defecto: 'primary'
-  disabled: false, // Valor por defecto: false
+  filled: false,
+  outlined: false,
+  text: false,  disabled: false, // Valor por defecto: false
 });
 
 // 1. Gestión de clases CSS
@@ -22,10 +23,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
  *
  * @returns {ComputedRef<string[]>} Array reactivo de clases CSS
  */
-const buttonClasses = useButtonClasses({
-  variant: props.variant,
-  disabled: props.disabled,
-});
+const buttonClasses = useButtonClasses(props);
 
 // 2. Gestión de estilos dinámicos
 /**
@@ -34,8 +32,7 @@ const buttonClasses = useButtonClasses({
  * Nota: Los colores se deberían inyectar desde el tema global
  */
 useButtonStyles({
-  variant: props.variant,
-  disabled: props.disabled,
+  ...props,
   colors: {
     // Estos valores deberían venir del sistema de temas
     primary: '',
