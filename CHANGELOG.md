@@ -1,3 +1,12 @@
+## [0.9.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.9.0...v0.9.1) (2025-03-31)
+
+
+### Bug Fixes
+
+* **ci:** :bug: se arregla changelog ([50786b8](https://github.com/VictorManuelCarrillo/vue-ui/commit/50786b8a80d62c1a986d78d49aa8f4e5c962a9ef))
+
+
+
 # [0.9.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.8.2...v0.9.0) (2025-03-31)
 
 
