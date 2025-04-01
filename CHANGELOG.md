@@ -1,3 +1,12 @@
+## [0.14.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.0...v0.14.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **button:** :label: se corrigen import de types ([59c9922](https://github.com/VictorManuelCarrillo/vue-ui/commit/59c9922eca63f5616a14ab077d43dd8b25c8e6d3))
+
+
+
 # [0.14.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.13.1...v0.14.0) (2025-04-01)
 
 
