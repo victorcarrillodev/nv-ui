@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import type { ComputedRef } from 'vue';
-import type {ButtonProps} from './button';
+import type { ButtonProps } from './button';
 
 // Cache para memoización (WeakMap no previene garbage collection)
 
