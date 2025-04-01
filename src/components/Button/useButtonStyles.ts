@@ -1,7 +1,7 @@
-import { watchEffect } from 'vue'
-import { useDynamicStyles } from '../../theme/useDynamicStyles'
-import { useTheme } from '../../theme/useTheme'
-import type { ButtonStylesOptions } from './button'
+import { watchEffect } from 'vue';
+import { useDynamicStyles } from '../../theme/useDynamicStyles';
+import { useTheme } from '../../theme/useTheme';
+import type { ButtonStylesOptions } from './button';
 
 /**
  * Hook composable para manejar estilos dinámicos de componentes Button
@@ -13,16 +13,16 @@ import type { ButtonStylesOptions } from './button'
  */
 export const useButtonStyles = (options: ButtonStylesOptions) => {
   // Inyección de dependencias para estilos dinámicos y tema
-  const { updateStyles, lightenColor } = useDynamicStyles()
-  const { theme } = useTheme()
+  const { updateStyles, lightenColor } = useDynamicStyles();
+  const { theme } = useTheme();
 
   /**
    * Función principal que actualiza todos los estilos del botón
    * Se ejecuta automáticamente cuando cambian las dependencias reactivas
    */
   const updateButtonStyles = () => {
-    const { variant, disabled } = options
-    const colors = theme.colors // Accede a la paleta de colores del tema actual
+    const { variant, disabled } = options;
+    const colors = theme.colors; // Accede a la paleta de colores del tema actual
 
     // 1. Estilos base aplicados a todos los botones
     updateStyles('.ui-button', {
@@ -36,22 +36,16 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
       'font-weight': '600', // Texto semibold
       transition: 'all 0.3s ease', // Transiciones suaves
       opacity: disabled ? '0.7' : '1', // Efecto de deshabilitado
-    })
+    });
 
     // 2. Estilos específicos por variante (primary, secondary, etc.)
     updateStyles(`.ui-button--${variant}`, {
-      'background-color':
-        variant === 'primary' ? colors.primary :
-        variant === 'secondary' ? colors.surface :
-        'transparent',
-      color:
-        variant === 'primary' ? '#ffffff' :
-        variant === 'secondary' ? colors.text :
-        colors.primary,
+      'background-color': variant === 'primary' ? colors.primary : variant === 'secondary' ? colors.surface : 'transparent',
+      color: variant === 'primary' ? '#ffffff' : variant === 'secondary' ? colors.text : colors.primary,
       ...(variant === 'secondary' && {
-        border: `1px solid ${colors.border}`
+        border: `1px solid ${colors.border}`,
       }),
-    })
+    });
 
     // 3. Efectos hover (solo si no está deshabilitado)
     if (!disabled) {
@@ -63,17 +57,17 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
         ...(variant === 'text' && {
           'text-decoration': 'underline', // Subrayado para variante texto
         }),
-      })
+      });
     }
-  }
+  };
 
   // Observador reactivo que ejecuta updateButtonStyles cuando:
   // - Cambia el tema
   // - Cambian las opciones (variant, disabled)
-  watchEffect(updateButtonStyles)
+  watchEffect(updateButtonStyles);
 
   // Expone la función para actualización manual si es necesario
   return {
     updateButtonStyles,
-  }
-}
+  };
+};
