@@ -1,3 +1,12 @@
+## [0.14.7](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.6...v0.14.7) (2025-04-01)
+
+
+### Performance Improvements
+
+* **types:** :label: se mejoran types ([0dc3a08](https://github.com/VictorManuelCarrillo/vue-ui/commit/0dc3a08d4adb60aa1f91f3c6f8c8d63b441288f1))
+
+
+
 ## [0.14.6](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.5...v0.14.6) (2025-04-01)
 
 
