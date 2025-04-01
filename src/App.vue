@@ -31,6 +31,6 @@ const ThemedComponent = {
     <ThemedComponent />
     <nv-button outlined>ola</nv-button>
     <nv-button filled>ola</nv-button>
-    <nv-button text>ola</nv-button>
+    <nv-button >ola</nv-button>
   </ThemeProvider>
 </template>

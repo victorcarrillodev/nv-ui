@@ -9,7 +9,8 @@ import type { ThemeColors } from '../../types/theme';
 export interface ButtonProps {
   filled?: boolean;
   outlined?: boolean;
-  text?: boolean;  disabled?: boolean;
+  text?: boolean;
+  disabled?: boolean;
   // Puedes añadir más props según necesidades:
   // size?: 'small' | 'medium' | 'large'
   // loading?: boolean
@@ -24,7 +25,8 @@ export interface ButtonProps {
 export interface ButtonClassesOptions {
   filled?: boolean;
   outlined?: boolean;
-  text?: boolean;  disabled: boolean;
+  text?: boolean;
+  disabled: boolean;
 }
 
 /**

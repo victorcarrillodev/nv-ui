@@ -3,7 +3,6 @@ import type { ComputedRef } from 'vue';
 import type ButtonProps from './button';
 
 // Cache para memoización (WeakMap no previene garbage collection)
-const classCache = new WeakMap<ButtonProps, ComputedRef<string[]>>();
 
 /**
  * Generates reactive CSS classes for a Button component with memoization
@@ -18,29 +17,16 @@ const classCache = new WeakMap<ButtonProps, ComputedRef<string[]>>();
  * const sameClasses = useButtonClasses({ variant: 'primary', disabled: true })
  */
 export const useButtonClasses = (options: ButtonProps): ComputedRef<string[]> => {
-  // Verificar caché primero
-  const cached = classCache.get(options);
-  if (cached) return cached;
-
-  // Crear nuevo computed si no está en caché
-  const classes = computed(() => {
+  return computed(() => {
     const classes = ['ui-button'];
 
     if (options.filled) classes.push('ui-button--filled');
     if (options.outlined) classes.push('ui-button--outlined');
     if (options.text) classes.push('ui-button--text');
-
-    if (options.disabled) {
-      classes.push('ui-button--disabled');
-    }
+    if (options.disabled) classes.push('ui-button--disabled');
 
     return classes;
   });
-
-  // Almacenar en caché
-  classCache.set(options, classes);
-
-  return classes;
 };
 
 /**
@@ -80,6 +66,7 @@ classesToString.cache = Object.create(null);
 type ButtonProps = {
   filled?: boolean;
   outlined?: boolean;
-  text?: boolean;   disabled?: boolean;
+  text?: boolean;
+  disabled?: boolean;
   size?: 'sm' | 'md' | 'lg'; // <- Nueva prop opcional
 };

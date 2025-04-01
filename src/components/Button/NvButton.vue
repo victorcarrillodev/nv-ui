@@ -14,7 +14,8 @@ import type { ButtonProps } from './button';
 const props = withDefaults(defineProps<ButtonProps>(), {
   filled: false,
   outlined: false,
-  text: false,  disabled: false, // Valor por defecto: false
+  text: false,
+  disabled: false, // Valor por defecto: false
 });
 
 // 1. Gestión de clases CSS
