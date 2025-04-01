@@ -1,30 +1,32 @@
 import type { ThemeColors } from '../../types/theme';
 
 /**
- * Propiedades principales del componente Button
+ * #Main properties of Button component
  *
- * @property variant - Tipo de botón (primary, secondary, text)
- * @property disabled - Estado deshabilitado del botón
+ * @property disabled - Disabled state of the Button
+ * @property filled - Button variant
+ * @property outlined - Button variant
+ * @property text - Button variant
  */
 export interface ButtonProps {
+  disabled?: boolean;
   filled?: boolean;
   outlined?: boolean;
-  text?: boolean;  disabled?: boolean;
-  // Puedes añadir más props según necesidades:
-  // size?: 'small' | 'medium' | 'large'
-  // loading?: boolean
+  size?: 'sm' | 'md' | 'lg';
+  text?: boolean;
 }
-
 /**
- * Opciones para el generador de clases
+ * #Options for the classes generator
  *
- * Contiene las mismas propiedades que ButtonProps pero sin opcionales
- * ya que se establecen valores por defecto en el componente
+ * Contain the same properties than ButtonProps but without optionals
+ * since default values ​​are set in the component
  */
 export interface ButtonClassesOptions {
-  filled?: boolean;
-  outlined?: boolean;
-  text?: boolean;  disabled: boolean;
+  disabled: boolean;
+  filled: boolean;
+  outlined: boolean;
+  size: 'sm' | 'md' | 'lg';
+  text: boolean;
 }
 
 /**

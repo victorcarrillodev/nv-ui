@@ -80,6 +80,7 @@ classesToString.cache = Object.create(null);
 type ButtonProps = {
   filled?: boolean;
   outlined?: boolean;
-  text?: boolean;   disabled?: boolean;
+  text?: boolean;
+  disabled?: boolean;
   size?: 'sm' | 'md' | 'lg'; // <- Nueva prop opcional
 };
