@@ -1,6 +1,6 @@
 import { watchEffect } from 'vue';
-import { useDynamicStyles } from '../../theme/useDynamicStyles';
-import { useTheme } from '../../theme/useTheme';
+import { useDynamicStyles } from '@/theme/composables/useDynamicStyles';
+import { useTheme } from '@/theme/composables/useTheme';
 import type { ButtonStylesOptions } from './button';
 
 /**
@@ -40,8 +40,8 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
 
     // 2. Estilos específicos por variante (primary, secondary, etc.)
     updateStyles(`.ui-button--${variant}`, {
-      'background-color': variant === 'primary' ? colors.primary : variant === 'secondary' ? colors.surface : 'transparent',
-      color: variant === 'primary' ? '#ffffff' : variant === 'secondary' ? colors.text : colors.primary,
+      'background-color': variant === 'primary' ? colors.primary.main : variant === 'secondary' ? colors.surface : 'transparent',
+      color: variant === 'primary' ? '#ffffff' : variant === 'secondary' ? colors.text : colors.primary.main,
       ...(variant === 'secondary' && {
         border: `1px solid ${colors.border}`,
       }),
