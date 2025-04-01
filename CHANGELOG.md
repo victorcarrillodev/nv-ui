@@ -1,3 +1,12 @@
+# [0.10.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.9.1...v0.10.0) (2025-04-01)
+
+
+### Features
+
+* **types:** :label: se agregan types ([710cc3c](https://github.com/VictorManuelCarrillo/vue-ui/commit/710cc3ca8b0b31c78af240a90701891532f484db))
+
+
+
 ## [0.9.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.9.0...v0.9.1) (2025-03-31)
 
 
