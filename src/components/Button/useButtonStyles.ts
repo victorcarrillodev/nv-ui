@@ -89,7 +89,9 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
   // Observador reactivo que ejecuta updateButtonStyles cuando:
   // - Cambia el tema
   // - Cambian las opciones (variant, disabled)
-  watchEffect(updateButtonStyles);
+  watchEffect(() => {
+    updateButtonStyles();
+  });
 
   // Expone la función para actualización manual si es necesario
   return {

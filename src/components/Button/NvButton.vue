@@ -10,12 +10,6 @@ const theme = useTheme();
 
 /**
  * Definición de props con valores por defecto
- *
- * @property {boolean} filled - Estado del botón de tipo lleno
- * @property {boolean} outlined - Estado del botón de tipo contorneado
- * @property {boolean} text - Estado del botón de tipo texto
- * @property {boolean} disabled - Estado deshabilitado
- * @property {string} size - Tamaño del botón
  */
 const props = withDefaults(defineProps<ButtonProps>(), {
   filled: true,
@@ -36,39 +30,23 @@ const buttonVariant = computed(() => {
   }
 });
 
-// 2. Gestión de clases CSS
-/**
- * Genera las clases dinámicas del botón basadas en las props
- *
- * @returns {ComputedRef<string[]>} Array reactivo de clases CSS
- */
+// 2. Genera las clases dinámicas basadas en las props
 const buttonClasses = useButtonClasses({
   ...props,
   ...buttonVariant.value,
 });
 
 // 3. Gestión de estilos dinámicos
-/**
- * Configura los estilos CSS-in-JS basados en las props
- *
- * Nota: Los colores se deberían inyectar desde el tema global
- */
 useButtonStyles({
   ...buttonVariant.value,
   colors: theme.theme.colors,
-  disabled: props.disabled,
-  size: props.size,
+  disabled: false,
+  size: 'sm',
 });
 </script>
 
 <template>
-  <!--
-    Elemento button raíz
-    :class - Aplica las clases dinámicas generadas
-    :disabled - Controla estado disabled nativo
-  -->
   <button :class="buttonClasses" :disabled="disabled">
-    <!-- Slot para contenido dinámico -->
     <slot />
   </button>
 </template>

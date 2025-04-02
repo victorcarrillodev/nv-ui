@@ -6,16 +6,9 @@ import type ButtonProps from './button';
 const classCache = new WeakMap<ButtonProps, ComputedRef<string[]>>();
 
 /**
- * Generates reactive CSS classes for a Button component with memoization
- * @param {ButtonProps} options - Configuration object for button styling
- * @returns {ComputedRef<string[]>} - Memoized computed ref with CSS classes
- *
- * @example
- * // Primera llamada: calcula y cachea
- * const classes = useButtonClasses({ variant: 'primary', disabled: true })
- *
- * // Llamadas posteriores con mismas options: retorna caché
- * const sameClasses = useButtonClasses({ variant: 'primary', disabled: true })
+ * Genera clases dinámicas reactivas para el componente Button con memoización
+ * @param {ButtonProps} options - Objeto de configuración para los estilos del botón
+ * @returns {ComputedRef<string[]>} - Referencia computada con las clases CSS
  */
 export const useButtonClasses = (options: ButtonProps): ComputedRef<string[]> => {
   // Verificar caché primero
@@ -47,9 +40,9 @@ export const useButtonClasses = (options: ButtonProps): ComputedRef<string[]> =>
 };
 
 /**
- * Optimized class concatenation with memoization
- * @param {(string | Record<string, boolean>)[]} classes - Array of class definitions
- * @returns {string} - Space-separated class string
+ * Concatenación optimizada de clases con memoización
+ * @param {(string | Record<string, boolean>)[]} classes - Array de definiciones de clases
+ * @returns {string} - Cadena de clases separadas por espacios
  */
 export const classesToString = (classes: (string | Record<string, boolean>)[]): string => {
   // Cache simple para strings (útil en renders repetidos)
