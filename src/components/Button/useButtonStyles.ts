@@ -28,7 +28,6 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
     // 1. Estilos base aplicados a todos los botones
     updateStyles('.ui-button', {
       'align-items': 'center',
-      border: 'none', // Reset de estilos
       'border-radius': '0.375rem', // 6px - border-radius mediano
       cursor: disabled ? 'not-allowed' : 'pointer', // Feedback visual
       display: 'inline-flex',
@@ -42,8 +41,9 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
     // 2. Estilos específicos por variante (primary, secondary, etc.)
     if (filled) {
       updateStyles('.ui-button--filled', {
-        'background-color': colors.primary.main,
         color: '#ffffff',
+        'background-color': colors.primary.main,
+        border: 'none',
       });
     }
 
@@ -51,7 +51,7 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
       updateStyles('.ui-button--outlined', {
         'background-color': 'transparent',
         color: colors.primary.main,
-        border: `1px solid ${colors.primary.main}`,
+        border: `10px solid ${colors.secondary}`,
       });
     }
 
@@ -59,6 +59,7 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
       updateStyles('.ui-button--text', {
         'background-color': 'transparent',
         color: colors.primary.main,
+        border: 'none',
       });
     }
 
