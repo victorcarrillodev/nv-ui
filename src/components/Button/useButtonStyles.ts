@@ -92,6 +92,22 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
     //     }),
     //   })
     // }
+    /**
+     * ?added */
+    updateStyles('.ui-button--sm', {
+      padding: '0.5rem 1rem',
+      'font-size': '0.875rem', // 14px
+    });
+
+    updateStyles('.ui-button--md', {
+      padding: '0.75rem 1.5rem',
+      'font-size': '1rem', // 16px
+    });
+
+    updateStyles('.ui-button--lg', {
+      padding: '1rem 2rem',
+      'font-size': '1.125rem', // 18px
+    });
   };
 
   // Observador reactivo que ejecuta updateButtonStyles cuando:
