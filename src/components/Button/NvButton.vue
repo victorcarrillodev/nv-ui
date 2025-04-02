@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   outlined: false,
   text: false,
   disabled: false, // Valor por defecto: false
+  size: 'md', // Valor por defecto
 });
 
 // 1. Gestión de clases CSS
