@@ -1,6 +1,7 @@
-import { inject } from 'vue';
+import { inject, reactive } from 'vue';
 import type { Theme, ThemeMode } from '@/theme/types/theme';
 import { ThemeSymbol } from '@/theme/constants/theme-keys';
+import { lightThemeColors } from '@/theme/themes/theme';
 
 /**
  * Interfaz extendida del contexto del tema
@@ -41,7 +42,12 @@ export function useTheme(): ThemeContext {
 
   // Validación de seguridad para desarrollo
   if (!context) {
-    throw new Error('useTheme debe usarse dentro de un ThemeProvider. ' + 'Envuelve tu aplicación con <ThemeProvider>');
+    console.warn('useTheme debe usarse dentro de un ThemeProvider');
+    return {
+      theme: reactive({ mode: 'light', colors: lightThemeColors }),
+      toggleMode: () => {},
+      setMode: () => {},
+    };
   }
 
   return context;
