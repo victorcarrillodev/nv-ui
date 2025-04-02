@@ -1,3 +1,12 @@
+# [0.16.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.15.0...v0.16.0) (2025-04-02)
+
+
+### Features
+
+* **size:** :sparkles: se agrega la prop size ([66beedb](https://github.com/VictorManuelCarrillo/vue-ui/commit/66beedb9d177282ebb92d3c5f5c93c79cac83091))
+
+
+
 # [0.15.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.13...v0.15.0) (2025-04-02)
 
 
