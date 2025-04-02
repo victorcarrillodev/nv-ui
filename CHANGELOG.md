@@ -1,3 +1,12 @@
+# [0.15.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.13...v0.15.0) (2025-04-02)
+
+
+### Features
+
+* **components:** :sparkles: se dclara globalidad ([ff91de0](https://github.com/VictorManuelCarrillo/vue-ui/commit/ff91de066adf3152c50c39b0ed26a2b0cd0cf381))
+
+
+
 ## [0.14.13](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.12...v0.14.13) (2025-04-02)
 
 
