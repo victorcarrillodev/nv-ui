@@ -1,49 +1,63 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 // Importaciones de utilidades y tipos
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './buttonClasses';
 import type { ButtonProps } from './button';
+import { useTheme } from '@/theme/composables/useTheme';
+import { computed } from 'vue';
+
+const theme = useTheme();
 
 /**
  * Definición de props con valores por defecto
  *
- * @property {string} variant - Tipo de botón (primary/secondary/etc.)
+ * @property {boolean} filled - Estado del botón de tipo lleno
+ * @property {boolean} outlined - Estado del botón de tipo contorneado
+ * @property {boolean} text - Estado del botón de tipo texto
  * @property {boolean} disabled - Estado deshabilitado
+ * @property {string} size - Tamaño del botón
  */
 const props = withDefaults(defineProps<ButtonProps>(), {
-  filled: false,
+  filled: true,
   outlined: false,
   text: false,
-  disabled: false, // Valor por defecto: false
-  size: 'md', // Valor por defecto
+  disabled: false,
+  size: 'md',
 });
 
-// 1. Gestión de clases CSS
+// 1. Asegúrate de que solo una de las propiedades esté activada a la vez
+const buttonVariant = computed(() => {
+  if (props.outlined) {
+    return { filled: false, outlined: true, text: false };
+  } else if (props.text) {
+    return { filled: false, outlined: false, text: true };
+  } else {
+    return { filled: true, outlined: false, text: false };
+  }
+});
+
+// 2. Gestión de clases CSS
 /**
  * Genera las clases dinámicas del botón basadas en las props
  *
  * @returns {ComputedRef<string[]>} Array reactivo de clases CSS
  */
-const buttonClasses = useButtonClasses(props);
+const buttonClasses = useButtonClasses({
+  ...props,
+  ...buttonVariant.value,
+});
 
-// 2. Gestión de estilos dinámicos
+// 3. Gestión de estilos dinámicos
 /**
  * Configura los estilos CSS-in-JS basados en las props
  *
  * Nota: Los colores se deberían inyectar desde el tema global
  */
 useButtonStyles({
-  ...props,
-  colors: {
-    // Estos valores deberían venir del sistema de temas
-    primary: '',
-    secondary: '',
-    background: '',
-    surface: '',
-    text: '',
-    border: '',
-  },
+  ...buttonVariant.value,
+  colors: theme.theme.colors,
+  disabled: props.disabled,
+  size: props.size,
 });
 </script>
 

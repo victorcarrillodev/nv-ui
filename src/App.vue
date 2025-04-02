@@ -29,8 +29,8 @@ const ThemedComponent = {
 <template>
   <ThemeProvider default-mode="light">
     <ThemedComponent />
-    <NvButton size="lg">size lg</NvButton>
-    <NvButton size="md">size md</NvButton>
-    <NvButton size="sm">size sm</NvButton>
+    <NvButton size="lg" text>size lg</NvButton>
+    <NvButton size="md" outlined>size md</NvButton>
+    <NvButton size="sm" filled>size sm</NvButton>
   </ThemeProvider>
 </template>
