@@ -1,3 +1,12 @@
+## [0.16.3](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.16.2...v0.16.3) (2025-04-02)
+
+
+### Bug Fixes
+
+* **theme:** :bug: se corrigen errores ([574f901](https://github.com/VictorManuelCarrillo/vue-ui/commit/574f9018c2126f2c137b71a16eb07f88078a5f85))
+
+
+
 ## [0.16.2](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.16.1...v0.16.2) (2025-04-02)
 
 
