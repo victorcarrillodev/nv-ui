@@ -1,72 +1,54 @@
 <script setup lang="ts">
-// Importaciones
-import { provide, reactive, watchEffect } from 'vue';
+import { provide, reactive, watchEffect, onMounted } from 'vue';
 import { darkThemeColors, lightThemeColors } from '@/theme/themes/theme';
 import type { Theme, ThemeMode } from '@/theme/types/theme';
 import { ThemeSymbol } from '@/theme/constants/theme-keys';
 
-/**
- * Props del componente
- * @property {ThemeMode} [defaultMode='light'] - Modo de tema inicial
- */
+// Clave de almacenamiento en localStorage
+const THEME_KEY = 'user-theme';
+
+// Props del componente
 const props = defineProps<{
   defaultMode?: ThemeMode;
 }>();
 
-/**
- * Estado reactivo del tema
- * @type {Theme}
- *
- * Inicializado con:
- * - Modo: el especificado en props o 'light' por defecto
- * - Colores: paleta correspondiente al modo inicial
- */
+// Obtener el modo almacenado en localStorage o usar el predeterminado
+const storedMode = (localStorage.getItem(THEME_KEY) as ThemeMode) || props.defaultMode || 'light';
+
+// Estado reactivo del tema
 const themeState = reactive<Theme>({
-  mode: props.defaultMode || 'light',
-  colors: props.defaultMode === 'dark' ? darkThemeColors : lightThemeColors,
+  mode: storedMode,
+  colors: storedMode === 'dark' ? darkThemeColors : lightThemeColors,
 });
 
-/**
- * Efecto reactivo que aplica los estilos del tema al elemento body
- *
- * Actualiza:
- * - Color de fondo
- * - Color de texto
- * - Transiciones para cambios suaves
- *
- * Se ejecuta automáticamente cuando cambia themeState
- */
+// Sincroniza el tema almacenado al montar el componente
+onMounted(() => {
+  const savedMode = localStorage.getItem(THEME_KEY) as ThemeMode | null;
+  if (savedMode) {
+    setMode(savedMode);
+  }
+});
+
+// Efecto para actualizar estilos del body dinámicamente
 watchEffect(() => {
   document.body.style.backgroundColor = themeState.colors.background.default;
   document.body.style.color = themeState.colors.text;
   document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
 });
 
-/**
- * Función para alternar entre modos claro/oscuro
- * Actualiza tanto el modo como la paleta de colores correspondiente
- */
+// Función para cambiar entre light y dark
 function toggleMode() {
-  themeState.mode = themeState.mode === 'light' ? 'dark' : 'light';
-  themeState.colors = themeState.mode === 'dark' ? darkThemeColors : lightThemeColors;
+  setMode(themeState.mode === 'light' ? 'dark' : 'light');
 }
 
-/**
- * Función para establecer un modo específico
- * @param {ThemeMode} mode - Modo a establecer ('light' o 'dark')
- */
+// Función para establecer un modo específico y guardarlo en localStorage
 function setMode(mode: ThemeMode) {
   themeState.mode = mode;
   themeState.colors = mode === 'dark' ? darkThemeColors : lightThemeColors;
+  localStorage.setItem(THEME_KEY, mode);
 }
 
-/**
- * Provee el contexto del tema a componentes hijos
- *
- * @property {Theme} theme - Estado actual del tema
- * @property {Function} toggleMode - Función para cambiar modo
- * @property {Function} setMode - Función para establecer un modo específico
- */
+// Proveer el contexto del tema
 provide(ThemeSymbol, {
   theme: themeState,
   toggleMode,
@@ -75,6 +57,6 @@ provide(ThemeSymbol, {
 </script>
 
 <template>
-  <!-- Slot para contenido que recibirá el contexto del tema -->
+  <!-- Contenido que recibirá el contexto del tema -->
   <slot />
 </template>
