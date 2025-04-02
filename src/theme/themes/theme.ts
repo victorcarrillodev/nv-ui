@@ -18,7 +18,7 @@ export const lightThemeColors: ThemeColors = {
 
 export const darkThemeColors: ThemeColors = {
   primary: {
-    main: '#7986cb',
+    main: '#000000',
     light: '#7986cb',
     dark: '#7986cb',
   },
