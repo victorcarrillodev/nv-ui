@@ -1,3 +1,12 @@
+## [0.14.11](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.10...v0.14.11) (2025-04-02)
+
+
+### Bug Fixes
+
+* **husky:** :wrench: se agrega codigo en husky ([349fd35](https://github.com/VictorManuelCarrillo/vue-ui/commit/349fd35b6bd34c945a9cbe257056b446298544cf))
+
+
+
 ## [0.14.10](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.14.9...v0.14.10) (2025-04-01)
 
 
