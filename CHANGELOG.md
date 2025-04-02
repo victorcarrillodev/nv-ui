@@ -1,3 +1,12 @@
+## [0.16.2](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.16.1...v0.16.2) (2025-04-02)
+
+
+### Bug Fixes
+
+* **provider:** :bug: se mejora el provider ([115cc18](https://github.com/VictorManuelCarrillo/vue-ui/commit/115cc1838c5b29466203cd64f07697f0113be060))
+
+
+
 ## [0.16.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.16.0...v0.16.1) (2025-04-02)
 
 
