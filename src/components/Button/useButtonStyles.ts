@@ -27,16 +27,16 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
 
     // 1. Estilos base aplicados a todos los botones
     updateStyles('.ui-button', {
-      display: 'inline-flex',
       'align-items': 'center',
-      'justify-content': 'center',
-      padding: '0.75rem 1.5rem', // Tamaño estándar
-      'border-radius': '0.375rem', // 6px - border-radius mediano
       border: 'none', // Reset de estilos
+      'border-radius': '0.375rem', // 6px - border-radius mediano
       cursor: disabled ? 'not-allowed' : 'pointer', // Feedback visual
+      display: 'inline-flex',
       'font-weight': '600', // Texto semibold
-      transition: 'all 0.3s ease', // Transiciones suaves
+      'justify-content': 'center',
       opacity: disabled ? '0.7' : '1', // Efecto de deshabilitado
+      padding: '0.75rem 1.5rem', // Tamaño estándar
+      transition: 'all 0.3s ease', // Transiciones suaves
     });
 
     // 2. Estilos específicos por variante (primary, secondary, etc.)
@@ -61,19 +61,6 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
         color: colors.primary.main,
       });
     }
-    // updateStyles(`.ui-button--${variant}`, {
-    //   'background-color':
-    //     variant === 'primary' ? colors.primary :
-    //     variant === 'secondary' ? colors.surface :
-    //     'transparent',
-    //   color:
-    //     variant === 'primary' ? '#ffffff' :
-    //     variant === 'secondary' ? colors.text :
-    //     colors.primary,
-    //   ...(variant === 'secondary' && {
-    //     border: `1px solid ${colors.border}`
-    //   }),
-    // })
 
     // 3. Efectos hover (solo si no está deshabilitado)
     if (!disabled) {
@@ -81,31 +68,19 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
         filter: 'brightness(1.1)',
       });
     }
-    // if (!disabled) {
-    //   updateStyles(`.ui-button--${variant}:hover`, {
-    //     filter: 'brightness(1.1)', // Efecto de brillo general
-    //     ...(variant === 'secondary' && {
-    //       'background-color': lightenColor(colors.surface, 15),
-    //     }),
-    //     ...(variant === 'text' && {
-    //       'text-decoration': 'underline', // Subrayado para variante texto
-    //     }),
-    //   })
-    // }
-    /**
-     * ?added */
-    updateStyles('.ui-button--sm', {
-      padding: '0.5rem 1rem',
+    // Sizes
+    updateStyles('.NvButton__size-sm', {
+      padding: '0.2rem 1rem',
       'font-size': '0.875rem', // 14px
     });
 
-    updateStyles('.ui-button--md', {
-      padding: '0.75rem 1.5rem',
+    updateStyles('.NvButton__size-md', {
+      padding: '0.5rem 1.5rem',
       'font-size': '1rem', // 16px
     });
 
-    updateStyles('.ui-button--lg', {
-      padding: '1rem 2rem',
+    updateStyles('.NvButton__size-lg', {
+      padding: '0.8rem 2rem',
       'font-size': '1.125rem', // 18px
     });
   };

@@ -31,7 +31,7 @@ export const useButtonClasses = (options: ButtonProps): ComputedRef<string[]> =>
     if (options.text) classes.push('ui-button--text');
 
     // Agregar clases para el tamaño
-    if (options.size) classes.push(`ui-button--${options.size}`);
+    if (options.size) classes.push(`NvButton__size-${options.size}`);
 
     if (options.disabled) {
       classes.push('ui-button--disabled');
