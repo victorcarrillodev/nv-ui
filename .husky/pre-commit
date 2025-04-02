@@ -5,3 +5,5 @@ pnpm lint
 echo "\n\n 🪄  \e[1;34mFormateando código...\e[0m\n"
 
 pnpm format
+
+git add .
