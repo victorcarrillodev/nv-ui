@@ -1,3 +1,13 @@
+## [0.18.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.18.0...v0.18.1) (2025-04-03)
+
+
+### Bug Fixes
+
+* **styles:** :bug: se arreglan estilos ([cb731cc](https://github.com/VictorManuelCarrillo/vue-ui/commit/cb731cc26e66a15c6a98197e7be38fd7cac06590))
+* **theme:** :bug: se corrigen estructuras ([f9817d8](https://github.com/VictorManuelCarrillo/vue-ui/commit/f9817d8b6bfa2e8133157770b0a23f662db34bc7))
+
+
+
 # [0.18.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.17.0...v0.18.0) (2025-04-03)
 
 
