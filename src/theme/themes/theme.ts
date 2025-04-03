@@ -2,11 +2,15 @@ import type { ThemeColors } from '../types/theme';
 
 export const lightThemeColors: ThemeColors = {
   primary: {
-    main: '#3f51b5',
+    main: '#0037cf',
     light: '#3f51b5',
     dark: '#3f51b5',
   },
-  secondary: '#ff4081',
+  secondary: {
+    main: '#cf5300',
+    light: '#3f51b5',
+    dark: '#3f51b5',
+  },
   background: {
     paper: '#ffffff',
     default: '#000000',
@@ -18,11 +22,15 @@ export const lightThemeColors: ThemeColors = {
 
 export const darkThemeColors: ThemeColors = {
   primary: {
-    main: '#000000',
+    main: '#00b6cf',
     light: '#7986cb',
     dark: '#7986cb',
   },
-  secondary: '#a2c914',
+  secondary: {
+    main: '#cf5300',
+    light: '#3f51b5',
+    dark: '#3f51b5',
+  },
   background: {
     paper: '#4f5052',
     default: '#ffffff',

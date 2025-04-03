@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { ThemeColors } from '../../types/theme';
 
 /**
@@ -14,6 +15,7 @@ export interface ButtonProps {
   outlined?: boolean;
   size?: 'sm' | 'md' | 'lg';
   text?: boolean;
+  color?: 'primary' | 'secondary';
 }
 /**
  * #Options for the classes generator
@@ -27,6 +29,7 @@ export interface ButtonClassesOptions {
   outlined: boolean;
   size: 'sm' | 'md' | 'lg';
   text: boolean;
+  color: 'primary' | 'secondary';
 }
 
 /**
@@ -34,9 +37,7 @@ export interface ButtonClassesOptions {
  *
  * Extiende las opciones de clases y añade los colores del tema
  */
-export interface ButtonStylesOptions extends ButtonClassesOptions {
-  colors: ThemeColors;
-}
+export type ButtonStylesOptions = ButtonClassesOptions;
 
 /**
  * Tipo para elementos de clase CSS

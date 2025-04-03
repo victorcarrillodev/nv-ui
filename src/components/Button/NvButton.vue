@@ -3,10 +3,7 @@
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './buttonClasses';
 import type { ButtonProps } from './button';
-import { useTheme } from '@/theme/composables/useTheme';
 import { computed, ref, watchEffect } from 'vue';
-
-const theme = useTheme();
 
 /**
  * Definición de props con valores por defecto
@@ -17,6 +14,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   text: false,
   disabled: false,
   size: 'md',
+  color: 'primary', // Color por defecto
 });
 
 // 1. Asegúrate de que solo una de las propiedades esté activada a la vez
@@ -39,12 +37,13 @@ watchEffect(() => {
     ...buttonVariant.value,
   }).value;
 });
+
 // 3. Gestión de estilos dinámicos
 useButtonStyles({
   ...buttonVariant.value,
-  colors: theme.theme.colors,
-  disabled: false,
+  disabled: props.disabled,
   size: props.size,
+  color: props.color, // Aquí pasas el color que se usa en el hook
 });
 </script>
 
