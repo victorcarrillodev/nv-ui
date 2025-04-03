@@ -4,7 +4,7 @@ import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './buttonClasses';
 import type { ButtonProps } from './button';
 import { useTheme } from '@/theme/composables/useTheme';
-import { computed } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 
 const theme = useTheme();
 
@@ -31,17 +31,20 @@ const buttonVariant = computed(() => {
 });
 
 // 2. Genera las clases dinámicas basadas en las props
-const buttonClasses = useButtonClasses({
-  ...props,
-  ...buttonVariant.value,
-});
+const buttonClasses = ref<string[]>([]);
 
+watchEffect(() => {
+  buttonClasses.value = useButtonClasses({
+    ...props,
+    ...buttonVariant.value,
+  }).value;
+});
 // 3. Gestión de estilos dinámicos
 useButtonStyles({
   ...buttonVariant.value,
   colors: theme.theme.colors,
   disabled: false,
-  size: 'sm',
+  size: props.size,
 });
 </script>
 
