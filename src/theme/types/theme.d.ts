@@ -35,6 +35,10 @@ export interface PalleteColor {
 export interface ThemeColors {
   primary: PalleteColor;
   secondary: PalleteColor;
+  success: PalleteColor;
+  info: PalleteColor;
+  error: PalleteColor;
+  warning: PalleteColor;
   background: {
     paper: string;
     default: string;
