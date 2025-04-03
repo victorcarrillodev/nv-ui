@@ -1,3 +1,12 @@
+# [0.17.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.16.3...v0.17.0) (2025-04-03)
+
+
+### Features
+
+* **styles:** :building_construction: se mejoran estilos ([3f6b3d9](https://github.com/VictorManuelCarrillo/vue-ui/commit/3f6b3d9e55cbb0461e2a2059f131c4c183ec27ad))
+
+
+
 ## [0.16.3](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.16.2...v0.16.3) (2025-04-02)
 
 
