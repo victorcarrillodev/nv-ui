@@ -1,7 +1,7 @@
 import { inject, reactive } from 'vue';
 import type { Theme, ThemeMode } from '@/theme/types/theme';
 import { ThemeSymbol } from '@/theme/constants/theme-keys';
-import { lightThemeColors } from '@/theme/themes/theme';
+import { lightThemeColors } from '@/theme/themes/main/theme';
 
 /**
  * Interfaz extendida del contexto del tema
