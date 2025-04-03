@@ -1,6 +1,10 @@
 import type { ThemeColors } from '@/theme/types/theme';
 
 export const darkThemeColors: ThemeColors = {
+  common: {
+    black: '#000',
+    white: '#fff',
+  },
   primary: {
     main: '#00b6cf',
     light: '#7986cb',

@@ -15,7 +15,7 @@ const ThemedComponent = {
   },
   template: `
     <div :style="{
-      backgroundColor: theme.colors.primary.main,
+      backgroundColor: theme.colors.background.paper,
       color: theme.colors.text,
       padding: '20px'
     }">
@@ -29,8 +29,18 @@ const ThemedComponent = {
 <template>
   <ThemeProvider default-mode="light">
     <ThemedComponent />
-    <NvButton size="lg" text color="secondary">size lg</NvButton>
-    <NvButton size="md" outlined>size md</NvButton>
-    <NvButton size="sm" filled>size sm</NvButton>
+    <h2>default component</h2>
+    <NvButton>default button</NvButton>
+    <h2>color component</h2>
+    <NvButton color="primary">color primary</NvButton>
+    <NvButton color="secondary">color secondary</NvButton>
+    <NvButton color="success">color success</NvButton>
+    <NvButton color="info">color info</NvButton>
+    <NvButton color="error">color error</NvButton>
+    <NvButton color="warning">color warning</NvButton>
+    <h2>size component</h2>
+    <NvButton size="sm">sm size</NvButton>
+    <NvButton size="md">md size</NvButton>
+    <NvButton size="lg">lg size</NvButton>
   </ThemeProvider>
 </template>

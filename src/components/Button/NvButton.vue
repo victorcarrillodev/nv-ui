@@ -28,6 +28,10 @@ const buttonVariant = computed(() => {
   }
 });
 
+const uniqueClass = computed(
+  () => `ui-button-${props.color}-${buttonVariant.value.filled ? 'filled' : props.outlined ? 'outlined' : 'text'}`,
+);
+
 // 2. Genera las clases dinámicas basadas en las props
 const buttonClasses = ref<string[]>([]);
 
@@ -44,11 +48,12 @@ useButtonStyles({
   disabled: props.disabled,
   size: props.size,
   color: props.color, // Aquí pasas el color que se usa en el hook
+  className: uniqueClass.value,
 });
 </script>
 
 <template>
-  <button :class="buttonClasses" :disabled="disabled">
+  <button :class="[buttonClasses, uniqueClass]" :disabled="disabled">
     <slot />
   </button>
 </template>
