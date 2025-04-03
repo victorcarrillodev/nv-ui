@@ -1,3 +1,12 @@
+# [0.18.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.17.0...v0.18.0) (2025-04-03)
+
+
+### Features
+
+* **colors:** :sparkles: se agrega prop color ([bc142c9](https://github.com/VictorManuelCarrillo/vue-ui/commit/bc142c96b50ea74b2f26d0fc8996af3bf74d8d52))
+
+
+
 # [0.17.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.16.3...v0.17.0) (2025-04-03)
 
 
