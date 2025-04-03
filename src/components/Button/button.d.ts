@@ -10,13 +10,14 @@ import type { ThemeColors } from '../../types/theme';
  * @property outlined - Button variant
  * @property text - Button variant
  */
+type ButtonVariant = 'filled' | 'outlined' | 'text';
+
 export interface ButtonProps {
   disabled?: boolean;
-  filled?: boolean;
-  outlined?: boolean;
+  variant?: ButtonVariant; // En lugar de filled, outlined, text como props separadas
   size?: 'sm' | 'md' | 'lg';
-  text?: boolean;
   color?: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
+  className?: string; // Aquí agregamos la propiedad 'className'
 }
 /**
  * #Options for the classes generator
@@ -25,13 +26,11 @@ export interface ButtonProps {
  * since default values ​​are set in the component
  */
 export interface ButtonClassesOptions {
-  disabled: boolean;
-  filled: boolean;
-  outlined: boolean;
-  size: 'sm' | 'md' | 'lg';
-  text: boolean;
-  color: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
-  className: string;
+  disabled?: boolean;
+  variant?: ButtonVariant; // En lugar de filled, outlined, text como props separadas
+  size?: 'sm' | 'md' | 'lg';
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
+  className?: string; // Aquí agregamos la propiedad 'className'
 }
 
 /**

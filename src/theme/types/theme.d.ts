@@ -33,10 +33,6 @@ export interface PalleteColor {
   dark: string;
 }
 export interface ThemeColors {
-  common: {
-    black: string;
-    white: string;
-  };
   primary: PalleteColor;
   secondary: PalleteColor;
   success: PalleteColor;
@@ -47,9 +43,8 @@ export interface ThemeColors {
     paper: string;
     default: string;
   };
-  surface: string;
   text: string;
-  border: string;
+  // Puedes agregar más propiedades según necesites
 }
 
 /**
