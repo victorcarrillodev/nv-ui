@@ -28,7 +28,7 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
     // 1. Estilos base aplicados a todos los botones
     updateStyles('.ui-button', {
       'align-items': 'center',
-      'border-radius': '0.375rem', // 6px - border-radius mediano
+      borderRadius: '0.375rem', // 6px - border-radius mediano
       cursor: disabled ? 'not-allowed' : 'pointer', // Feedback visual
       display: 'inline-flex',
       'font-weight': '600', // Texto semibold
