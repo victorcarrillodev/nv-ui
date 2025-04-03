@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import type { PalleteColor } from '@/theme/types/theme';
 import type { ThemeColors } from '../../types/theme';
 
 /**
@@ -15,7 +16,7 @@ export interface ButtonProps {
   outlined?: boolean;
   size?: 'sm' | 'md' | 'lg';
   text?: boolean;
-  color?: 'primary' | 'secondary';
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
 }
 /**
  * #Options for the classes generator
@@ -29,7 +30,8 @@ export interface ButtonClassesOptions {
   outlined: boolean;
   size: 'sm' | 'md' | 'lg';
   text: boolean;
-  color: 'primary' | 'secondary';
+  color: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
+  className: string;
 }
 
 /**

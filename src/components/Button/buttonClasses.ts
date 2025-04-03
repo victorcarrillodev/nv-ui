@@ -17,20 +17,22 @@ export const useButtonClasses = (options: ButtonProps): ComputedRef<string[]> =>
 
   // Crear nuevo computed si no está en caché
   const classes = computed(() => {
-    const classes = ['ui-button'];
+    const classList = ['ui-button'];
 
-    if (options.filled) classes.push('ui-button--filled');
-    if (options.outlined) classes.push('ui-button--outlined');
-    if (options.text) classes.push('ui-button--text');
+    if (options.filled) classList.push('ui-button--filled');
+    if (options.outlined) classList.push('ui-button--outlined');
+    if (options.text) classList.push('ui-button--text');
 
     // Agregar clases para el tamaño
-    if (options.size) classes.push(`NvButton__size-${options.size}`);
+    if (options.size) classList.push(`NvButton__size-${options.size}`);
 
     if (options.disabled) {
-      classes.push('ui-button--disabled');
+      classList.push('ui-button--disabled');
     }
 
-    return classes;
+    classList.push(`ui-button-${options.color}`);
+
+    return classList;
   });
 
   // Almacenar en caché
@@ -79,4 +81,5 @@ type ButtonProps = {
   text?: boolean;
   disabled?: boolean;
   size?: 'sm' | 'md' | 'lg'; // <- Nueva prop opcional
+  color: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
 };
