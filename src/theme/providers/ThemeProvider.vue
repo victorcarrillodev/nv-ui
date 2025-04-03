@@ -7,13 +7,18 @@ import { ThemeSymbol } from '@/theme/constants/theme-keys';
 // Clave de almacenamiento en localStorage
 const THEME_KEY = 'user-theme';
 
+// Función para obtener el tema almacenado
+function getStoredTheme(): ThemeMode {
+  return (localStorage.getItem(THEME_KEY) as ThemeMode) || 'light';
+}
+
 // Props del componente
 const props = defineProps<{
   defaultMode?: ThemeMode;
 }>();
 
 // Obtener el modo almacenado en localStorage o usar el predeterminado
-const storedMode = (localStorage.getItem(THEME_KEY) as ThemeMode) || props.defaultMode || 'light';
+const storedMode = getStoredTheme() || (props.defaultMode ?? 'light');
 
 // Estado reactivo del tema
 const themeState = reactive<Theme>({
@@ -23,22 +28,34 @@ const themeState = reactive<Theme>({
 
 // Sincroniza el tema almacenado al montar el componente
 onMounted(() => {
-  const savedMode = localStorage.getItem(THEME_KEY) as ThemeMode | null;
+  const savedMode = getStoredTheme();
   if (savedMode) {
     setMode(savedMode);
   }
 });
 
 // Efecto para actualizar estilos del body dinámicamente
+let currentBackground = themeState.colors.background.default;
+let currentTextColor = themeState.colors.text;
+
 watchEffect(() => {
-  document.body.style.backgroundColor = themeState.colors.background.default;
-  document.body.style.color = themeState.colors.text;
-  document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+  if (document.body.style.backgroundColor !== currentBackground) {
+    document.body.style.backgroundColor = themeState.colors.background.default;
+    currentBackground = themeState.colors.background.default;
+  }
+
+  if (document.body.style.color !== currentTextColor) {
+    document.body.style.color = themeState.colors.text;
+    currentTextColor = themeState.colors.text;
+  }
 });
 
 // Función para cambiar entre light y dark
 function toggleMode() {
-  setMode(themeState.mode === 'light' ? 'dark' : 'light');
+  const newMode = themeState.mode === 'light' ? 'dark' : 'light';
+  if (newMode !== themeState.mode) {
+    setMode(newMode);
+  }
 }
 
 // Función para establecer un modo específico y guardarlo en localStorage

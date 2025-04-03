@@ -1,85 +1,31 @@
 import { computed } from 'vue';
-import type { ComputedRef } from 'vue';
-import type ButtonProps from './button';
-
-// Cache para memoización (WeakMap no previene garbage collection)
-const classCache = new WeakMap<ButtonProps, ComputedRef<string[]>>();
+import type { ButtonClassesOptions } from './button';
 
 /**
- * Genera clases dinámicas reactivas para el componente Button con memoización
- * @param {ButtonProps} options - Objeto de configuración para los estilos del botón
- * @returns {ComputedRef<string[]>} - Referencia computada con las clases CSS
+ * Hook para generar clases dinámicas para el componente Button.
+ * Retorna un ComputedRef<string[]> con las clases a aplicar.
  */
-export const useButtonClasses = (options: ButtonProps): ComputedRef<string[]> => {
-  // Verificar caché primero
-  const cached = classCache.get(options);
-  if (cached) return cached;
+export const useButtonClasses = (options: ButtonClassesOptions) => {
+  return computed(() => {
+    const { variant, size, color, disabled, className } = options;
+    const classes: string[] = [];
 
-  // Crear nuevo computed si no está en caché
-  const classes = computed(() => {
-    const classList = ['ui-button'];
-
-    if (options.filled) classList.push('ui-button--filled');
-    if (options.outlined) classList.push('ui-button--outlined');
-    if (options.text) classList.push('ui-button--text');
-
-    // Agregar clases para el tamaño
-    if (options.size) classList.push(`NvButton__size-${options.size}`);
-
-    if (options.disabled) {
-      classList.push('ui-button--disabled');
+    if (className) {
+      classes.push(className);
+    }
+    if (variant) {
+      classes.push(`btn-${variant}`);
+    }
+    if (size) {
+      classes.push(`btn-${size}`);
+    }
+    if (color) {
+      classes.push(`btn-${color}`);
+    }
+    if (disabled) {
+      classes.push('btn-disabled');
     }
 
-    classList.push(`ui-button-${options.color}`);
-
-    return classList;
+    return classes;
   });
-
-  // Almacenar en caché
-  classCache.set(options, classes);
-
-  return classes;
-};
-
-/**
- * Concatenación optimizada de clases con memoización
- * @param {(string | Record<string, boolean>)[]} classes - Array de definiciones de clases
- * @returns {string} - Cadena de clases separadas por espacios
- */
-export const classesToString = (classes: (string | Record<string, boolean>)[]): string => {
-  // Cache simple para strings (útil en renders repetidos)
-  const cacheKey = JSON.stringify(classes);
-  if (classesToString.cache[cacheKey]) {
-    return classesToString.cache[cacheKey];
-  }
-
-  const result = classes
-    .flatMap((classDef) =>
-      typeof classDef === 'string'
-        ? classDef
-        : Object.entries(classDef)
-            .filter(([, val]) => val)
-            .map(([key]) => key),
-    )
-    .join(' ');
-
-  // Almacenar en caché (limitando tamaño)
-  if (Object.keys(classesToString.cache).length < 100) {
-    classesToString.cache[cacheKey] = result;
-  }
-
-  return result;
-};
-
-// Cache para classesToString (simple objeto)
-classesToString.cache = Object.create(null);
-
-// Tipado extendido para ButtonProps (recomendado)
-type ButtonProps = {
-  filled?: boolean;
-  outlined?: boolean;
-  text?: boolean;
-  disabled?: boolean;
-  size?: 'sm' | 'md' | 'lg'; // <- Nueva prop opcional
-  color: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
 };

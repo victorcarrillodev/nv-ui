@@ -1,59 +1,75 @@
 <script setup lang="ts">
-// Importaciones de utilidades y tipos
-import { useButtonStyles } from './useButtonStyles';
-import { useButtonClasses } from './buttonClasses';
+import { computed } from 'vue';
+import { useTheme } from '@/theme/composables/useTheme';
 import type { ButtonProps } from './button';
-import { computed, ref, watchEffect } from 'vue';
 
-/**
- * Definición de props con valores por defecto
- */
+// Definición de props con valores predeterminados
 const props = withDefaults(defineProps<ButtonProps>(), {
-  filled: true,
-  outlined: false,
-  text: false,
+  variant: 'filled', // 'filled', 'outlined' o 'text'
+  size: 'md', // 'sm', 'md' o 'lg'
+  color: 'primary', // 'primary', 'secondary', etc.
   disabled: false,
-  size: 'md',
-  color: 'primary', // Color por defecto
 });
 
-// 1. Asegúrate de que solo una de las propiedades esté activada a la vez
-const buttonVariant = computed(() => {
-  if (props.outlined) {
-    return { filled: false, outlined: true, text: false };
-  } else if (props.text) {
-    return { filled: false, outlined: false, text: true };
-  } else {
-    return { filled: true, outlined: false, text: false };
+// Obtén el tema reactivo
+const { theme } = useTheme();
+
+// Computed para el objeto de estilos del botón, basado en el tema y las props
+const buttonStyle = computed(() => {
+  // Obtén la paleta de colores del tema para el color solicitado o usa primary como fallback
+  const colors = theme.colors;
+  const colorPalette = colors[props.color] || colors.primary;
+  const mainColor = colorPalette.main;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const lightColor = colorPalette.light;
+  // Para el modo 'dark' podrías tener lógica adicional si es necesario, por ejemplo:
+  // const isDark = theme.mode === 'dark';
+
+  // Define los estilos base según la variante
+  const style: Record<string, string | number> = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 600,
+    borderRadius: '0.375rem',
+    cursor: props.disabled ? 'not-allowed' : 'pointer',
+    opacity: props.disabled ? 0.7 : 1,
+    padding: '0.75rem 1.5rem',
+    transition: 'all 0.4s ease',
+  };
+
+  if (props.variant === 'filled') {
+    style.backgroundColor = mainColor;
+    style.color = '#ffffff';
+    style.border = 'none';
+  } else if (props.variant === 'outlined') {
+    style.backgroundColor = 'transparent';
+    style.color = mainColor;
+    style.border = `2px solid ${mainColor}`;
+  } else if (props.variant === 'text') {
+    style.backgroundColor = 'transparent';
+    style.color = mainColor;
+    style.border = 'none';
   }
-});
 
-const uniqueClass = computed(
-  () => `ui-button-${props.color}-${buttonVariant.value.filled ? 'filled' : props.outlined ? 'outlined' : 'text'}`,
-);
+  // Ajusta el tamaño (esto es un ejemplo; puedes refinarlo)
+  if (props.size === 'sm') {
+    style.padding = '0.5rem 1rem';
+    style.fontSize = '0.875rem';
+  } else if (props.size === 'lg') {
+    style.padding = '1rem 2rem';
+    style.fontSize = '1.125rem';
+  } else {
+    style.fontSize = '1rem';
+  }
 
-// 2. Genera las clases dinámicas basadas en las props
-const buttonClasses = ref<string[]>([]);
-
-watchEffect(() => {
-  buttonClasses.value = useButtonClasses({
-    ...props,
-    ...buttonVariant.value,
-  }).value;
-});
-
-// 3. Gestión de estilos dinámicos
-useButtonStyles({
-  ...buttonVariant.value,
-  disabled: props.disabled,
-  size: props.size,
-  color: props.color, // Aquí pasas el color que se usa en el hook
-  className: uniqueClass.value,
+  return style;
 });
 </script>
 
 <template>
-  <button :class="[buttonClasses, uniqueClass]" :disabled="disabled">
+  <!-- Se enlaza el estilo directamente al botón -->
+  <button :style="buttonStyle" :disabled="props.disabled">
     <slot />
   </button>
 </template>
