@@ -34,7 +34,7 @@ export interface PalleteColor {
 }
 export interface ThemeColors {
   primary: PalleteColor;
-  secondary: string;
+  secondary: PalleteColor;
   background: {
     paper: string;
     default: string;

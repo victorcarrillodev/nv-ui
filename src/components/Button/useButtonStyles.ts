@@ -2,6 +2,7 @@ import { watchEffect } from 'vue';
 import { useDynamicStyles } from '@/theme/composables/useDynamicStyles';
 import { useTheme } from '@/theme/composables/useTheme';
 import type { ButtonStylesOptions } from './button';
+import type { ThemeColors, PalleteColor } from '@/theme/types/theme';
 
 /**
  * Hook composable para manejar estilos dinámicos de componentes Button
@@ -13,8 +14,7 @@ import type { ButtonStylesOptions } from './button';
  */
 export const useButtonStyles = (options: ButtonStylesOptions) => {
   // Inyección de dependencias para estilos dinámicos y tema
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { updateStyles, lightenColor } = useDynamicStyles();
+  const { updateStyles } = useDynamicStyles();
   const { theme } = useTheme();
 
   /**
@@ -22,8 +22,19 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
    * Se ejecuta automáticamente cuando cambian las dependencias reactivas
    */
   const updateButtonStyles = () => {
-    const { filled, outlined, text, disabled } = options;
+    const { filled, outlined, text, disabled, color } = options;
     const colors = theme.colors; // Accede a la paleta de colores del tema actual
+
+    // Validación del color proporcionado (si es una clave válida de ThemeColors)
+    const isValidColor = color && color in colors;
+
+    // Verificamos si el color seleccionado es un PalleteColor
+    const colorPalette = isValidColor ? colors[color as keyof ThemeColors] : colors.primary;
+
+    // Comprobamos que colorPalette sea un PalleteColor antes de acceder a sus propiedades
+    const buttonColor = (colorPalette as PalleteColor).main;
+    const buttonColorDark = (colorPalette as PalleteColor).dark;
+    const buttonColorLight = (colorPalette as PalleteColor).light;
 
     // 1. Estilos base aplicados a todos los botones
     updateStyles('.ui-button', {
@@ -38,11 +49,11 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
       transition: 'all 0.3s ease', // Transiciones suaves
     });
 
-    // 2. Estilos específicos por variante (primary, secondary, etc.)
+    // 2. Estilos específicos por variante (filled, outlined, text)
     if (filled) {
       updateStyles('.ui-button--filled', {
         color: '#ffffff',
-        'background-color': colors.primary.main,
+        'background-color': buttonColor,
         border: 'none',
       });
     }
@@ -50,26 +61,43 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
     if (outlined) {
       updateStyles('.ui-button--outlined', {
         'background-color': 'transparent',
-        color: colors.primary.main,
-        border: `10px solid ${colors.secondary}`,
+        color: buttonColor,
+        border: `2px solid ${buttonColor}`,
       });
     }
 
     if (text) {
       updateStyles('.ui-button--text', {
         'background-color': 'transparent',
-        color: colors.primary.main,
+        color: buttonColor,
         border: 'none',
       });
     }
 
-    // 3. Efectos hover (solo si no está deshabilitado)
+    // 3. Efectos hover (usando color.dark y color.light)
     if (!disabled) {
       updateStyles('.ui-button:hover', {
-        filter: 'brightness(1.1)',
+        'background-color': buttonColorLight,
+        filter: 'brightness(1.1)', // Efecto de brillo al hacer hover
       });
     }
-    // Sizes
+
+    // 4. Efecto de hover en los botones outlined
+    if (outlined) {
+      updateStyles('.ui-button--outlined:hover', {
+        'background-color': buttonColorLight,
+        color: '#ffffff',
+      });
+    }
+
+    // 5. Efecto de hover en los botones text
+    if (text) {
+      updateStyles('.ui-button--text:hover', {
+        color: buttonColorDark,
+      });
+    }
+
+    // 6. Estilos para tamaños
     updateStyles('.NvButton__size-sm', {
       padding: '0.2rem 1rem',
       'font-size': '0.875rem', // 14px
