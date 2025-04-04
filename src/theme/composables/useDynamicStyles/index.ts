@@ -1,5 +1,5 @@
 // src/theme/composables/useDynamicStyles.ts
-import { ref, onUnmounted } from 'vue';
+import { ref, onUnmounted, getCurrentInstance } from 'vue';
 
 type StyleCache = Map<string, { cssText: string; index: number }>;
 
@@ -7,11 +7,14 @@ const styleElement = ref<HTMLStyleElement | null>(null);
 const styleCache = ref<StyleCache>(new Map());
 const isServer = typeof window === 'undefined';
 
-onUnmounted(() => {
-  if (styleElement.value) {
-    document.head.removeChild(styleElement.value);
-  }
-});
+// Verificamos si hay una instancia activa y, de ser así, registramos onUnmounted.
+if (getCurrentInstance()) {
+  onUnmounted(() => {
+    if (styleElement.value) {
+      document.head.removeChild(styleElement.value);
+    }
+  });
+}
 
 const createStyleElement = (): HTMLStyleElement => {
   if (isServer) return {} as HTMLStyleElement;
