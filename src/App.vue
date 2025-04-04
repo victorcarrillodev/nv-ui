@@ -34,13 +34,5 @@ const ThemedComponent = {
     <h2>color component</h2>
     <NvButton color="primary" variant="outlined">color primary</NvButton>
     <NvButton color="secondary">color secondary</NvButton>
-    <NvButton color="success">color success</NvButton>
-    <NvButton color="info">color info</NvButton>
-    <NvButton color="error">color error</NvButton>
-    <NvButton color="warning">color warning</NvButton>
-    <h2>size component</h2>
-    <NvButton size="sm">sm size</NvButton>
-    <NvButton size="md">md size</NvButton>
-    <NvButton size="lg">lg size</NvButton>
   </ThemeProvider>
 </template>
