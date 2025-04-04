@@ -1,75 +1,42 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useTheme } from '@/theme/composables/useTheme';
+import { useButtonClasses } from './useButtonClasses';
+import { useButtonStyles } from './useButtonStyles';
 import type { ButtonProps } from './button';
+import { computed, watchEffect, type CSSProperties } from 'vue';
 
-// Definición de props con valores predeterminados
 const props = withDefaults(defineProps<ButtonProps>(), {
-  variant: 'filled', // 'filled', 'outlined' o 'text'
-  size: 'md', // 'sm', 'md' o 'lg'
-  color: 'primary', // 'primary', 'secondary', etc.
+  variant: 'filled',
+  size: 'md',
+  color: 'primary',
   disabled: false,
 });
 
-// Obtén el tema reactivo
-const { theme } = useTheme();
+const uniqueClass = computed(() => `ui-button-${props.color}-${props.variant}`);
 
-// Computed para el objeto de estilos del botón, basado en el tema y las props
-const buttonStyle = computed(() => {
-  // Obtén la paleta de colores del tema para el color solicitado o usa primary como fallback
-  const colors = theme.colors;
-  const colorPalette = colors[props.color] || colors.primary;
-  const mainColor = colorPalette.main;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const lightColor = colorPalette.light;
-  // Para el modo 'dark' podrías tener lógica adicional si es necesario, por ejemplo:
-  // const isDark = theme.mode === 'dark';
+const buttonClasses = useButtonClasses({
+  variant: props.variant,
+  size: props.size,
+  color: props.color,
+  disabled: props.disabled,
+  className: uniqueClass.value,
+});
 
-  // Define los estilos base según la variante
-  const style: Record<string, string | number> = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: 600,
-    borderRadius: '0.375rem',
-    cursor: props.disabled ? 'not-allowed' : 'pointer',
-    opacity: props.disabled ? 0.7 : 1,
-    padding: '0.75rem 1.5rem',
-    transition: 'all 0.4s ease',
-  };
+const { styles, applyStyles } = useButtonStyles({
+  variant: props.variant,
+  size: props.size,
+  color: props.color,
+  disabled: props.disabled,
+  className: uniqueClass.value,
+});
 
-  if (props.variant === 'filled') {
-    style.backgroundColor = mainColor;
-    style.color = '#ffffff';
-    style.border = 'none';
-  } else if (props.variant === 'outlined') {
-    style.backgroundColor = 'transparent';
-    style.color = mainColor;
-    style.border = `2px solid ${mainColor}`;
-  } else if (props.variant === 'text') {
-    style.backgroundColor = 'transparent';
-    style.color = mainColor;
-    style.border = 'none';
-  }
-
-  // Ajusta el tamaño (esto es un ejemplo; puedes refinarlo)
-  if (props.size === 'sm') {
-    style.padding = '0.5rem 1rem';
-    style.fontSize = '0.875rem';
-  } else if (props.size === 'lg') {
-    style.padding = '1rem 2rem';
-    style.fontSize = '1.125rem';
-  } else {
-    style.fontSize = '1rem';
-  }
-
-  return style;
+// Aplicar los estilos dinámicamente cuando el componente se monta o actualiza
+watchEffect(() => {
+  applyStyles();
 });
 </script>
 
 <template>
-  <!-- Se enlaza el estilo directamente al botón -->
-  <button :style="buttonStyle" :disabled="props.disabled">
+  <button :class="buttonClasses" :style="styles as CSSProperties" :disabled="disabled">
     <slot />
   </button>
 </template>
