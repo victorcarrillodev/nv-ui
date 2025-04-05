@@ -1,3 +1,12 @@
+# [0.19.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.18.8...v0.19.0) (2025-04-05)
+
+
+### Features
+
+* **shape:** :sparkles: se agrega nueva prop ([511b994](https://github.com/VictorManuelCarrillo/vue-ui/commit/511b994aa3f7830358fbcf43de4a3f53b42645a5))
+
+
+
 ## [0.18.8](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.18.7...v0.18.8) (2025-04-05)
 
 
