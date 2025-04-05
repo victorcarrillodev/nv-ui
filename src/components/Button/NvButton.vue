@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 });
 
 // Generar una clase única basada en color y variant
-const uniqueClass = computed(() => `ui-button-${props.color}-${props.variant}`);
+const uniqueClass = computed(() => `NvButton__${props.color}-${props.variant}`);
 
 // Obtener las clases dinámicas usando useButtonClasses y pasando la clase única
 const buttonClasses = useButtonClasses({

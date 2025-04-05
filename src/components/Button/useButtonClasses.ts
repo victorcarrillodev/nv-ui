@@ -8,18 +8,19 @@ export const useButtonClasses = (options: ButtonClassesOptions) => {
   return computed(() => {
     const { variant, size, color, disabled, className } = options;
     const classes: string[] = [className || ''];
+    const Nv = 'NvButton__';
 
     if (variant) {
-      classes.push(`btn-${variant}`);
+      classes.push(Nv + `variant-${variant}`);
     }
     if (size) {
-      classes.push(`btn-${size}`);
+      classes.push(Nv + `size-${size}`);
     }
     if (color) {
-      classes.push(`btn-${color}`);
+      classes.push(Nv + `color-${color}`);
     }
     if (disabled) {
-      classes.push('btn-disabled');
+      classes.push(Nv + 'disabled');
     }
     return classes;
   });
