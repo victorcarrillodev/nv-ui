@@ -6,7 +6,7 @@ import type { ButtonClassesOptions } from './button';
  */
 export const useButtonClasses = (options: ButtonClassesOptions) => {
   return computed(() => {
-    const { variant, size, color, disabled, className } = options;
+    const { variant, size, color, disabled, className, shape } = options;
     const classes: string[] = [className || ''];
     const Nv = 'NvButton__';
 
@@ -21,6 +21,9 @@ export const useButtonClasses = (options: ButtonClassesOptions) => {
     }
     if (disabled) {
       classes.push(Nv + 'disabled');
+    }
+    if (shape) {
+      classes.push(Nv + `shape-${shape}`);
     }
     return classes;
   });
