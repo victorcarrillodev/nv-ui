@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   size: 'md',
   color: 'primary',
   disabled: false,
+  shape: 'normal',
 });
 
 // Generar una clase única basada en color y variant
@@ -22,6 +23,7 @@ const buttonClasses = useButtonClasses({
   color: props.color,
   disabled: props.disabled,
   className: uniqueClass.value,
+  shape: props.shape,
 });
 
 // Aplicar estilos dinámicos. El hook inyecta las reglas CSS basadas en uniqueClass.
@@ -32,6 +34,7 @@ watchEffect(() => {
     color: props.color,
     disabled: props.disabled,
     className: uniqueClass.value,
+    shape: props.shape,
   });
 });
 </script>

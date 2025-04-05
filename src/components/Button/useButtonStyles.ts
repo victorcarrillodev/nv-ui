@@ -36,7 +36,7 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
   const { theme } = useTheme();
 
   const styles = computed(() => {
-    const { variant, size, color, disabled } = options;
+    const { variant, size, color, disabled, shape } = options;
     const colors = theme.colors;
     const isValidColor = color && color in colors;
     const colorPalette = isValidColor ? colors[color as keyof ThemeColors] : colors.primary;
@@ -91,6 +91,16 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
     } else if (size === 'lg') {
       buttonStyles.padding = '0.8rem 2rem';
       buttonStyles.fontSize = '1.125rem';
+    }
+
+    if (shape === 'normal') {
+      buttonStyles.borderRadius = '0.2rem';
+    }
+    if (shape === 'rounded') {
+      buttonStyles.borderRadius = '1rem';
+    }
+    if (shape === 'pill') {
+      buttonStyles.borderRadius = '5rem';
     }
 
     return convertKeysToKebabCase(buttonStyles);
