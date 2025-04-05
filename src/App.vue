@@ -33,6 +33,6 @@ const ThemedComponent = {
     <NvButton>default button</NvButton>
     <h2>color component</h2>
     <NvButton color="primary" variant="outlined">color primary</NvButton>
-    <NvButton color="secondary">color secondary</NvButton>
+    <NvButton color="error">color secondary</NvButton>
   </ThemeProvider>
 </template>
