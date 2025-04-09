@@ -1,3 +1,16 @@
+## [0.19.2](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.19.1...v0.19.2) (2025-04-09)
+
+
+
+## [0.19.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.19.0...v0.19.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* **theme:** :sparkles: se mejora el themeProvider ([7193d4c](https://github.com/VictorManuelCarrillo/vue-ui/commit/7193d4c4a8bc19ac36bdca82f3d62610454c1697))
+
+
+
 # [0.19.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.18.8...v0.19.0) (2025-04-05)
 
 
