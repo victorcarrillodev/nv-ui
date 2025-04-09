@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue';
+import { computed } from 'vue';
 import { useButtonClasses } from './useButtonClasses';
 import { useButtonStyles } from './useButtonStyles';
 import type { ButtonProps } from './button';
 
-// Definición de las props con valores predeterminados
+// Props con valores por defecto
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled',
   size: 'md',
@@ -13,10 +13,10 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   shape: 'normal',
 });
 
-// Generar una clase única basada en color y variant
+// Clase única que sirve como selector CSS-in-JS
 const uniqueClass = computed(() => `NvButton__${props.color}-${props.variant}`);
 
-// Obtener las clases dinámicas usando useButtonClasses y pasando la clase única
+// Composable para clases dinámicas
 const buttonClasses = useButtonClasses({
   variant: props.variant,
   size: props.size,
@@ -26,21 +26,21 @@ const buttonClasses = useButtonClasses({
   shape: props.shape,
 });
 
-// Aplicar estilos dinámicos. El hook inyecta las reglas CSS basadas en uniqueClass.
-watchEffect(() => {
-  useButtonStyles({
-    variant: props.variant,
-    size: props.size,
-    color: props.color,
-    disabled: props.disabled,
-    className: uniqueClass.value,
-    shape: props.shape,
-  });
+// ✅ Composable para estilos dinámicos (corregido)
+const { applyStyles } = useButtonStyles({
+  variant: props.variant,
+  size: props.size,
+  color: props.color,
+  disabled: props.disabled,
+  className: uniqueClass.value,
+  shape: props.shape,
 });
+
+// Aplica los estilos al montar y cuando reactive data cambie
+applyStyles();
 </script>
 
 <template>
-  <!-- Se aplican las clases dinámicas y la clase única para que las reglas CSS inyectadas funcionen -->
   <button :class="[buttonClasses, uniqueClass]" :disabled="props.disabled">
     <slot />
   </button>

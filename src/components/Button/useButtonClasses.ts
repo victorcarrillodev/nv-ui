@@ -1,30 +1,19 @@
 import { computed } from 'vue';
+import { buildClass, joinClasses } from '@/theme/utils/class-utils';
 import type { ButtonClassesOptions } from './button';
 
-/**
- * Hook para generar las clases dinámicas del botón
- */
 export const useButtonClasses = (options: ButtonClassesOptions) => {
   return computed(() => {
-    const { variant, size, color, disabled, className, shape } = options;
-    const classes: string[] = [className || ''];
-    const Nv = 'NvButton__';
+    const { variant, size, color, disabled, shape, className } = options;
+    const base = 'NvButton';
 
-    if (variant) {
-      classes.push(Nv + `variant-${variant}`);
-    }
-    if (size) {
-      classes.push(Nv + `size-${size}`);
-    }
-    if (color) {
-      classes.push(Nv + `color-${color}`);
-    }
-    if (disabled) {
-      classes.push(Nv + 'disabled');
-    }
-    if (shape) {
-      classes.push(Nv + `shape-${shape}`);
-    }
-    return classes;
+    return joinClasses(
+      className,
+      buildClass(base, 'variant', variant),
+      buildClass(base, 'size', size),
+      buildClass(base, 'color', color),
+      buildClass(base, 'shape', shape),
+      disabled && buildClass(base, 'disabled', true),
+    );
   });
 };
