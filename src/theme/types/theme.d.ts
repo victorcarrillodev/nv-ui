@@ -33,6 +33,7 @@ export interface PalleteColor {
   dark: string;
 }
 export interface ThemeColors {
+  common?: { black: string; white: string };
   primary: PalleteColor;
   secondary: PalleteColor;
   success: PalleteColor;

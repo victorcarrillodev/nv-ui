@@ -39,7 +39,5 @@ export const lightThemeColors: ThemeColors = {
     paper: '#E4E8F7',
     default: '#F5F6FF',
   },
-  surface: '#f5f5f5',
   text: '#9fc700',
-  border: '#e0e0e0',
 };
