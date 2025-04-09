@@ -1,114 +1,106 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { computed, watchEffect } from 'vue';
 import { updateStyles } from '@/theme/composables/useDynamicStyles';
 import { useTheme } from '@/theme/composables/useTheme';
 import type { ButtonStylesOptions } from './button';
 import type { ThemeColors, PalleteColor } from '@/theme/types/theme';
+import { convertKeysToKebabCase } from '@/theme/utils/style-utils';
 
 /**
- * Convierte claves camelCase a kebab-case
- */
-function toKebabCase(str: string): string {
-  return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-}
-
-/**
- * Convierte todas las claves del objeto a kebab-case (recursivo)
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function convertKeysToKebabCase(obj: Record<string, any>): Record<string, any> {
-  return Object.entries(obj).reduce(
-    (acc, [key, value]) => {
-      const newKey = toKebabCase(key);
-      acc[newKey] = typeof value === 'object' && !Array.isArray(value) ? convertKeysToKebabCase(value) : value;
-      return acc;
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    {} as Record<string, any>,
-  );
-}
-
-/**
- * Hook para gestionar los estilos dinámicos del botón.
- * Genera un objeto de estilos basado en las propiedades y el tema,
- * y lo inyecta en el DOM mediante updateStyles.
+ * Composable para generar y aplicar estilos dinámicos de botón
  */
 export const useButtonStyles = (options: ButtonStylesOptions) => {
   const { theme } = useTheme();
 
   const styles = computed(() => {
-    const { variant, size, color, disabled, shape } = options;
+    const { variant, size, color, disabled, shape, className } = options;
     const colors = theme.colors;
     const isValidColor = color && color in colors;
-    const colorPalette = isValidColor ? colors[color as keyof ThemeColors] : colors.primary;
-    const buttonColor = (colorPalette as PalleteColor).main;
-    const buttonColorDark = (colorPalette as PalleteColor).dark;
-    const buttonColorLight = (colorPalette as PalleteColor).light;
+    const palette = isValidColor ? colors[color as keyof ThemeColors] : colors.primary;
+    const { main, light, dark } = palette as PalleteColor;
 
-    const buttonStyles: Record<string, string | object> = {
-      alignItems: 'center',
-      borderRadius: '0.375rem',
-      cursor: disabled ? 'not-allowed' : 'pointer',
+    const baseStyles: Record<string, string | object> = {
       display: 'inline-flex',
-      fontWeight: '600',
+      alignItems: 'center',
       justifyContent: 'center',
+      fontWeight: '600',
       margin: '0.1rem',
+      cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? '0.7' : '1',
-      padding: '0.75rem 1.5rem',
       transition: 'all 0.4s ease',
-      backgroundColor: variant === 'filled' ? buttonColor : 'transparent',
-      color: variant === 'filled' ? '#ffffff' : buttonColor,
-      border: variant === 'outlined' ? `2px solid ${buttonColor}` : 'none',
+      border: 'none',
     };
 
-    // Hover effects
-    if (!disabled) {
-      buttonStyles['&:hover'] = {
-        backgroundColor: variant === 'filled' ? buttonColorLight : 'transparent',
-        filter: variant === 'filled' ? 'brightness(1.1)' : 'none',
-      };
+    // Variante
+    switch (variant) {
+      case 'filled':
+        Object.assign(baseStyles, {
+          backgroundColor: main,
+          color: '#ffffff',
+          '&:hover': !disabled && {
+            backgroundColor: light,
+            filter: 'brightness(1.1)',
+          },
+        });
+        break;
+
+      case 'outlined':
+        Object.assign(baseStyles, {
+          backgroundColor: 'transparent',
+          color: main,
+          border: `2px solid ${main}`,
+          '&:hover': !disabled && {
+            backgroundColor: light,
+            color: '#ffffff',
+          },
+        });
+        break;
+
+      case 'text':
+        Object.assign(baseStyles, {
+          backgroundColor: 'transparent',
+          color: main,
+          '&:hover': !disabled && {
+            color: dark,
+          },
+        });
+        break;
     }
 
-    if (variant === 'outlined') {
-      buttonStyles['&:hover'] = {
-        backgroundColor: buttonColorLight,
-        color: '#ffffff',
-      };
-    }
+    // Tamaño
+    const sizeStyles: Record<string, string> = {
+      sm: {
+        padding: '0.2rem 1rem',
+        fontSize: '0.875rem',
+      },
+      md: {
+        padding: '0.5rem 1.5rem',
+        fontSize: '1rem',
+      },
+      lg: {
+        padding: '0.8rem 2rem',
+        fontSize: '1.125rem',
+      },
+    }[size ?? 'md'];
 
-    if (variant === 'text') {
-      buttonStyles['&:hover'] = {
-        color: buttonColorDark,
-      };
-    }
+    Object.assign(baseStyles, sizeStyles);
 
-    // Tamaños
-    if (size === 'sm') {
-      buttonStyles.padding = '0.2rem 1rem';
-      buttonStyles.fontSize = '0.875rem';
-    } else if (size === 'md') {
-      buttonStyles.padding = '0.5rem 1.5rem';
-      buttonStyles.fontSize = '1rem';
-    } else if (size === 'lg') {
-      buttonStyles.padding = '0.8rem 2rem';
-      buttonStyles.fontSize = '1.125rem';
-    }
+    // Forma
+    const shapeStyles: Record<string, string> = {
+      normal: '0.2rem',
+      rounded: '1rem',
+      pill: '5rem',
+    };
 
-    if (shape === 'normal') {
-      buttonStyles.borderRadius = '0.2rem';
-    }
-    if (shape === 'rounded') {
-      buttonStyles.borderRadius = '1rem';
-    }
-    if (shape === 'pill') {
-      buttonStyles.borderRadius = '5rem';
-    }
+    baseStyles.borderRadius = shapeStyles[shape ?? 'normal'];
 
-    return convertKeysToKebabCase(buttonStyles);
+    return convertKeysToKebabCase(baseStyles);
   });
 
-  // Inyecta los estilos en el DOM
   const applyStyles = () => {
-    updateStyles(`.${options.className}`, styles.value);
+    if (options.className) {
+      updateStyles(`.${options.className}`, styles.value);
+    }
   };
 
   watchEffect(() => {

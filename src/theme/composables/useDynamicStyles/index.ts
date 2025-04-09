@@ -1,4 +1,4 @@
-import { ref, onUnmounted } from 'vue';
+import { ref } from 'vue';
 import type { StyleObject } from './types';
 
 type StyleCache = Map<string, { cssText: string; index: number }>;
@@ -85,7 +85,7 @@ export const updateStyles = (selector: string, styles: StyleObject) => {
  * Elimina todos los estilos dinámicos insertados
  */
 export const resetDynamicStyles = () => {
-  if (styleElement.value) {
+  if (styleElement.value && document.head.contains(styleElement.value)) {
     document.head.removeChild(styleElement.value);
   }
   styleElement.value = null;
@@ -93,8 +93,11 @@ export const resetDynamicStyles = () => {
 };
 
 /**
- * Limpieza automática al desmontar el componente que lo usa
+ * Hook para usar en componentes
  */
-onUnmounted(() => {
-  resetDynamicStyles();
-});
+export const useDynamicStyles = () => {
+  return {
+    updateStyles,
+    resetDynamicStyles,
+  };
+};
