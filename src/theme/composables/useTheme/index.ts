@@ -1,24 +1,20 @@
 // src/theme/composables/useTheme/index.ts
 
 import { inject } from 'vue';
-import { ThemeSymbol, type ThemeContext } from '@/theme/constants/theme-keys';
+import { ThemeSymbol } from '@/theme/constants/theme-keys';
+import type { ThemeContext } from '@/theme/types/theme-provider';
 
 /**
- * Hook personalizado para gestión avanzada del tema
- * @returns {ThemeContext} Objeto con:
- *  - El tema actual
- *  - Función para alternar entre modos
- *  - Función para establecer modo específico
+ * Composable para consumir el contexto del tema actual.
+ * Debe usarse dentro de un ThemeProvider.
  *
- * @throws {Error} Si se usa fuera de un ThemeProvider
+ * @returns Objeto reactivo del contexto de tema
  */
 export function useTheme(): ThemeContext {
-  // Intentamos obtener el contexto inyectado por ThemeProvider
   const context = inject(ThemeSymbol);
 
-  // Si no se inyecta, lanzamos un error
   if (!context) {
-    throw new Error('useTheme debe usarse dentro de un ThemeProvider');
+    throw new Error('[useTheme] must be used within a <ThemeProvider>');
   }
 
   return context;

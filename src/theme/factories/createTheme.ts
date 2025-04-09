@@ -40,9 +40,7 @@ const DEFAULT_THEME_COLORS: ThemeColors = {
     paper: '#E4E8F7',
     default: '#F5F6FF',
   },
-  surface: '#f5f5f5',
   text: '#9fc700',
-  border: '#e0e0e0',
 };
 
 // Default themes for light and dark mode
@@ -66,9 +64,7 @@ export function createTheme(options: { mode?: ThemeMode; colors?: Partial<ThemeC
     error: { ...baseColors.error, ...options.colors?.error },
     warning: { ...baseColors.warning, ...options.colors?.warning },
     background: { ...baseColors.background, ...options.colors?.background },
-    surface: options.colors?.surface ?? baseColors.surface,
     text: options.colors?.text ?? baseColors.text,
-    border: options.colors?.border ?? baseColors.border,
   };
 
   return {

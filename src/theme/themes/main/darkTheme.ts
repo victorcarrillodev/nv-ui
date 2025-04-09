@@ -39,7 +39,5 @@ export const darkThemeColors: ThemeColors = {
     paper: '#667D71',
     default: '#36423C',
   },
-  surface: '#1e1e1e',
   text: '#ff0000',
-  border: '#424242',
 };

@@ -3,7 +3,7 @@ import { provide, reactive, watchEffect, onMounted } from 'vue';
 import { darkThemeColors, lightThemeColors } from '@/theme/themes/main/theme';
 import type { Theme, ThemeMode } from '@/theme/types/theme';
 import { ThemeSymbol } from '@/theme/constants/theme-keys';
-import type { ThemeContext } from './theme-provider';
+import type { ThemeContext } from '../types/theme-provider';
 
 const THEME_KEY = 'user-theme';
 
