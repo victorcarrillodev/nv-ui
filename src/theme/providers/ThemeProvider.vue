@@ -3,30 +3,26 @@ import { provide, reactive, watchEffect, onMounted } from 'vue';
 import { darkThemeColors, lightThemeColors } from '@/theme/themes/main/theme';
 import type { Theme, ThemeMode } from '@/theme/types/theme';
 import { ThemeSymbol } from '@/theme/constants/theme-keys';
+import type { ThemeContext } from './theme-provider';
 
-// Clave de almacenamiento en localStorage
 const THEME_KEY = 'user-theme';
 
-// Función para obtener el tema almacenado
 function getStoredTheme(): ThemeMode {
+  if (typeof window === 'undefined') return 'light';
   return (localStorage.getItem(THEME_KEY) as ThemeMode) || 'light';
 }
 
-// Props del componente
 const props = defineProps<{
   defaultMode?: ThemeMode;
 }>();
 
-// Obtener el modo almacenado en localStorage o usar el predeterminado
 const storedMode = getStoredTheme() || (props.defaultMode ?? 'light');
 
-// Estado reactivo del tema
 const themeState = reactive<Theme>({
   mode: storedMode,
-  colors: storedMode === 'dark' ? darkThemeColors : lightThemeColors,
+  colors: storedMode === 'dark' ? { ...darkThemeColors } : { ...lightThemeColors },
 });
 
-// Sincroniza el tema almacenado al montar el componente
 onMounted(() => {
   const savedMode = getStoredTheme();
   if (savedMode) {
@@ -34,23 +30,15 @@ onMounted(() => {
   }
 });
 
-// Efecto para actualizar estilos del body dinámicamente
-let currentBackground = themeState.colors.background.default;
-let currentTextColor = themeState.colors.text;
-
 watchEffect(() => {
-  if (document.body.style.backgroundColor !== currentBackground) {
-    document.body.style.backgroundColor = themeState.colors.background.default;
-    currentBackground = themeState.colors.background.default;
-  }
-
-  if (document.body.style.color !== currentTextColor) {
-    document.body.style.color = themeState.colors.text;
-    currentTextColor = themeState.colors.text;
-  }
+  updateBodyStyles(themeState.colors);
 });
 
-// Función para cambiar entre light y dark
+function updateBodyStyles(colors: Theme['colors']) {
+  document.body.style.backgroundColor = colors.background.default;
+  document.body.style.color = colors.text;
+}
+
 function toggleMode() {
   const newMode = themeState.mode === 'light' ? 'dark' : 'light';
   if (newMode !== themeState.mode) {
@@ -58,15 +46,15 @@ function toggleMode() {
   }
 }
 
-// Función para establecer un modo específico y guardarlo en localStorage
 function setMode(mode: ThemeMode) {
   themeState.mode = mode;
-  themeState.colors = mode === 'dark' ? darkThemeColors : lightThemeColors;
-  localStorage.setItem(THEME_KEY, mode);
+  Object.assign(themeState.colors, mode === 'dark' ? darkThemeColors : lightThemeColors);
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(THEME_KEY, mode);
+  }
 }
 
-// Proveer el contexto del tema
-provide(ThemeSymbol, {
+provide<ThemeContext>(ThemeSymbol, {
   theme: themeState,
   toggleMode,
   setMode,
@@ -74,6 +62,5 @@ provide(ThemeSymbol, {
 </script>
 
 <template>
-  <!-- Contenido que recibirá el contexto del tema -->
   <slot />
 </template>
