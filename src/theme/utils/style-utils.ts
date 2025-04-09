@@ -18,8 +18,8 @@ export function convertKeysToKebabCase(
       const newKey = toKebabCase(key);
       acc[newKey] = typeof value === 'object' && !Array.isArray(value) ? convertKeysToKebabCase(value) : value;
       return acc;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     {} as Record<string, any>,
   );
 }

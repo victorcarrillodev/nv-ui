@@ -1,3 +1,7 @@
+## [0.19.3](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.19.2...v0.19.3) (2025-04-09)
+
+
+
 ## [0.19.2](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.19.1...v0.19.2) (2025-04-09)
 
 
