@@ -162,6 +162,18 @@ interface Transitions {
     leavingScreen: number;
   };
 }
+
+interface ZIndex {
+  mobileStepper: number;
+  fab: number;
+  speedDial: number;
+  appBar: number;
+  drawer: number;
+  modal: number;
+  snackbar: number;
+  tooltip: number;
+  [key: string]: number; // Para permitir valores personalizados
+}
 interface Theme {
   pallete: Pallete;
   spacing: (value: number) => string;
@@ -200,4 +212,6 @@ interface Theme {
   ];
   typography: Typography;
   transitions: Transitions;
+  zIndex: ZIndex;
+  toRuntimeSource: () => string;
 }
