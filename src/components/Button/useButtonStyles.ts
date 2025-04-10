@@ -1,19 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { computed, watchEffect } from 'vue';
 import { updateStyles } from '@/theme/composables/useDynamicStyles';
-import { useTheme } from '@/theme/composables/useTheme';
 import type { ButtonStylesOptions } from './button';
+import type { ThemeContext } from '@/theme/types/theme-provider';
 import type { ThemeColors, PalleteColor } from '@/theme/types/theme';
 import { convertKeysToKebabCase } from '@/theme/utils/style-utils';
 
 /**
  * Composable para generar y aplicar estilos dinámicos de botón
  */
-export const useButtonStyles = (options: ButtonStylesOptions) => {
-  const { theme } = useTheme();
+export const useButtonStyles = (options: ButtonStylesOptions, themeContext: ThemeContext) => {
+  // ✅ Usa el theme que viene como argumento (reactivo)
+  const { theme } = themeContext;
 
   const styles = computed(() => {
-    const { variant, size, color, disabled, shape, className } = options;
+    const { variant, size, color, disabled, shape } = options;
     const colors = theme.colors;
     const isValidColor = color && color in colors;
     const palette = isValidColor ? colors[color as keyof ThemeColors] : colors.primary;
@@ -67,7 +67,7 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
         break;
     }
 
-    // Tamaño
+    // Tamaños
     const sizeStyles: Record<string, string> = {
       sm: {
         padding: '0.2rem 1rem',
@@ -103,6 +103,7 @@ export const useButtonStyles = (options: ButtonStylesOptions) => {
     }
   };
 
+  // ✅ Reaplica estilos si cambia el tema o props
   watchEffect(() => {
     applyStyles();
   });
