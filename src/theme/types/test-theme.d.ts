@@ -97,9 +97,16 @@ interface Pallete {
     default: string;
   };
   action: PaletteAction;
+}
+
+type StyleFunction<Props extends object = object> = (theme: Theme, props: Props) => CSSProperties;
+
+interface Theme {
+  pallete: Pallete;
   spacing: (value: number) => string;
   shape: {
     borderRadius: 3;
   };
   containerQueries: ContainerQueries;
+  applyStyles: <Props extends object = object>(styleFunction: StyleFunction<Props>) => (props: Props) => CSSProperties;
 }
