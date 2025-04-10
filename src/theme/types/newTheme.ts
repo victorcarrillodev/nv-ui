@@ -184,7 +184,6 @@ export interface ThemeComponents {
 
 // ========== Dynamic Styles Helper ==========
 export type StyleFunction<Props extends object = object> = (theme: Theme, props: Props) => CSSProperties;
-
 // ========== Theme Interface ==========
 export interface Theme {
   palette: Palette;

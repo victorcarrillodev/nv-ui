@@ -1,64 +1,66 @@
 <script setup lang="ts">
-import { provide, reactive, watchEffect, onMounted } from 'vue';
-import { darkThemeColors, lightThemeColors } from '@/theme/themes/main/theme';
-import type { Theme, ThemeMode } from '@/theme/types/theme';
+import { provide, reactive, watchEffect } from 'vue';
+import { lightTheme, darkTheme } from '@/theme/themes/main/newTheme';
+import type { Theme } from '@/theme/types/newTheme';
+import type { ThemeContext } from '@/theme/types/theme-provider';
 import { ThemeSymbol } from '@/theme/constants/theme-keys';
-import type { ThemeContext } from '../types/theme-provider';
 
 const THEME_KEY = 'user-theme';
-
-function getStoredTheme(): ThemeMode {
-  if (typeof window === 'undefined') return 'light';
-  return (localStorage.getItem(THEME_KEY) as ThemeMode) || 'light';
-}
+type ThemeMode = 'light' | 'dark';
 
 const props = defineProps<{
   defaultMode?: ThemeMode;
 }>();
 
-const storedMode = getStoredTheme() || (props.defaultMode ?? 'light');
+function getStoredTheme(): ThemeMode {
+  if (typeof window === 'undefined') return 'light';
+  return (localStorage.getItem(THEME_KEY) as ThemeMode) || (props.defaultMode ?? 'light');
+}
 
-const themeState = reactive<Theme>({
+const storedMode = getStoredTheme();
+
+// ✅ Mapas con objetos Theme generados
+const themeMap: Record<ThemeMode, Theme> = {
+  light: lightTheme,
+  dark: darkTheme,
+};
+
+// ✅ Estado reactivo del proveedor de tema
+const themeState = reactive<{
+  mode: ThemeMode;
+  theme: Theme;
+}>({
   mode: storedMode,
-  colors: storedMode === 'dark' ? { ...darkThemeColors } : { ...lightThemeColors },
+  theme: themeMap[storedMode],
 });
-
-onMounted(() => {
-  const savedMode = getStoredTheme();
-  if (savedMode) {
-    setMode(savedMode);
-  }
-});
-
-watchEffect(() => {
-  updateBodyStyles(themeState.colors);
-});
-
-function updateBodyStyles(colors: Theme['colors']) {
-  document.body.style.backgroundColor = colors.background.default;
-  document.body.style.color = colors.text;
-}
-
-function toggleMode() {
-  const newMode = themeState.mode === 'light' ? 'dark' : 'light';
-  if (newMode !== themeState.mode) {
-    setMode(newMode);
-  }
-}
 
 function setMode(mode: ThemeMode) {
   themeState.mode = mode;
-  Object.assign(themeState.colors, mode === 'dark' ? darkThemeColors : lightThemeColors);
-  if (typeof window !== 'undefined') {
-    localStorage.setItem(THEME_KEY, mode);
-  }
+  themeState.theme = themeMap[mode];
+  localStorage.setItem(THEME_KEY, mode);
 }
 
-provide<ThemeContext>(ThemeSymbol, {
-  theme: themeState,
-  toggleMode,
-  setMode,
+function toggleMode() {
+  const next = themeState.mode === 'light' ? 'dark' : 'light';
+  setMode(next);
+}
+
+// ✅ Estilos globales reactivos
+watchEffect(() => {
+  const { background, text } = themeState.theme.palette;
+  document.body.style.backgroundColor = background.default;
+  document.body.style.color = text.primary;
+  document.body.style.transition = 'all 0.3s ease-in-out';
 });
+
+// ✅ Provide el contexto de tema
+const context: ThemeContext = {
+  theme: themeState.theme,
+  setMode,
+  toggleMode,
+};
+
+provide(ThemeSymbol, context);
 </script>
 
 <template>

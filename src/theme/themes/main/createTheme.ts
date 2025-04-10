@@ -1,8 +1,10 @@
-import type { Theme, Typography, ZIndex, Transitions, Breakpoints, ContainerQueries, Palette, StyleFunction } from '../../types/newTheme';
+import type { Theme, Typography, ZIndex, Transitions, Breakpoints, ContainerQueries, Palette, StyleFunction } from '@/theme/types/newTheme';
+import type { CSSProperties } from 'vue';
 
-// Dummy funciones de utilidad, reemplaza por las reales si las tienes
+// ========== px → rem ==========
 const pxToRem = (px: number) => `${px / 16}rem`;
 
+// ========== TYPOGRAPHY ==========
 const defaultTypography: Typography = {
   htmlFontSize: 16,
   pxToRem,
@@ -28,6 +30,7 @@ const defaultTypography: Typography = {
   inherit: { fontSize: 'inherit' },
 };
 
+// ========== Z-INDEX ==========
 const defaultZIndex: ZIndex = {
   mobileStepper: 1000,
   fab: 1050,
@@ -39,9 +42,10 @@ const defaultZIndex: ZIndex = {
   tooltip: 1500,
 };
 
+// ========== TRANSITIONS ==========
 const defaultTransitions: Transitions = {
   create: (props, options = {}) => {
-    const propStr = Array.isArray(props) ? props.join(',') : props;
+    const propStr = Array.isArray(props) ? props.join(', ') : props;
     const duration = options.duration ?? 300;
     const easing = options.easing ?? 'ease-in-out';
     const delay = options.delay ?? 0;
@@ -65,15 +69,18 @@ const defaultTransitions: Transitions = {
   },
 };
 
+// ========== BREAKPOINTS ==========
 const defaultBreakpoints: Breakpoints = {
   keys: ['xs', 'sm', 'md', 'lg', 'xl'],
   values: { xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920 },
   unit: 'px',
   up: (key) => `@media (min-width:${typeof key === 'number' ? key : defaultBreakpoints.values[key]}px)`,
   down: (key) => `@media (max-width:${typeof key === 'number' ? key : defaultBreakpoints.values[key]}px)`,
-  between: (start: number | 'xs' | 'sm' | 'md' | 'lg' | 'xl', end: number | 'xs' | 'sm' | 'md' | 'lg' | 'xl') =>
-    `@media (min-width:${typeof start === 'number' ? start : defaultBreakpoints.values[start]}px) and (max-width:${typeof end === 'number' ? end : defaultBreakpoints.values[end]}px)`,
-  only: (key: keyof typeof defaultBreakpoints.values) => {
+  between: (start, end) =>
+    `@media (min-width:${typeof start === 'number' ? start : defaultBreakpoints.values[start]}px) and (max-width:${
+      typeof end === 'number' ? end : defaultBreakpoints.values[end]
+    }px)`,
+  only: (key) => {
     const keys = Object.keys(defaultBreakpoints.values) as Array<keyof typeof defaultBreakpoints.values>;
     const nextKeyIndex = keys.indexOf(key) + 1;
     const nextKey = keys[nextKeyIndex];
@@ -84,6 +91,7 @@ const defaultBreakpoints: Breakpoints = {
   not: (key) => `@media not all and (min-width:${defaultBreakpoints.values[key]}px)`,
 };
 
+// ========== CONTAINER QUERIES ==========
 const defaultContainerQueries: ContainerQueries = {
   up: (value) => `@container (min-width: ${value})`,
   down: (value) => `@container (max-width: ${value})`,
@@ -92,31 +100,32 @@ const defaultContainerQueries: ContainerQueries = {
   not: (value) => `@container not all and (min-width: ${value})`,
 };
 
-const defaultShadows = Array.from({ length: 25 }, (_, i) => (i === 0 ? 'none' : `0px ${i}px ${i * 2}px rgba(0,0,0,0.1)`));
+// ========== SOMBRAS ==========
+const defaultShadows = Array.from({ length: 25 }, (_, i) => (i === 0 ? 'none' : `0px ${i}px ${i * 2}px rgba(0, 0, 0, 0.1)`));
 
-/**
- * Generador de temas completos
- */
+// ========== CREACIÓN DEL TEMA ==========
 export const createTheme = (palette: Palette): Theme => {
-  return {
+  // Base sin `applyStyles` para evitar problemas de referencia circular
+  const baseTheme = {
     palette,
     spacing: (...values: number[]) => values.map((v) => `${v * 8}px`).join(' '),
-    shape: {
-      borderRadius: 6,
-    },
+    shape: { borderRadius: 6 },
     typography: defaultTypography,
     zIndex: defaultZIndex,
     transitions: defaultTransitions,
     breakpoints: defaultBreakpoints,
     containerQueries: defaultContainerQueries,
     shadows: defaultShadows,
-    applyStyles:
-      <Props extends object = object>(styleFn: StyleFunction<Props>) =>
-      (props: Props) =>
-        styleFn(theme, props),
-    toRuntimeSource: () => JSON.stringify(palette), // ejemplo simple
+    toRuntimeSource: () => JSON.stringify(palette),
   };
 
-  // Local para applyStyles
-  const theme = {} as Theme; // placeholder para evitar error
+  // Cast al tipo completo de Theme
+  const theme = baseTheme as Theme;
+
+  // ✅ Definir applyStyles después
+  theme.applyStyles = function <Props extends object = object>(styleFn: StyleFunction<Props>): (props: Props) => CSSProperties {
+    return (props) => styleFn(theme, props);
+  };
+
+  return theme;
 };

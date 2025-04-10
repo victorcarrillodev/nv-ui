@@ -1,23 +1,8 @@
-// src/theme/types/theme-provider.d.ts
+// src/theme/types/theme-provider.ts
+import type { Theme } from './newTheme';
 
-import type { Theme, ThemeMode } from './theme';
-
-/**
- * Contexto del sistema de temas (modo, colores y métodos).
- */
 export interface ThemeContext {
-  /**
-   * Objeto reactivo con la configuración actual del tema.
-   */
   theme: Theme;
-
-  /**
-   * Alterna entre modo claro y oscuro.
-   */
+  setMode: (mode: 'light' | 'dark') => void;
   toggleMode: () => void;
-
-  /**
-   * Establece un modo específico ('light' | 'dark').
-   */
-  setMode: (mode: ThemeMode) => void;
 }
