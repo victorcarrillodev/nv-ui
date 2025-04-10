@@ -1,5 +1,10 @@
-interface Breakpoints {
-  keys: ['xs', 'sm', 'md', 'lg', 'xl'];
+// theme.d.ts
+
+import type { CSSProperties } from 'vue';
+
+// ========== Breakpoints ==========
+export interface Breakpoints {
+  keys: readonly ['xs', 'sm', 'md', 'lg', 'xl'];
   values: {
     xs: number;
     sm: number;
@@ -14,31 +19,16 @@ interface Breakpoints {
   only: (key: keyof Breakpoints['values']) => string;
   not: (key: keyof Breakpoints['values']) => string;
 }
-// TODO revisar mui components interface theme
-// export interface ThemeComponents {
-//   // Puedes definir propiedades comunes para todos los componentes
-//   MuiButton?: {
-//     defaultProps?: {
-//       variant?: 'text' | 'outlined' | 'contained';
-//       size?: 'small' | 'medium' | 'large';
-//     };
-//     styleOverrides?: {
-//       root?: CSSProperties;
-//       // ... otras variantes
-//     };
-//   };
-//   // Agrega más componentes según necesites
-//   MuiTextField?: {
-//     something?: true
-//   };
-// }
-interface PalleteColor {
+
+// ========== Palette ==========
+export interface PaletteColor {
   main: string;
   light: string;
   dark: string;
   contrastText: string;
 }
-interface PaletteAction {
+
+export interface PaletteAction {
   active: string;
   hover: string;
   hoverOpacity: number;
@@ -52,24 +42,18 @@ interface PaletteAction {
   activatedOpacity: number;
 }
 
-interface ContainerQueries {
-  up: (key: string | number) => string;
-  down: (key: string | number) => string;
-  between: (start: string | number, end: string | number) => string;
-  only: (key: string) => string;
-  not: (key: string) => string;
-}
-interface Pallete {
+export interface Palette {
   mode: 'light' | 'dark';
   common: {
     black: string;
     white: string;
   };
-  primary: PalleteColor;
-  secondary: PalleteColor;
-  success: PalleteColor;
-  error: PalleteColor;
-  warning: PalleteColor;
+  primary: PaletteColor;
+  secondary: PaletteColor;
+  info: PaletteColor;
+  success: PaletteColor;
+  error: PaletteColor;
+  warning: PaletteColor;
   grey: {
     50: string;
     100: string;
@@ -99,10 +83,17 @@ interface Pallete {
   action: PaletteAction;
 }
 
-type StyleFunction<Props extends object = object> = (theme: Theme, props: Props) => CSSProperties;
+// ========== Container Queries ==========
+export interface ContainerQueries {
+  up: (key: string | number) => string;
+  down: (key: string | number) => string;
+  between: (start: string | number, end: string | number) => string;
+  only: (key: string) => string;
+  not: (key: string) => string;
+}
 
-// typography
-interface TypographyStyle {
+// ========== Typography ==========
+export interface TypographyStyle {
   fontFamily?: string;
   fontWeight?: number | string;
   fontSize: string;
@@ -111,7 +102,7 @@ interface TypographyStyle {
   textTransform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase';
 }
 
-interface Typography {
+export interface Typography {
   htmlFontSize: number;
   pxToRem: (px: number) => string;
   fontFamily: string;
@@ -136,7 +127,8 @@ interface Typography {
   inherit: TypographyStyle;
 }
 
-interface Transitions {
+// ========== Transitions ==========
+export interface Transitions {
   getAutoHeightDuration: (height: number) => number;
   create: (
     props: string | string[],
@@ -163,7 +155,8 @@ interface Transitions {
   };
 }
 
-interface ZIndex {
+// ========== Z-Index ==========
+export interface ZIndex {
   mobileStepper: number;
   fab: number;
   speedDial: number;
@@ -172,46 +165,42 @@ interface ZIndex {
   modal: number;
   snackbar: number;
   tooltip: number;
-  [key: string]: number; // Para permitir valores personalizados
+  [key: string]: number;
 }
-interface Theme {
-  pallete: Pallete;
-  spacing: (value: number) => string;
-  shape: {
-    borderRadius: 3;
+
+// ========== Per-Component Overrides ==========
+export interface ThemeComponents {
+  NvButton?: {
+    defaultProps?: {
+      variant?: 'filled' | 'outlined' | 'text';
+      size?: 'sm' | 'md' | 'lg';
+    };
+    styleOverrides?: {
+      root?: CSSProperties;
+    };
   };
+  // Agrega más overrides aquí: NvCard, NvInput, etc.
+}
+
+// ========== Dynamic Styles Helper ==========
+export type StyleFunction<Props extends object = object> = (theme: Theme, props: Props) => CSSProperties;
+
+// ========== Theme Interface ==========
+export interface Theme {
+  palette: Palette;
+  spacing: (...values: number[]) => string;
+  shape: {
+    borderRadius: number | string;
+  };
+  breakpoints: Breakpoints;
   containerQueries: ContainerQueries;
-  applyStyles: <Props extends object = object>(styleFunction: StyleFunction<Props>) => (props: Props) => CSSProperties;
-  shadows: [
-    'none',
-    string,
-    string,
-    string,
-    string,
-    string, // 1-5
-    string,
-    string,
-    string,
-    string,
-    string, // 6-10
-    string,
-    string,
-    string,
-    string,
-    string, // 11-15
-    string,
-    string,
-    string,
-    string,
-    string, // 16-20
-    string,
-    string,
-    string,
-    string,
-    string, // 21-25
-  ];
   typography: Typography;
   transitions: Transitions;
   zIndex: ZIndex;
-  toRuntimeSource: () => string;
+  shadows: string[]; // de 0 a 25 niveles
+  components?: ThemeComponents;
+  cssVarPrefix?: string;
+  toCSSVars?: () => Record<string, string>; // Opcional, para exportar variables CSS
+  toRuntimeSource?: () => string; // Para serializar tema si se requiere
+  applyStyles: <Props extends object = object>(styleFunction: StyleFunction<Props>) => (props: Props) => CSSProperties;
 }
