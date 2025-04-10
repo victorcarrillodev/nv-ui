@@ -1,3 +1,12 @@
+## [0.20.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.20.0...v0.20.1) (2025-04-10)
+
+
+### Bug Fixes
+
+* :art: se realiza primera prueba ([10c7365](https://github.com/VictorManuelCarrillo/vue-ui/commit/10c73659fc30f0eb20d01b5806c9202579f5ce32))
+
+
+
 # [0.20.0](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.19.8...v0.20.0) (2025-04-10)
 
 
