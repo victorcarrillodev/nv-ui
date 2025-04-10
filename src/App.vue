@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ThemeProvider from '@/theme/providers/ThemeProvider.vue';
 import { useTheme } from '@/theme/composables/useTheme/index';
-import NvButton from './components/Button/NvButton.vue';
+import NvButton from './components/Button/UIButton.vue';
 
 // Componente hijo que usa el tema
 const ThemedComponent = {
