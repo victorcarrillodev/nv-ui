@@ -20,3 +20,14 @@ export function buildClass(base: string, key: string, value?: string | boolean):
 export function joinClasses(...classes: (string | false | null | undefined)[]): string {
   return classes.filter(Boolean).join(' ');
 }
+
+/**
+ * Genera una clase única basada en un componente, color y variante.
+ * Ideal para usar como selector en CSS-in-JS y clases dinámicas.
+ *
+ * Ej: generateUniqueClass('NvButton', 'primary', 'filled')
+ * → 'NvButton__primary-filled'
+ */
+export function generateUniqueClass(base: string, color?: string, variant?: string): string {
+  return `${base}__${color ?? 'default'}-${variant ?? 'default'}`;
+}

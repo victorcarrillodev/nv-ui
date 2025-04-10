@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useButtonClasses } from './useButtonClasses';
+import { computed, watchEffect } from 'vue';
 import { useButtonStyles } from './useButtonStyles';
+import { useTheme } from '@/theme/composables/useTheme';
+import { generateUniqueClass } from '@/theme/utils/class-utils';
 import type { ButtonProps } from './button';
 
-// Props con valores por defecto
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled',
   size: 'md',
@@ -13,35 +13,37 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   shape: 'normal',
 });
 
-// Clase única que sirve como selector CSS-in-JS
-const uniqueClass = computed(() => `NvButton__${props.color}-${props.variant}`);
+const themeContext = useTheme();
 
-// Composable para clases dinámicas
-const buttonClasses = useButtonClasses({
-  variant: props.variant,
-  size: props.size,
-  color: props.color,
-  disabled: props.disabled,
-  className: uniqueClass.value,
-  shape: props.shape,
+// Clase reactiva que puede cambiar si cambian props
+const uniqueClass = computed(() => generateUniqueClass('NvButton', props.color, props.variant));
+
+// ✅ Hook que genera los estilos
+const { styles } = useButtonStyles(
+  {
+    variant: props.variant,
+    size: props.size,
+    color: props.color,
+    disabled: props.disabled,
+    shape: props.shape,
+    className: uniqueClass.value, // sí, todavía lo pasamos
+  },
+  themeContext,
+);
+
+// ✅ Aseguramos que los estilos se re-apliquen cuando cambie el tema o props
+watchEffect(async () => {
+  const className = uniqueClass.value;
+  const currentStyles = styles.value;
+  if (className && currentStyles) {
+    const { updateStyles } = await import('@/theme/composables/useDynamicStyles');
+    updateStyles(`.${className}`, currentStyles);
+  }
 });
-
-// ✅ Composable para estilos dinámicos (corregido)
-const { applyStyles } = useButtonStyles({
-  variant: props.variant,
-  size: props.size,
-  color: props.color,
-  disabled: props.disabled,
-  className: uniqueClass.value,
-  shape: props.shape,
-});
-
-// Aplica los estilos al montar y cuando reactive data cambie
-applyStyles();
 </script>
 
 <template>
-  <button :class="[buttonClasses, uniqueClass]" :disabled="props.disabled">
+  <button :class="uniqueClass" :disabled="props.disabled">
     <slot />
   </button>
 </template>
