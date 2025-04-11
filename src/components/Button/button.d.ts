@@ -15,7 +15,7 @@ export interface ButtonClassesOptions {
   variant: ButtonVariant;
   size: 'sm' | 'md' | 'lg';
   color: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
-  className: string;
+  className?: string;
   shape: 'normal' | 'rounded' | 'pill';
 }
 
