@@ -1,24 +1,18 @@
 import { computed } from 'vue';
 import type { ButtonClassesOptions } from './button';
-import { buildClass, joinClasses } from '@/theme/utils/class-utils';
+import { generateComponentClasses } from '@/theme/utils/class-utils';
 
+/**
+ * Hook para generar clases dinámicas del botón usando BEM por props.
+ */
 export const useButtonClasses = (options: ButtonClassesOptions) => {
-  return computed(() => {
-    const { variant, size, color, disabled, shape, className } = options;
-
-    const base = 'NvButton';
-
-    // Generar clase única basada en color + variant
-    const uniqueClass = `${base}__${color}-${variant}`;
-
-    return joinClasses(
-      className,
-      uniqueClass,
-      buildClass(base, 'variant', variant),
-      buildClass(base, 'size', size),
-      buildClass(base, 'color', color),
-      buildClass(base, 'shape', shape),
-      disabled && buildClass(base, 'disabled', true),
-    );
-  });
+  return computed(() =>
+    generateComponentClasses('NvButton', {
+      variant: options.variant,
+      size: options.size,
+      color: options.color,
+      shape: options.shape,
+      disabled: options.disabled,
+    }),
+  );
 };

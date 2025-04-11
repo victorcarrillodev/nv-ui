@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue';
-import { useButtonStyles } from './useButtonStyles';
+import { watch } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
-import { generateUniqueClass } from '@/theme/utils/class-utils';
+import { useButtonStyles } from './useButtonStyles';
+import { useButtonClasses } from './useButtonClasses';
 import type { ButtonProps } from './button';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -13,37 +13,49 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   shape: 'normal',
 });
 
+// 👇 Hook del theme
 const themeContext = useTheme();
 
-// Clase reactiva que puede cambiar si cambian props
-const uniqueClass = computed(() => generateUniqueClass('NvButton', props.color, props.variant));
+// 👇 Generar clases basadas en props (BEM dinámico)
+const buttonClasses = useButtonClasses({
+  variant: props.variant,
+  size: props.size,
+  color: props.color,
+  shape: props.shape,
+  disabled: props.disabled,
+  className: 'NvButton', // solo para compatibilidad con estilos si lo necesitas
+});
 
-// ✅ Hook que genera los estilos
+// 👇 Hook de estilos inyectados dinámicamente
 const { styles } = useButtonStyles(
   {
     variant: props.variant,
     size: props.size,
     color: props.color,
-    disabled: props.disabled,
     shape: props.shape,
-    className: uniqueClass.value, // sí, todavía lo pasamos
+    disabled: props.disabled,
+    className: 'NvButton', // mismo selector base
   },
   themeContext,
 );
 
-// ✅ Aseguramos que los estilos se re-apliquen cuando cambie el tema o props
-watchEffect(async () => {
-  const className = uniqueClass.value;
-  const currentStyles = styles.value;
-  if (className && currentStyles) {
-    const { updateStyles } = await import('@/theme/composables/useDynamicStyles');
-    updateStyles(`.${className}`, currentStyles);
-  }
-});
+// 👇 Reaplicar estilos al cambiar cualquier cosa
+watch(
+  () => styles.value,
+  (newStyles) => {
+    if (newStyles) {
+      import('@/theme/composables/useDynamicStyles').then(({ updateStyles }) => {
+        updateStyles(`.NvButton`, newStyles);
+      });
+    }
+  },
+  { immediate: true, deep: true },
+);
 </script>
 
 <template>
-  <button :class="uniqueClass" :disabled="props.disabled">
+  <!-- Aplica todas las clases generadas -->
+  <button :class="buttonClasses" :disabled="props.disabled">
     <slot />
   </button>
 </template>
