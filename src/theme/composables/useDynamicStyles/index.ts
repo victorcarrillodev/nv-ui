@@ -1,103 +1,132 @@
 import { ref } from 'vue';
-import type { StyleObject } from './types';
+import type { StyleObject, StyleValue } from './types';
 
 type StyleCache = Map<string, { cssText: string; index: number }>;
+type StyleSheet = CSSStyleSheet | null;
 
 const styleElement = ref<HTMLStyleElement | null>(null);
 const styleCache = ref<StyleCache>(new Map());
 const isServer = typeof window === 'undefined';
 
-/**
- * Crea e inyecta un <style> en el <head> si no existe aún
- */
+// Helper functions
+const isStyleObject = (value: StyleValue): value is Record<string, string> => typeof value === 'object' && value !== null;
+
 const createStyleElement = (): HTMLStyleElement | null => {
   if (isServer) return null;
-  if (styleElement.value) return styleElement.value;
 
-  const style = document.createElement('style');
-  style.id = 'nv-dynamic-style';
-  document.head.appendChild(style);
-  styleElement.value = style;
-  return style;
+  if (!styleElement.value) {
+    const style = document.createElement('style');
+    style.id = 'nv-dynamic-style';
+    style.setAttribute('data-dynamic-styles', 'true');
+    document.head.appendChild(style);
+    styleElement.value = style;
+  }
+
+  return styleElement.value;
 };
 
-/**
- * Inserta una regla CSS al <style> dinámico
- */
-const insertRule = (selector: string, cssText: string): number => {
-  const sheet = styleElement.value?.sheet;
-  if (!sheet) return -1;
+const getStyleSheet = (): StyleSheet => {
+  const styleEl = createStyleElement();
+  return styleEl?.sheet || null;
+};
 
+const safeInsertRule = (sheet: CSSStyleSheet, rule: string): number => {
   try {
     const index = sheet.cssRules.length;
-    sheet.insertRule(`${selector} { ${cssText} }`, index);
+    sheet.insertRule(rule, index);
     return index;
-  } catch (err) {
-    console.error(`[useDynamicStyles] Error inserting rule for "${selector}":`, err);
+  } catch (error) {
+    console.error('[useDynamicStyles] Error inserting rule:', error);
     return -1;
   }
 };
 
-/**
- * Aplica estilos dinámicos a un selector, incluyendo reglas anidadas
- */
-export const updateStyles = (selector: string, styles: StyleObject) => {
+const safeDeleteRule = (sheet: CSSStyleSheet, index: number): boolean => {
+  try {
+    sheet.deleteRule(index);
+    return true;
+  } catch (error) {
+    console.warn('[useDynamicStyles] Error deleting rule:', error);
+    return false;
+  }
+};
+
+const generateCssText = (styles: Record<string, string>): string =>
+  Object.entries(styles)
+    .map(([prop, val]) => `${prop}:${val};`)
+    .join('');
+
+export const updateStyles = (selector: string, styles: StyleObject): void => {
   if (isServer) return;
 
-  const styleEl = createStyleElement();
-  if (!styleEl || !styleEl.sheet) return;
+  const sheet = getStyleSheet();
+  if (!sheet) return;
 
-  // Estilos planos
-  const flatStyles = Object.entries(styles).filter(([, v]) => typeof v === 'string');
-  const cssText = flatStyles.map(([prop, val]) => `${prop}:${val};`).join('');
+  // Limpiar estilos anteriores
+  const cleanUpStyles = (selectorPrefix: string) => {
+    const cachedKeys = Array.from(styleCache.value.keys()).filter((key) => key.startsWith(selectorPrefix));
 
-  // Elimina estilos anteriores si existen
-  const cached = styleCache.value.get(selector);
-  if (cached && cached.index >= 0) {
-    try {
-      styleEl.sheet.deleteRule(cached.index);
-    } catch (err) {
-      console.warn(`[useDynamicStyles] Error deleting rule for "${selector}":`, err);
+    cachedKeys.forEach((key) => {
+      const cached = styleCache.value.get(key);
+      if (cached && cached.index >= 0) {
+        safeDeleteRule(sheet, cached.index);
+      }
+      styleCache.value.delete(key);
+    });
+  };
+
+  // Limpiar tanto el selector principal como los anidados
+  cleanUpStyles(selector);
+
+  // Procesar estilos principales
+  const flatStyles: Record<string, string> = {};
+  const nestedStyles: Record<string, Record<string, string>> = {};
+
+  Object.entries(styles).forEach(([key, value]) => {
+    if (isStyleObject(value)) {
+      nestedStyles[key] = value;
+    } else if (typeof value === 'string') {
+      flatStyles[key] = value;
+    }
+  });
+
+  // Insertar estilos principales
+  if (Object.keys(flatStyles).length > 0) {
+    const cssText = generateCssText(flatStyles);
+    const index = safeInsertRule(sheet, `${selector} { ${cssText} }`);
+
+    if (index >= 0) {
+      styleCache.value.set(selector, { cssText, index });
     }
   }
 
-  const index = insertRule(selector, cssText);
-  if (index >= 0) {
-    styleCache.value.set(selector, { cssText, index });
-  }
+  // Insertar estilos anidados
+  Object.entries(nestedStyles).forEach(([nestedKey, nestedStyles]) => {
+    const nestedSelector = `${selector}${nestedKey.replace('&', '')}`;
+    const cssText = generateCssText(nestedStyles);
+    const index = safeInsertRule(sheet, `${nestedSelector} { ${cssText} }`);
 
-  // Estilos anidados (ej: &:hover, &:focus)
-  Object.entries(styles)
-    .filter(([, v]) => typeof v === 'object')
-    .forEach(([nestedKey, nestedValue]) => {
-      const nestedSelector = selector + ' ' + nestedKey.replace('&', '');
-      const nestedCss = Object.entries(nestedValue as Record<string, string>)
-        .map(([k, v]) => `${k}:${v};`)
-        .join('');
-      const nestedIndex = insertRule(nestedSelector, nestedCss);
-      if (nestedIndex >= 0) {
-        styleCache.value.set(nestedSelector, { cssText: nestedCss, index: nestedIndex });
-      }
-    });
+    if (index >= 0) {
+      styleCache.value.set(nestedSelector, { cssText, index });
+    }
+  });
 };
 
-/**
- * Elimina todos los estilos dinámicos insertados
- */
-export const resetDynamicStyles = () => {
+export const resetDynamicStyles = (): void => {
+  if (isServer) return;
+
   if (styleElement.value && document.head.contains(styleElement.value)) {
     document.head.removeChild(styleElement.value);
+    styleElement.value = null;
   }
-  styleElement.value = null;
   styleCache.value.clear();
 };
 
-/**
- * Hook para usar en componentes
- */
 export const useDynamicStyles = () => {
   return {
     updateStyles,
     resetDynamicStyles,
+    getCacheSize: () => styleCache.value.size,
+    getStyleElement: () => styleElement.value,
   };
 };
