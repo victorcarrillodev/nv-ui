@@ -6,20 +6,21 @@ export function toKebabCase(str: string): string {
 }
 
 /**
- * Convierte todas las claves de un objeto (y subobjetos) a kebab-case
+ * Convierte todas las claves de un objeto (y subobjetos) a kebab-case.
+ * No modifica arrays ni valores primitivos.
  */
-export function convertKeysToKebabCase(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  obj: Record<string, any>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): Record<string, any> {
-  return Object.entries(obj).reduce(
-    (acc, [key, value]) => {
+export function convertKeysToKebabCase(obj: unknown): unknown {
+  if (Array.isArray(obj)) {
+    return obj.map(convertKeysToKebabCase);
+  }
+
+  if (obj !== null && typeof obj === 'object') {
+    return Object.entries(obj as Record<string, unknown>).reduce<Record<string, unknown>>((acc, [key, value]) => {
       const newKey = toKebabCase(key);
-      acc[newKey] = typeof value === 'object' && !Array.isArray(value) ? convertKeysToKebabCase(value) : value;
+      acc[newKey] = value !== null && typeof value === 'object' ? convertKeysToKebabCase(value) : value;
       return acc;
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    {} as Record<string, any>,
-  );
+    }, {});
+  }
+
+  return obj;
 }
