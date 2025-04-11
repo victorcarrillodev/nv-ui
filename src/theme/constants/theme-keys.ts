@@ -1,5 +1,10 @@
 // src/theme/constants/theme-keys.ts
-import type { ThemeContext } from '@/theme/types/theme-provider';
-import type { InjectionKey } from 'vue';
 
-export const ThemeSymbol: InjectionKey<ThemeContext> = Symbol('Theme');
+import type { InjectionKey } from 'vue';
+import type { ThemeContext } from '@/theme/types/theme-provider';
+
+/**
+ * Key para inyectar y consumir el contexto del tema en el componente.
+ * Usado con provide/inject.
+ */
+export const ThemeInjectionKey: InjectionKey<ThemeContext> = Symbol('ThemeContext');
