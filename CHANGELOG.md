@@ -1,3 +1,13 @@
+## [0.20.2](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.20.1...v0.20.2) (2025-04-11)
+
+
+### Bug Fixes
+
+* :bug: se arreglan errores de implementacion ([99a1405](https://github.com/VictorManuelCarrillo/vue-ui/commit/99a1405077fcd19fc7261f3bcdce81e89c4cb5b5))
+* :bug: se mejora implementación del nuevo tema ([2bf517a](https://github.com/VictorManuelCarrillo/vue-ui/commit/2bf517a2ce9c4c3608d0ff14c1d833dd1f3a9d33))
+
+
+
 ## [0.20.1](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.20.0...v0.20.1) (2025-04-10)
 
 
