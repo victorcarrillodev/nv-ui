@@ -1,8 +1,9 @@
 // src/theme/types/theme-provider.ts
+import type { ComputedRef } from 'vue';
 import type { Theme } from './newTheme';
 
 export interface ThemeContext {
-  theme: Theme;
+  theme: ComputedRef<Theme>;
   setMode: (mode: 'light' | 'dark') => void;
   toggleMode: () => void;
 }

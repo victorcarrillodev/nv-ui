@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { provide, reactive, watchEffect } from 'vue';
+import { provide, reactive, watchEffect, computed } from 'vue';
 import { lightTheme, darkTheme } from '@/theme/themes/main/newTheme';
 import type { Theme } from '@/theme/types/newTheme';
 import type { ThemeContext } from '@/theme/types/theme-provider';
-import { ThemeSymbol } from '@/theme/constants/theme-keys';
+import { ThemeInjectionKey } from '@/theme/constants/theme-keys';
 
 const THEME_KEY = 'user-theme';
 type ThemeMode = 'light' | 'dark';
@@ -19,13 +19,11 @@ function getStoredTheme(): ThemeMode {
 
 const storedMode = getStoredTheme();
 
-// ✅ Mapas con objetos Theme generados
 const themeMap: Record<ThemeMode, Theme> = {
   light: lightTheme,
   dark: darkTheme,
 };
 
-// ✅ Estado reactivo del proveedor de tema
 const themeState = reactive<{
   mode: ThemeMode;
   theme: Theme;
@@ -45,22 +43,22 @@ function toggleMode() {
   setMode(next);
 }
 
-// ✅ Estilos globales reactivos
 watchEffect(() => {
+  if (typeof document === 'undefined') return;
   const { background, text } = themeState.theme.palette;
   document.body.style.backgroundColor = background.default;
   document.body.style.color = text.primary;
   document.body.style.transition = 'all 0.3s ease-in-out';
 });
 
-// ✅ Provide el contexto de tema
+// ✅ Contexto reactivo
 const context: ThemeContext = {
-  theme: themeState.theme,
+  theme: computed(() => themeState.theme),
   setMode,
   toggleMode,
 };
 
-provide(ThemeSymbol, context);
+provide(ThemeInjectionKey, context);
 </script>
 
 <template>
