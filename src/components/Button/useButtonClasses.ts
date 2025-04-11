@@ -1,9 +1,10 @@
+// src/components/Button/useButtonClasses.ts
 import { computed } from 'vue';
 import type { ButtonClassesOptions } from './button';
 import { generateComponentClasses } from '@/theme/utils/class-utils';
 
 /**
- * Hook para generar clases dinámicas del botón usando BEM por props.
+ * Genera clases dinámicas tipo BEM basado en las props del botón.
  */
 export const useButtonClasses = (options: ButtonClassesOptions) => {
   return computed(() =>

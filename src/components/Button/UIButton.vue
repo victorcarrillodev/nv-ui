@@ -1,5 +1,6 @@
+<!-- src/components/Button/UIButton.vue -->
 <script setup lang="ts">
-import { watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
@@ -13,39 +14,33 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   shape: 'normal',
 });
 
-// 👇 Hook del theme
 const themeContext = useTheme();
 
-// 👇 Generar clases basadas en props (BEM dinámico)
+// Clase única por combinación de props (color-variant-size-shape)
+const selectorClass = computed(() => `NvButton__${props.color}-${props.variant}-${props.size}-${props.shape}`);
+
+// Hook que genera clases tipo BEM
 const buttonClasses = useButtonClasses({
-  variant: props.variant,
-  size: props.size,
-  color: props.color,
-  shape: props.shape,
-  disabled: props.disabled,
-  className: 'NvButton', // solo para compatibilidad con estilos si lo necesitas
+  ...props,
+  className: selectorClass.value,
 });
 
-// 👇 Hook de estilos inyectados dinámicamente
+// Hook que genera y aplica estilos dinámicos para esa clase única
 const { styles } = useButtonStyles(
   {
-    variant: props.variant,
-    size: props.size,
-    color: props.color,
-    shape: props.shape,
-    disabled: props.disabled,
-    className: 'NvButton', // mismo selector base
+    ...props,
+    className: selectorClass.value,
   },
   themeContext,
 );
 
-// 👇 Reaplicar estilos al cambiar cualquier cosa
+// Vuelve a aplicar los estilos si cambia la clase o el estilo
 watch(
   () => styles.value,
   (newStyles) => {
-    if (newStyles) {
+    if (selectorClass.value && newStyles) {
       import('@/theme/composables/useDynamicStyles').then(({ updateStyles }) => {
-        updateStyles(`.NvButton`, newStyles);
+        updateStyles(`.${selectorClass.value}`, newStyles);
       });
     }
   },
@@ -54,8 +49,8 @@ watch(
 </script>
 
 <template>
-  <!-- Aplica todas las clases generadas -->
-  <button :class="buttonClasses" :disabled="props.disabled">
+  <!-- Usa la clase base + modificadores + clase única para los estilos -->
+  <button :class="[...buttonClasses, selectorClass]" :disabled="props.disabled">
     <slot />
   </button>
 </template>

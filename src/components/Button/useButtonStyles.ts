@@ -1,3 +1,4 @@
+// src/components/Button/useButtonStyles.ts
 import { computed, watch } from 'vue';
 import type { ButtonStylesOptions } from './button';
 import type { ThemeContext } from '@/theme/types/theme-provider';
@@ -8,13 +9,8 @@ import { updateStyles } from '@/theme/composables/useDynamicStyles';
 export const useButtonStyles = (options: ButtonStylesOptions, themeContext: ThemeContext) => {
   const { theme } = themeContext;
 
-  // ✅ Computed reactivo basado en theme y props
   const styles = computed(() => {
     const { variant, size, color, disabled, shape } = options;
-
-    // ✅ Referencia reactiva al color y modo para que el computed se actualice
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const mode = theme.palette.mode;
     const palette = theme.palette[color];
     const { main, light, dark, contrastText } = palette as PaletteColor;
 
@@ -78,7 +74,6 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
     return convertKeysToKebabCase(base);
   });
 
-  // ✅ Watch que actualiza estilos si cambia el computed
   watch(
     () => styles.value,
     (newStyles) => {
