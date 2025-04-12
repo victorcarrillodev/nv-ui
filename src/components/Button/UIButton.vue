@@ -1,6 +1,5 @@
-<!-- src/components/Button/UIButton.vue -->
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue';
+import { computed, watch, toRef } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
@@ -15,8 +14,9 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 });
 
 const themeContext = useTheme();
+const theme = toRef(themeContext, 'theme');
 
-// Clase única para identificar estilos por combinación de props
+// Clase única basada en las props del botón
 const selectorClass = computed(() => `NvButton__${props.color}-${props.variant}-${props.size}-${props.shape}`);
 
 // Hook para generar clases BEM
@@ -25,7 +25,7 @@ const buttonClasses = useButtonClasses({
   className: selectorClass.value,
 });
 
-// Hook para obtener estilos dinámicos según props y theme
+// Hook para obtener estilos dinámicos
 const { styles } = useButtonStyles(
   {
     ...props,
@@ -34,13 +34,20 @@ const { styles } = useButtonStyles(
   themeContext,
 );
 
-// Aplica estilos dinámicos cuando cambian props o el theme
-watchEffect(async () => {
-  if (selectorClass.value && styles.value) {
-    const { updateStyles } = await import('@/theme/composables/useDynamicStyles');
-    updateStyles(`.${selectorClass.value}`, styles.value);
-  }
-});
+// Watcher optimizado para cambios en estilos y tema
+watch(
+  [styles, () => theme.value.palette],
+  ([newStyles]) => {
+    if (selectorClass.value && newStyles) {
+      import('@/theme/composables/useDynamicStyles').then(({ updateStyles }) => {
+        // Actualización forzada de estilos
+        updateStyles(`.${selectorClass.value}`, {});
+        updateStyles(`.${selectorClass.value}`, newStyles);
+      });
+    }
+  },
+  { immediate: true, deep: true },
+);
 </script>
 
 <template>
