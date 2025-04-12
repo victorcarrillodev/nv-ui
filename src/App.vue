@@ -7,7 +7,9 @@ import { NvButton } from '.';
 <template>
   <ThemeProvider>
     <ThemedMove />
-    <NvButton color="error">ola</NvButton>
-    <NvButton color="primary">ola</NvButton>
+    <NvButton color="primary">button 1</NvButton>
+    <NvButton color="error">button 2</NvButton>
+    <NvButton color="secondary">button 2</NvButton>
+    <NvButton color="success">button 2</NvButton>
   </ThemeProvider>
 </template>
