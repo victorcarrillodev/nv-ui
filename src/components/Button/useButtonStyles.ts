@@ -1,77 +1,87 @@
-// src/components/Button/useButtonStyles.ts
-import { computed, watch } from 'vue';
+import { computed, watch, toRef } from 'vue';
 import type { ButtonStylesOptions } from './button';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import type { PaletteColor } from '@/theme/types/newTheme';
 import { convertKeysToKebabCase } from '@/theme/utils/style-utils';
 import { updateStyles } from '@/theme/composables/useDynamicStyles';
+import type { StyleObject } from '@/theme/composables/useDynamicStyles/types';
 
 export const useButtonStyles = (options: ButtonStylesOptions, themeContext: ThemeContext) => {
-  const { theme } = themeContext;
+  const theme = toRef(themeContext, 'theme');
 
-  const styles = computed(() => {
+  // Definición explícita del tipo de retorno
+  const styles = computed<StyleObject>(() => {
     const { variant, size, color, disabled, shape } = options;
-    const palette = theme.palette[color];
-    const { main, light, dark, contrastText } = palette as PaletteColor;
+    const palette = theme.value.palette[color] as PaletteColor;
+    const { main, light, dark, contrastText } = palette;
 
-    const base: Record<string, string | object> = {
+    // Creamos el objeto base con el tipo correcto
+    const baseStyles: StyleObject = {
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontWeight: theme.typography.button?.fontWeight?.toString() || '600',
-      fontFamily: theme.typography.button?.fontFamily || theme.typography.fontFamily,
-      fontSize: theme.typography.button?.fontSize || '1rem',
+      fontWeight: theme.value.typography.button?.fontWeight?.toString() || '600',
+      fontFamily: theme.value.typography.button?.fontFamily || theme.value.typography.fontFamily,
+      fontSize: theme.value.typography.button?.fontSize || '1rem',
       cursor: disabled ? 'not-allowed' : 'pointer',
       opacity: disabled ? '0.6' : '1',
-      transition: theme.transitions.create('all', { duration: 300 }),
+      transition: theme.value.transitions.create('all', { duration: 300 }) as string,
       border: 'none',
-      boxShadow: variant === 'filled' ? theme.shadows[1] : 'none',
+      boxShadow: variant === 'filled' ? (theme.value.shadows[1] as string) : 'none',
     };
 
+    // Añadimos propiedades condicionales con el tipo correcto
     if (variant === 'filled') {
-      Object.assign(base, {
+      Object.assign(baseStyles, {
         backgroundColor: main,
         color: contrastText,
-        '&:hover': !disabled && {
-          backgroundColor: light,
-          filter: 'brightness(1.05)',
-        },
+        '&:hover': !disabled
+          ? {
+              backgroundColor: light,
+              filter: 'brightness(1.05)',
+            }
+          : undefined,
       });
     } else if (variant === 'outlined') {
-      Object.assign(base, {
+      Object.assign(baseStyles, {
         backgroundColor: 'transparent',
         color: main,
         border: `2px solid ${main}`,
-        '&:hover': !disabled && {
-          backgroundColor: light,
-          color: contrastText,
-        },
+        '&:hover': !disabled
+          ? {
+              backgroundColor: light,
+              color: contrastText,
+            }
+          : undefined,
       });
     } else if (variant === 'text') {
-      Object.assign(base, {
+      Object.assign(baseStyles, {
         backgroundColor: 'transparent',
         color: main,
-        '&:hover': !disabled && {
-          color: dark,
-        },
+        '&:hover': !disabled
+          ? {
+              color: dark,
+            }
+          : undefined,
       });
     }
 
-    const sizeMap: Record<string, Record<string, string>> = {
+    // Añadimos tamaños
+    const sizeMap: Record<string, StyleObject> = {
       sm: { padding: '0.2rem 1rem', fontSize: '0.875rem' },
       md: { padding: '0.5rem 1.5rem', fontSize: '1rem' },
       lg: { padding: '0.8rem 2rem', fontSize: '1.125rem' },
     };
-    Object.assign(base, sizeMap[size]);
+    Object.assign(baseStyles, sizeMap[size]);
 
-    const shapeMap: Record<string, string> = {
+    // Añadimos formas
+    baseStyles.borderRadius = {
       normal: '0.25rem',
       rounded: '1rem',
       pill: '5rem',
-    };
-    base.borderRadius = shapeMap[shape];
+    }[shape];
 
-    return convertKeysToKebabCase(base);
+    return convertKeysToKebabCase(baseStyles) as StyleObject;
   });
 
   watch(
