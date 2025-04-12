@@ -1,3 +1,12 @@
+## [0.20.6](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.20.5...v0.20.6) (2025-04-12)
+
+
+### Bug Fixes
+
+* **styles:** :bug: se arreglan estilos ([3bec102](https://github.com/VictorManuelCarrillo/vue-ui/commit/3bec1028722f7859b2d74ac33a4292de76d85a67))
+
+
+
 ## [0.20.5](https://github.com/VictorManuelCarrillo/vue-ui/compare/v0.20.4...v0.20.5) (2025-04-12)
 
 
