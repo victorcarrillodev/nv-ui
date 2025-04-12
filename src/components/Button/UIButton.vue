@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, watch, toRef } from 'vue';
+import { computed, watch, ref, toRef } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
 import type { ButtonProps } from './button';
+import { updateStyles } from '@/theme/composables/useDynamicStyles';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled',
@@ -16,42 +17,33 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const themeContext = useTheme();
 const theme = toRef(themeContext, 'theme');
 
-// Clase única basada en las props del botón
-const selectorClass = computed(() => `NvButton__${props.color}-${props.variant}-${props.size}-${props.shape}`);
+// ✅ Clase única por componente
+const classId = ref(`btn-${Math.random().toString(36).substring(2, 8)}`);
 
-// Hook para generar clases BEM
-const buttonClasses = useButtonClasses({
-  ...props,
-  className: selectorClass.value,
-});
+// ✅ Combinar clases BEM + clase para estilos dinámicos
+const buttonClasses = computed(() => [...useButtonClasses(props).value, classId.value]);
 
-// Hook para obtener estilos dinámicos
+// ✅ Estilos dinámicos usando la clase generada
 const { styles } = useButtonStyles(
   {
     ...props,
-    className: selectorClass.value,
+    className: `.${classId.value}`,
   },
   themeContext,
 );
 
-// Watcher optimizado para cambios en estilos y tema
+// ✅ Aplicar o actualizar los estilos cuando cambian props o tema
 watch(
-  [styles, () => theme.value.palette],
-  ([newStyles]) => {
-    if (selectorClass.value && newStyles) {
-      import('@/theme/composables/useDynamicStyles').then(({ updateStyles }) => {
-        // Actualización forzada de estilos
-        updateStyles(`.${selectorClass.value}`, {});
-        updateStyles(`.${selectorClass.value}`, newStyles);
-      });
-    }
+  () => [styles.value, theme.value],
+  () => {
+    updateStyles(`.${classId.value}`, styles.value as Record<string, string>);
   },
   { immediate: true, deep: true },
 );
 </script>
 
 <template>
-  <button :class="[...buttonClasses, selectorClass]" :disabled="props.disabled">
+  <button :class="buttonClasses" :disabled="props.disabled">
     <slot />
   </button>
 </template>
