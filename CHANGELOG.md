@@ -1,3 +1,13 @@
+## <small>0.20.7 (2025-04-13)</small>
+
+* chore: release v0.20.7 ([2762096](https://github.com/VictorManuelCarrillo/vue-ui/commit/2762096))
+* chore(changelog): :bug: se mejoran changelogs ([9806a36](https://github.com/VictorManuelCarrillo/vue-ui/commit/9806a36))
+* docs(changelog): :memo: se sube changelog ([95c9c38](https://github.com/VictorManuelCarrillo/vue-ui/commit/95c9c38))
+* docs(changelog): :memo: se sube changelog ([dc8ea72](https://github.com/VictorManuelCarrillo/vue-ui/commit/dc8ea72))
+* docs(changelog): :memo: se sube changelog ([360f6d1](https://github.com/VictorManuelCarrillo/vue-ui/commit/360f6d1))
+
+
+
 ## <small>0.20.6 (2025-04-12)</small>
 
 * chore: release v0.20.6 ([9146cbf](https://github.com/VictorManuelCarrillo/vue-ui/commit/9146cbf))
