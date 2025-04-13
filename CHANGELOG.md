@@ -1,3 +1,11 @@
+## 0.21.0 (2025-04-13)
+
+* chore: release v0.21.0 ([153640b](https://github.com/VictorManuelCarrillo/vue-ui/commit/153640b))
+* feat(prop): :sparkles: se agrega nueva prop ([0c2a31a](https://github.com/VictorManuelCarrillo/vue-ui/commit/0c2a31a))
+* docs(changelog): :memo: se sube changelog ([d9dc43c](https://github.com/VictorManuelCarrillo/vue-ui/commit/d9dc43c))
+
+
+
 ## <small>0.20.7 (2025-04-13)</small>
 
 * chore: release v0.20.7 ([2762096](https://github.com/VictorManuelCarrillo/vue-ui/commit/2762096))
