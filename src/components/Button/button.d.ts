@@ -8,6 +8,7 @@ export interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   color?: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
   shape?: 'normal' | 'rounded' | 'pill';
+  shadow?: number | string; // ✅ Aceptar string o number
 }
 
 export interface ButtonClassesOptions {
@@ -17,6 +18,7 @@ export interface ButtonClassesOptions {
   color: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
   className?: string;
   shape: 'normal' | 'rounded' | 'pill';
+  shadow: number | string; // ✅ Aceptar string o number
 }
 
 export type ButtonStylesOptions = ButtonClassesOptions;

@@ -1,3 +1,4 @@
+<!-- src/components/Button/UIButton.vue -->
 <script setup lang="ts">
 import { computed, watch, ref, toRef } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
@@ -12,18 +13,16 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   color: 'primary',
   disabled: false,
   shape: 'normal',
+  shadow: 1,
 });
 
 const themeContext = useTheme();
 const theme = toRef(themeContext, 'theme');
 
-// ✅ Clase única por componente
 const classId = ref(`btn-${Math.random().toString(36).substring(2, 8)}`);
 
-// ✅ Combinar clases BEM + clase para estilos dinámicos
 const buttonClasses = computed(() => [...useButtonClasses(props).value, classId.value]);
 
-// ✅ Estilos dinámicos usando la clase generada
 const { styles } = useButtonStyles(
   {
     ...props,
@@ -32,7 +31,6 @@ const { styles } = useButtonStyles(
   themeContext,
 );
 
-// ✅ Aplicar o actualizar los estilos cuando cambian props o tema
 watch(
   () => [styles.value, theme.value],
   () => {

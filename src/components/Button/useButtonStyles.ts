@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// src/components/Button/useButtonStyles.ts
+
 import { computed, toRef } from 'vue';
 import type { ButtonStylesOptions } from './button';
 import type { ThemeContext } from '@/theme/types/theme-provider';
@@ -10,9 +12,14 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
   const theme = toRef(themeContext, 'theme');
 
   const styles = computed<StyleObject>(() => {
-    const { variant, size, color, disabled, shape } = options;
+    const { variant, size, color, disabled, shape, shadow = 1 } = options;
+
     const palette = theme.value.palette[color] as PaletteColor;
     const { main, light, dark, contrastText } = palette;
+
+    // ✅ Convertir shadow a número seguro
+    const parsedShadow = Number(shadow);
+    const safeShadow = isNaN(parsedShadow) ? 1 : Math.max(0, Math.min(parsedShadow, theme.value.shadows.length - 1));
 
     const baseStyles: StyleObject = {
       display: 'inline-flex',
@@ -25,6 +32,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
       opacity: disabled ? '0.6' : '1',
       transition: 'all 0.3s ease',
       border: 'none',
+      boxShadow: theme.value.shadows[safeShadow], // ✅ uso final
     };
 
     switch (variant) {
@@ -32,7 +40,6 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
         Object.assign(baseStyles, {
           backgroundColor: main,
           color: contrastText,
-          boxShadow: theme.value.shadows[1],
         });
         break;
 
