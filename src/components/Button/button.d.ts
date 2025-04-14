@@ -18,7 +18,7 @@ export interface ButtonClassesOptions {
   variant: ButtonVariant;
   size: ButtonSizes;
   color: ButtonColors;
-  className: string;
+  className?: string;
   shape: ButtonShapes;
   shadow: number | string;
 }
