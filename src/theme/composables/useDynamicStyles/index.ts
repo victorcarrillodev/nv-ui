@@ -1,7 +1,6 @@
 // src/theme/composables/useDynamicStyles/index.ts
 
 import { ref } from 'vue';
-// import type { StyleObject } from './types';
 
 const STYLE_MAP = new Map<string, { cssText: string; index: number }>();
 const styleElement = ref<HTMLStyleElement | null>(null);
@@ -27,33 +26,55 @@ const generateCssText = (styles: Record<string, string>): string =>
     .map(([prop, val]) => `${prop}:${val};`)
     .join('');
 
-export const updateStyles = (selector: string, styles: Record<string, string>) => {
+export const updateStyles = (selector: string, styles: Record<string, unknown>) => {
   if (isServer || !styles) return;
 
   const sheet = getStyleSheet();
   if (!sheet) return;
 
-  const cssText = generateCssText(styles);
-  const rule = `${selector} { ${cssText} }`;
+  const flatStyles: Record<string, string> = {};
+  const nestedStyles: Record<string, Record<string, string>> = {};
 
+  // 🔍 Separa estilos planos y anidados (ej. :hover, :focus)
+  for (const [key, value] of Object.entries(styles)) {
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      nestedStyles[key] = value as Record<string, string>;
+    } else {
+      flatStyles[key] = String(value);
+    }
+  }
+
+  // 🧼 Eliminar regla anterior si existe
   const existing = STYLE_MAP.get(selector);
-
   if (existing && existing.index >= 0 && existing.index < sheet.cssRules.length) {
     try {
       sheet.deleteRule(existing.index);
-      const newIndex = sheet.insertRule(rule, existing.index);
-      STYLE_MAP.set(selector, { cssText, index: newIndex });
-    } catch (err) {
-      console.error('[updateStyles] Error replacing style rule:', err);
+    } catch (e) {
+      console.warn(`[updateStyles] Error al eliminar regla base:`, e);
     }
-    return;
   }
 
+  // ✅ Insertar regla base
   try {
+    const cssText = generateCssText(flatStyles);
+    const rule = `${selector} { ${cssText} }`;
     const index = sheet.insertRule(rule, sheet.cssRules.length);
     STYLE_MAP.set(selector, { cssText, index });
   } catch (err) {
-    console.error('[updateStyles] Error inserting style rule:', err);
+    console.error('[updateStyles] Error al insertar regla base:', err);
+  }
+
+  // ✅ Insertar reglas anidadas (como :hover, :focus)
+  for (const [nestedKey, nestedStyle] of Object.entries(nestedStyles)) {
+    const nestedSelector = `${selector}${nestedKey}`;
+    try {
+      const cssText = generateCssText(nestedStyle);
+      const rule = `${nestedSelector} { ${cssText} }`;
+      const index = sheet.insertRule(rule, sheet.cssRules.length);
+      STYLE_MAP.set(nestedSelector, { cssText, index });
+    } catch (err) {
+      console.error(`[updateStyles] Error al insertar regla anidada (${nestedKey}):`, err);
+    }
   }
 };
 

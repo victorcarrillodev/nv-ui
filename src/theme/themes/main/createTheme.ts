@@ -101,7 +101,7 @@ const defaultContainerQueries: ContainerQueries = {
 };
 
 // ========== SOMBRAS ==========
-const defaultShadows = Array.from({ length: 25 }, (_, i) => (i === 0 ? 'none' : `0px ${i}px ${i * 2}px rgba(0, 0, 0, 0.1)`));
+const defaultShadows = Array.from({ length: 25 }, (_, i) => (i === 0 ? 'none' : `0px ${i}px ${i * 2}px rgba(0, 0, 0, 0.5)`));
 
 // ========== CREACIÓN DEL TEMA ==========
 export const createTheme = (palette: Palette): Theme => {

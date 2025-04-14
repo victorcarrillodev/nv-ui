@@ -1,7 +1,7 @@
 /**
  * Tipos mejorados para estilos dinámicos
  */
-export type StyleValue = string | number | undefined | null | StyleNestedObject;
+export type StyleValue = string | number | null | unknown | undefined | Record<string, string>;
 export type StyleNestedObject = Record<string, string | number>;
 
 export interface StyleObject {
