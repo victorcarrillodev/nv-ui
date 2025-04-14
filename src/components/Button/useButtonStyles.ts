@@ -30,7 +30,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
       opacity: disabled ? '0.6' : '1',
       border: 'none',
       boxShadow: theme.value.shadows[safeShadow],
-      transition: 'all 0.3s ease',
+      transition: 'all 0.5s ease',
       margin: '0.1rem',
     };
 

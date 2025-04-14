@@ -1,24 +1,26 @@
-// Definiciones de tipos para el componente Button
-
+// Props definitions for button component
 export type ButtonVariant = 'filled' | 'outlined' | 'text';
-
+export type ButtonSizes = 'sm' | 'md' | 'lg';
+export type ButtonColors = 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
+export type ButtonShapes = 'normal' | 'rounded' | 'pill';
+// Main Button interface
 export interface ButtonProps {
   disabled?: boolean;
   variant?: ButtonVariant;
-  size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
-  shape?: 'normal' | 'rounded' | 'pill';
-  shadow?: number | string; // ✅ Aceptar string o number
+  size?: ButtonSizes;
+  color?: ButtonColors;
+  shape?: ButtonShapes;
+  shadow?: number | string;
 }
-
+// Button interface for styles
 export interface ButtonClassesOptions {
   disabled: boolean;
   variant: ButtonVariant;
-  size: 'sm' | 'md' | 'lg';
-  color: 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
-  className?: string;
-  shape: 'normal' | 'rounded' | 'pill';
-  shadow: number | string; // ✅ Aceptar string o number
+  size: ButtonSizes;
+  color: ButtonColors;
+  className: string;
+  shape: ButtonShapes;
+  shadow: number | string;
 }
-
+// Button type for classes
 export type ButtonStylesOptions = ButtonClassesOptions;
