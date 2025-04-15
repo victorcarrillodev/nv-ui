@@ -1,3 +1,11 @@
+## <small>0.21.3 (2025-04-15)</small>
+
+* chore: release v0.21.3 ([f96089e](https://github.com/VictorManuelCarrillo/vue-ui/commit/f96089e))
+* fix(classes): :bug: se mejoran clases ([77aaec4](https://github.com/VictorManuelCarrillo/vue-ui/commit/77aaec4))
+* docs(changelog): :memo: se sube changelog ([b83205d](https://github.com/VictorManuelCarrillo/vue-ui/commit/b83205d))
+
+
+
 ## <small>0.21.2 (2025-04-14)</small>
 
 * chore: release v0.21.2 ([80cb59b](https://github.com/VictorManuelCarrillo/vue-ui/commit/80cb59b))
