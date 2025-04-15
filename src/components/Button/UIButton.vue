@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch, ref, toRef } from 'vue';
+import { computed, watch, toRef } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
@@ -17,22 +17,31 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 const themeContext = useTheme();
 const theme = toRef(themeContext, 'theme');
-const classId = ref(`btn-${Math.random().toString(36).substring(2, 8)}`);
 
-const buttonClasses = computed(() => [...useButtonClasses(props).value, classId.value]);
+// ✅ Clases tipo BEM: NvButton, NvButton__variant-filled, etc.
+const buttonClasses = useButtonClasses(props);
 
+// ✅ Selector dinámico para aplicar estilos (sin clase aleatoria)
+const styleSelector = computed(() => {
+  // Convierte ['NvButton', 'NvButton__variant-filled', 'NvButton__color-primary'] a:
+  // ".NvButton.NvButton__variant-filled.NvButton__color-primary"
+  return '.' + buttonClasses.value.filter(Boolean).join('.');
+});
+
+// ✅ Obtener estilos dinámicos
 const { styles } = useButtonStyles(
   {
     ...props,
-    className: `.${classId.value}`,
+    className: styleSelector.value,
   },
   themeContext,
 );
 
+// ✅ Aplicar estilos por clase semántica
 watch(
   () => [styles.value, theme.value],
   () => {
-    updateStyles(`.${classId.value}`, styles.value);
+    updateStyles(styleSelector.value, styles.value);
   },
   { immediate: true, deep: true },
 );
