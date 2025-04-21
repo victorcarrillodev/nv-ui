@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   disabled: false,
   shape: 'normal',
   shadow: 1,
+  component: 'button',
 });
 
 const themeContext = useTheme();
@@ -48,7 +49,7 @@ watch(
 </script>
 
 <template>
-  <button :class="buttonClasses" :disabled="props.disabled">
+  <component :is="component" :class="buttonClasses" :disabled="props.disabled">
     <slot />
-  </button>
+  </component>
 </template>
