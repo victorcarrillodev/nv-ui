@@ -3,7 +3,7 @@
 import { computed, toRef } from 'vue';
 import type { ButtonStylesOptions } from './button';
 import type { ThemeContext } from '@/theme/types/theme-provider';
-import type { PaletteColor } from '@/theme/types/newTheme';
+import type { PaletteColor } from '@/theme/types/theme';
 import { convertKeysToKebabCase } from '@/theme/utils/style-utils';
 import { resolveResponsiveProp } from '@/theme/utils/responsive';
 import type { StyleObject } from '@/theme/composables/useDynamicStyles/types';

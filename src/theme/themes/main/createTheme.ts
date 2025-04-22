@@ -1,4 +1,4 @@
-import type { Theme, Typography, ZIndex, Transitions, Breakpoints, ContainerQueries, Palette, StyleFunction } from '@/theme/types/newTheme';
+import type { Theme, Typography, ZIndex, Transitions, Breakpoints, ContainerQueries, Palette, StyleFunction } from '@/theme/types/theme';
 import type { CSSProperties } from 'vue';
 
 // ========== px → rem ==========

@@ -1,5 +1,3 @@
-// theme.d.ts
-
 import type { CSSProperties } from 'vue';
 
 // ========== Breakpoints ==========

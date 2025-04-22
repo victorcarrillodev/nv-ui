@@ -1,5 +1,5 @@
 // src/theme/themes/main/lightTheme.ts
-import type { Palette } from '@/theme/types/newTheme';
+import type { Palette } from '@/theme/types/theme';
 
 export const lightThemeColors: Palette = {
   mode: 'light',
