@@ -1,3 +1,13 @@
+## <small>0.21.4 (2025-04-22)</small>
+
+* chore: release v0.21.4 ([3f6912c](https://github.com/VictorManuelCarrillo/vue-ui/commit/3f6912c))
+* refactor(theme): :fire: se eliminan archivos ([b4559d7](https://github.com/VictorManuelCarrillo/vue-ui/commit/b4559d7))
+* feat(props): :sparkles: se agrega prop ([b40b05e](https://github.com/VictorManuelCarrillo/vue-ui/commit/b40b05e))
+* fix(types): :label: se arreglan types ([befc7fc](https://github.com/VictorManuelCarrillo/vue-ui/commit/befc7fc))
+* docs(changelog): :memo: se sube changelog ([63346c6](https://github.com/VictorManuelCarrillo/vue-ui/commit/63346c6))
+
+
+
 ## <small>0.21.3 (2025-04-15)</small>
 
 * chore: release v0.21.3 ([f96089e](https://github.com/VictorManuelCarrillo/vue-ui/commit/f96089e))
