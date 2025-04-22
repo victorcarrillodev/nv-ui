@@ -2,22 +2,26 @@
 
 import { computed } from 'vue';
 import type { ButtonClassesOptions } from './button';
-import { generateComponentClasses } from '@/theme/utils/class-utils';
+import { generateComponentClasses, generateMuiStyleClasses } from '@/theme/utils/class-utils';
 import { resolveResponsiveProp } from '@/theme/utils/responsive';
 
-export const useButtonClasses = (options: ButtonClassesOptions) => {
-  const variant = resolveResponsiveProp(options.variant);
-  const size = resolveResponsiveProp(options.size);
-  const color = resolveResponsiveProp(options.color);
-  const shape = resolveResponsiveProp(options.shape);
+const STYLE_MODE: 'bem' | 'mui' = 'mui'; // ⬅️ cambia a 'bem' si querés BEM style
 
-  return computed(() =>
-    generateComponentClasses('NvButton', {
-      variant,
-      size,
-      color,
-      shape,
+export const useButtonClasses = (options: ButtonClassesOptions) => {
+  const variant = computed(() => resolveResponsiveProp(options.variant));
+  const size = computed(() => resolveResponsiveProp(options.size));
+  const color = computed(() => resolveResponsiveProp(options.color));
+  const shape = computed(() => resolveResponsiveProp(options.shape));
+
+  return computed(() => {
+    const props = {
+      variant: variant.value,
+      size: size.value,
+      color: color.value,
+      shape: shape.value,
       disabled: options.disabled,
-    }),
-  );
+    };
+
+    return STYLE_MODE === 'mui' ? generateMuiStyleClasses('NvButton', props) : generateComponentClasses('NvButton', props);
+  });
 };
