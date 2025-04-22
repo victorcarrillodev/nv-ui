@@ -1,3 +1,11 @@
+## <small>0.21.5 (2025-04-22)</small>
+
+* chore: release v0.21.5 ([df5267c](https://github.com/VictorManuelCarrillo/vue-ui/commit/df5267c))
+* refactor(theme): :label: se cambian nombres en tipos ([975f86b](https://github.com/VictorManuelCarrillo/vue-ui/commit/975f86b))
+* docs(changelog): :memo: se sube changelog ([979b566](https://github.com/VictorManuelCarrillo/vue-ui/commit/979b566))
+
+
+
 ## <small>0.21.4 (2025-04-22)</small>
 
 * chore: release v0.21.4 ([3f6912c](https://github.com/VictorManuelCarrillo/vue-ui/commit/3f6912c))
