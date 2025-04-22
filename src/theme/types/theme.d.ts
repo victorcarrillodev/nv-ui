@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'vue';
 
-// ========== Breakpoints ==========
+// Breakpoints ==================================
 export interface Breakpoints {
   keys: readonly ['xs', 'sm', 'md', 'lg', 'xl'];
   values: {
@@ -18,7 +18,7 @@ export interface Breakpoints {
   not: (key: keyof Breakpoints['values']) => string;
 }
 
-// ========== Palette ==========
+// Palette ======================================
 export interface PaletteColor {
   main: string;
   light: string;
@@ -81,7 +81,7 @@ export interface Palette {
   action: PaletteAction;
 }
 
-// ========== Container Queries ==========
+// Container Queries ============================
 export interface ContainerQueries {
   up: (key: string | number) => string;
   down: (key: string | number) => string;
@@ -90,7 +90,7 @@ export interface ContainerQueries {
   not: (key: string) => string;
 }
 
-// ========== Typography ==========
+// Typography ===================================
 export interface TypographyStyle {
   fontFamily?: string;
   fontWeight?: number | string;
@@ -125,7 +125,7 @@ export interface Typography {
   inherit: TypographyStyle;
 }
 
-// ========== Transitions ==========
+// Transitions ==================================
 export interface Transitions {
   getAutoHeightDuration: (height: number) => number;
   create: (
@@ -153,7 +153,7 @@ export interface Transitions {
   };
 }
 
-// ========== Z-Index ==========
+// Z-Index ======================================
 export interface ZIndex {
   mobileStepper: number;
   fab: number;
@@ -166,7 +166,7 @@ export interface ZIndex {
   [key: string]: number;
 }
 
-// ========== Per-Component Overrides ==========
+// Per-Component Overrides ======================
 export interface ThemeComponents {
   NvButton?: {
     defaultProps?: {
@@ -180,9 +180,9 @@ export interface ThemeComponents {
   // Agrega más overrides aquí: NvCard, NvInput, etc.
 }
 
-// ========== Dynamic Styles Helper ==========
+// Dynamic Styles Helper ========================
 export type StyleFunction<Props extends object = object> = (theme: Theme, props: Props) => CSSProperties;
-// ========== Theme Interface ==========
+// Theme Interface ==============================
 export interface Theme {
   palette: Palette;
   spacing: (...values: number[]) => string;
@@ -198,6 +198,6 @@ export interface Theme {
   components?: ThemeComponents;
   cssVarPrefix?: string;
   toCSSVars?: () => Record<string, string>; // Opcional, para exportar variables CSS
-  toRuntimeSource?: () => string; // Para serializar tema si se requiere
+  toRuntimeSource?: () => string; // Para serialize tema si se requiere
   applyStyles: <Props extends object = object>(styleFunction: StyleFunction<Props>) => (props: Props) => CSSProperties;
 }
