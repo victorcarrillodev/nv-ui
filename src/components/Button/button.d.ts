@@ -9,11 +9,13 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonColor = 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
 export type ButtonShape = 'normal' | 'rounded' | 'pill';
 
+export type ResponsiveProp<T> = T | Partial<Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', T>>;
+
 export interface ButtonProps {
   disabled?: boolean;
   variant?: ButtonVariant;
-  size?: ButtonSize;
-  color?: ButtonColor;
+  size?: ResponsiveProp<ButtonSize>;
+  color?: ResponsiveProp<ButtonColor>;
   shape?: ButtonShape;
   shadow?: number | string;
   component?: ElementType;

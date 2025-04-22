@@ -1,15 +1,23 @@
+// src/components/Button/useButtonStyles.ts
+
 import { computed, toRef } from 'vue';
 import type { ButtonStylesOptions } from './button';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import type { PaletteColor } from '@/theme/types/newTheme';
 import { convertKeysToKebabCase } from '@/theme/utils/style-utils';
+import { resolveResponsiveProp } from '@/theme/utils/responsive';
 import type { StyleObject } from '@/theme/composables/useDynamicStyles/types';
 
 export const useButtonStyles = (options: ButtonStylesOptions, themeContext: ThemeContext) => {
   const theme = toRef(themeContext, 'theme');
 
   const styles = computed<StyleObject>(() => {
-    const { variant, size, color, disabled, shape, shadow = 1 } = options;
+    const variant = resolveResponsiveProp(options.variant);
+    const size = resolveResponsiveProp(options.size);
+    const color = resolveResponsiveProp(options.color);
+    const shape = resolveResponsiveProp(options.shape);
+    const shadow = resolveResponsiveProp(options.shadow);
+    const disabled = options.disabled;
 
     const palette = theme.value.palette[color] as PaletteColor;
     const { main, light, dark, contrastText } = palette;
@@ -90,8 +98,6 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
     }
 
     const final: StyleObject = convertKeysToKebabCase(base) as StyleObject;
-
-    // ✅ Hover dinámico
     if (Object.keys(hover).length > 0) {
       final[':hover'] = convertKeysToKebabCase(hover);
     }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { provide, reactive, watchEffect, computed } from 'vue';
-import { lightTheme, darkTheme } from '@/theme/themes/main/newTheme';
+import { lightTheme, darkTheme } from '@/theme/themes/main/theme';
 import type { Theme } from '@/theme/types/newTheme';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import { ThemeInjectionKey } from '@/theme/constants/theme-keys';

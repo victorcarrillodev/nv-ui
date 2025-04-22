@@ -3,8 +3,9 @@ import { computed, watch, toRef } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
-import type { ButtonProps } from './button';
 import { updateStyles } from '@/theme/composables/useDynamicStyles';
+import { resolveResponsiveProp, currentBreakpoint } from '@/theme/utils/responsive';
+import type { ButtonProps } from './button';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled',
@@ -19,28 +20,43 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const themeContext = useTheme();
 const theme = toRef(themeContext, 'theme');
 
-// ✅ Clases tipo BEM: NvButton, NvButton__variant-filled, etc.
-const buttonClasses = useButtonClasses(props);
+// 🟢 Detectar props actualizadas por breakpoint
+const resolvedProps = computed(() => ({
+  variant: resolveResponsiveProp(props.variant),
+  size: resolveResponsiveProp(props.size),
+  color: resolveResponsiveProp(props.color),
+  shape: resolveResponsiveProp(props.shape),
+  shadow: resolveResponsiveProp(props.shadow),
+  disabled: props.disabled,
+  component: props.component,
+}));
 
-// ✅ Selector dinámico para aplicar estilos (sin clase aleatoria)
+// ✅ Clases tipo BEM: NvButton, NvButton__variant-filled, etc.
+const buttonClasses = computed(
+  () =>
+    useButtonClasses({
+      ...resolvedProps.value,
+      className: '', // opcional, lo podés usar si querés forzar una clase base
+    }).value,
+);
+
+// ✅ Selector CSS para aplicar estilos
 const styleSelector = computed(() => {
-  // Convierte ['NvButton', 'NvButton__variant-filled', 'NvButton__color-primary'] a:
-  // ".NvButton.NvButton__variant-filled.NvButton__color-primary"
   return '.' + buttonClasses.value.filter(Boolean).join('.');
 });
 
-// ✅ Obtener estilos dinámicos
+// ✅ Estilos dinámicos
 const { styles } = useButtonStyles(
   {
-    ...props,
+    ...resolvedProps.value,
     className: styleSelector.value,
   },
   themeContext,
 );
 
-// ✅ Aplicar estilos por clase semántica
+// ✅ Reaplica estilos cuando cambia el breakpoint o el tema
 watch(
-  () => [styles.value, theme.value],
+  () => [styles.value, theme.value, currentBreakpoint.value],
   () => {
     updateStyles(styleSelector.value, styles.value);
   },
@@ -49,7 +65,7 @@ watch(
 </script>
 
 <template>
-  <component :is="component" :class="buttonClasses" :disabled="props.disabled">
+  <component :is="props.component" :class="buttonClasses" :disabled="props.disabled">
     <slot />
   </component>
 </template>
