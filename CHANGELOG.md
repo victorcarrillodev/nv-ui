@@ -1,3 +1,12 @@
+## 0.22.0 (2025-04-23)
+
+* chore: release v0.22.0 ([7b8f42b](https://github.com/VictorManuelCarrillo/vue-ui/commit/7b8f42b))
+* feat(props): :sparkles: se agregan props dinámicas ([9bfc423](https://github.com/VictorManuelCarrillo/vue-ui/commit/9bfc423))
+* test(button): :test_tube: se agregan tests ([1f617ae](https://github.com/VictorManuelCarrillo/vue-ui/commit/1f617ae))
+* docs(changelog): :memo: se sube changelog ([4e4dd6e](https://github.com/VictorManuelCarrillo/vue-ui/commit/4e4dd6e))
+
+
+
 ## <small>0.21.6 (2025-04-22)</small>
 
 * chore: release v0.21.6 ([023e47f](https://github.com/VictorManuelCarrillo/vue-ui/commit/023e47f))
