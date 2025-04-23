@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { provide, reactive, watchEffect, computed } from 'vue';
+import { provide, reactive, watchEffect, computed, onMounted, onBeforeUnmount } from 'vue';
 import { lightTheme, darkTheme } from '@/theme/themes/main/theme';
 import type { Theme } from '@/theme/types/theme';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import { ThemeInjectionKey } from '@/theme/constants/theme-keys';
+import { currentBreakpoint } from '@/theme/utils/responsive';
+import { useBreakpointListener } from '../utils/breakpoints';
 
 const THEME_KEY = 'user-theme';
 type ThemeMode = 'light' | 'dark';
 
-const props = defineProps<{
-  defaultMode?: ThemeMode;
-}>();
+const props = defineProps<{ defaultMode?: ThemeMode }>();
 
 function getStoredTheme(): ThemeMode {
   if (typeof window === 'undefined') return 'light';
@@ -24,10 +24,7 @@ const themeMap: Record<ThemeMode, Theme> = {
   dark: darkTheme,
 };
 
-const themeState = reactive<{
-  mode: ThemeMode;
-  theme: Theme;
-}>({
+const themeState = reactive({
   mode: storedMode,
   theme: themeMap[storedMode],
 });
@@ -43,15 +40,36 @@ function toggleMode() {
   setMode(next);
 }
 
+// 🌐 Detectar y actualizar el breakpoint actual
+onMounted(() => {
+  const detect = () => {
+    const width = window.innerWidth;
+    const breakpoints = themeState.theme.breakpoints.values;
+
+    if (width < breakpoints.sm) currentBreakpoint.value = 'xs';
+    else if (width < breakpoints.md) currentBreakpoint.value = 'sm';
+    else if (width < breakpoints.lg) currentBreakpoint.value = 'md';
+    else if (width < breakpoints.xl) currentBreakpoint.value = 'lg';
+    else currentBreakpoint.value = 'xl';
+
+    console.log('📱 Breakpoint actual:', currentBreakpoint.value);
+  };
+
+  detect(); // detectar al cargar
+  window.addEventListener('resize', detect);
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', detect);
+  });
+});
+
 watchEffect(() => {
-  if (typeof document === 'undefined') return;
   const { background, text } = themeState.theme.palette;
   document.body.style.backgroundColor = background.default;
   document.body.style.color = text.primary;
   document.body.style.transition = 'all 0.3s ease-in-out';
 });
 
-// ✅ Contexto reactivo
 const context: ThemeContext = {
   theme: computed(() => themeState.theme),
   setMode,
@@ -59,6 +77,10 @@ const context: ThemeContext = {
 };
 
 provide(ThemeInjectionKey, context);
+
+onMounted(() => {
+  useBreakpointListener();
+});
 </script>
 
 <template>
