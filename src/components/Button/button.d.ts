@@ -1,9 +1,6 @@
 import { Component, ConcreteComponent } from 'vue';
 
-type ElementType =
-  | keyof HTMLElementTagNameMap // Elementos HTML ('div', 'span', etc.)
-  | Component // Componentes Vue (options API o composition API)
-  | ConcreteComponent; // Componentes con más tipado específico
+type ElementType = keyof HTMLElementTagNameMap | Component | ConcreteComponent;
 export type ButtonVariant = 'filled' | 'outlined' | 'text';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonColor = 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';

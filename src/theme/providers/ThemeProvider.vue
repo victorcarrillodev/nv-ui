@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { provide, reactive, watchEffect, computed, onMounted, onBeforeUnmount } from 'vue';
+import { provide, reactive, watchEffect, computed } from 'vue';
 import { lightTheme, darkTheme } from '@/theme/themes/main/theme';
 import type { Theme } from '@/theme/types/theme';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import { ThemeInjectionKey } from '@/theme/constants/theme-keys';
-import { currentBreakpoint } from '@/theme/utils/responsive';
-import { useBreakpointListener } from '../utils/breakpoints';
+import { useBreakpointListener } from '@/theme/utils/responsive'; // 👈 importa esto
 
 const THEME_KEY = 'user-theme';
 type ThemeMode = 'light' | 'dark';
@@ -14,10 +13,8 @@ const props = defineProps<{ defaultMode?: ThemeMode }>();
 
 function getStoredTheme(): ThemeMode {
   if (typeof window === 'undefined') return 'light';
-  return (localStorage.getItem(THEME_KEY) as ThemeMode) || (props.defaultMode ?? 'light');
+  return (localStorage.getItem(THEME_KEY) as ThemeMode) || props.defaultMode || 'light';
 }
-
-const storedMode = getStoredTheme();
 
 const themeMap: Record<ThemeMode, Theme> = {
   light: lightTheme,
@@ -25,8 +22,8 @@ const themeMap: Record<ThemeMode, Theme> = {
 };
 
 const themeState = reactive({
-  mode: storedMode,
-  theme: themeMap[storedMode],
+  mode: getStoredTheme(),
+  theme: themeMap[getStoredTheme()],
 });
 
 function setMode(mode: ThemeMode) {
@@ -36,32 +33,8 @@ function setMode(mode: ThemeMode) {
 }
 
 function toggleMode() {
-  const next = themeState.mode === 'light' ? 'dark' : 'light';
-  setMode(next);
+  setMode(themeState.mode === 'light' ? 'dark' : 'light');
 }
-
-// 🌐 Detectar y actualizar el breakpoint actual
-onMounted(() => {
-  const detect = () => {
-    const width = window.innerWidth;
-    const breakpoints = themeState.theme.breakpoints.values;
-
-    if (width < breakpoints.sm) currentBreakpoint.value = 'xs';
-    else if (width < breakpoints.md) currentBreakpoint.value = 'sm';
-    else if (width < breakpoints.lg) currentBreakpoint.value = 'md';
-    else if (width < breakpoints.xl) currentBreakpoint.value = 'lg';
-    else currentBreakpoint.value = 'xl';
-
-    console.log('📱 Breakpoint actual:', currentBreakpoint.value);
-  };
-
-  detect(); // detectar al cargar
-  window.addEventListener('resize', detect);
-
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', detect);
-  });
-});
 
 watchEffect(() => {
   const { background, text } = themeState.theme.palette;
@@ -70,6 +43,9 @@ watchEffect(() => {
   document.body.style.transition = 'all 0.3s ease-in-out';
 });
 
+// ✅ Inicia el listener de breakpoint solo una vez
+useBreakpointListener();
+
 const context: ThemeContext = {
   theme: computed(() => themeState.theme),
   setMode,
@@ -77,10 +53,6 @@ const context: ThemeContext = {
 };
 
 provide(ThemeInjectionKey, context);
-
-onMounted(() => {
-  useBreakpointListener();
-});
 </script>
 
 <template>

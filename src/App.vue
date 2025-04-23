@@ -9,7 +9,7 @@ import { currentBreakpoint } from './theme/utils/responsive';
   <ThemeProvider>
     <div>{{ currentBreakpoint }}</div>
     <ThemedMove />
-    <NvButton :color="{ xs: 'primary', sm: 'error', md: 'secondary', lg: 'success' }" shadow="5">button 1</NvButton>
+    <NvButton :color="{ xs: 'primary', sm: 'error', md: 'secondary', lg: 'success' }" shadow="5">button {{ currentBreakpoint }}</NvButton>
     <NvButton color="error">button 2</NvButton>
     <NvButton color="secondary">button 2</NvButton>
     <NvButton color="success" size="sm">button 2</NvButton>

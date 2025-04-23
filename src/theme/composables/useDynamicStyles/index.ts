@@ -78,6 +78,20 @@ export const updateStyles = (selector: string, styles: Record<string, unknown>) 
   }
 };
 
+export const removeStyles = (selector: string) => {
+  const sheet = getStyleSheet();
+  const entry = STYLE_MAP.get(selector);
+
+  if (sheet && entry) {
+    try {
+      sheet.deleteRule(entry.index);
+    } catch (e) {
+      console.warn(`[removeStyles] Error eliminando regla:`, e);
+    }
+    STYLE_MAP.delete(selector);
+  }
+};
+
 export const resetDynamicStyles = () => {
   if (styleElement.value && document.head.contains(styleElement.value)) {
     document.head.removeChild(styleElement.value);
