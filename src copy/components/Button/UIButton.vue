@@ -5,7 +5,7 @@ import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
 import { updateStyles, removeStyles } from '@/theme/composables/useDynamicStyles';
 import { resolveResponsiveProp, currentBreakpoint } from '@/theme/utils/responsive';
-import type { ButtonProps } from './button';
+import type { ButtonProps } from './types';
 import { hashString } from '@/theme/utils/hash';
 
 const props = withDefaults(defineProps<ButtonProps>(), {

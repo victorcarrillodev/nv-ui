@@ -1,6 +1,6 @@
 // src/components/Button/useButtonStyles.ts
 import { computed, toRef } from 'vue';
-import type { ButtonStylesOptions } from './button';
+import type { ButtonStylesOptions } from './types';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import type { PaletteColor } from '@/theme/types/theme';
 import { convertKeysToKebabCase } from '@/theme/utils/style-utils';
