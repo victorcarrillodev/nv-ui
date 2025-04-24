@@ -1,3 +1,12 @@
+## <small>0.22.1 (2025-04-24)</small>
+
+* chore: release v0.22.1 ([1f9e51e](https://github.com/VictorManuelCarrillo/vue-ui/commit/1f9e51e))
+* refactor(button): :art: se reactorizan archivos ([48c5ffa](https://github.com/VictorManuelCarrillo/vue-ui/commit/48c5ffa))
+* refactor(chore): :construction: se refactoriza la estructura ([85ca1c6](https://github.com/VictorManuelCarrillo/vue-ui/commit/85ca1c6))
+* docs(changelog): :memo: se sube changelog ([39f1464](https://github.com/VictorManuelCarrillo/vue-ui/commit/39f1464))
+
+
+
 ## 0.22.0 (2025-04-23)
 
 * chore: release v0.22.0 ([7b8f42b](https://github.com/VictorManuelCarrillo/vue-ui/commit/7b8f42b))
