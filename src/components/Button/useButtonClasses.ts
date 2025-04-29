@@ -1,7 +1,7 @@
 // src/components/Button/useButtonClasses.ts
 import { computed } from 'vue';
 import type { ButtonClassesOptions } from './types';
-import { generateComponentClasses } from '@/theme/utils/class-utils';
+import { generateComponentClasses } from '@/utils/class-utils';
 
 export const useButtonClasses = (options: ButtonClassesOptions) => {
   return computed(() =>

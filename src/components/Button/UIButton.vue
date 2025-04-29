@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, watch, toRef } from 'vue';
-import { useTheme } from '@/theme/composables/useTheme';
+import { useTheme } from '../../theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
-import { updateStyles, removeStyles } from '@/theme/composables/useDynamicStyles';
-import { resolveResponsiveProp, currentBreakpoint } from '@/theme/utils/responsive';
+import { updateStyles, removeStyles } from '../../theme/composables/useDynamicStyles';
+import { resolveResponsiveProp, currentBreakpoint } from '../../utils/responsive';
 import type { ButtonProps } from './types';
-import { hashString } from '@/theme/utils/hash';
+import { hashString } from '../../utils/hash';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled',

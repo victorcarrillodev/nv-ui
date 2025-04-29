@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { provide, reactive, watchEffect, computed } from 'vue';
-import { lightTheme, darkTheme } from '@/theme/themes/main/theme';
-import type { Theme } from '@/theme/types/theme';
-import type { ThemeContext } from '@/theme/types/theme-provider';
-import { ThemeInjectionKey } from '@/theme/constants/theme-keys';
-import { useBreakpointListener } from '@/theme/utils/responsive'; // 👈 importa esto
+import { lightTheme, darkTheme } from '../themes/theme';
+import type { Theme } from '../types/theme';
+import type { ThemeContext } from '../types/theme-provider';
+import { ThemeInjectionKey } from '../constants/theme-keys';
+import { useBreakpointListener } from '../../utils/responsive'; // 👈 importa esto
 
 const THEME_KEY = 'user-theme';
 type ThemeMode = 'light' | 'dark';

@@ -1,5 +1,4 @@
-// src/theme/themes/main/darkTheme.ts
-import { Palette } from '../types/theme';
+import type { Palette } from '../types/theme';
 
 export const darkThemeColors: Palette = {
   mode: 'dark',

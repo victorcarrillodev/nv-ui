@@ -3,8 +3,8 @@ import { computed, toRef } from 'vue';
 import type { ButtonStylesOptions } from './types';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import type { PaletteColor } from '@/theme/types/theme';
-import { convertKeysToKebabCase } from '@/theme/utils/style-utils';
-import type { StyleObject } from '@/theme/composables/useDynamicStyles/types';
+import { convertKeysToKebabCase } from '@/utils/style-utils';
+import type { StyleObject } from '@/theme/types/useDynamicStyles';
 
 export const useButtonStyles = (options: ButtonStylesOptions, themeContext: ThemeContext) => {
   const theme = toRef(themeContext, 'theme');
