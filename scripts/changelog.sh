@@ -48,14 +48,17 @@ conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0
 print_blue "2. Comenzando con GIT"
 print_rainbow "Agregando cambios al stage"
 print_blue "==========================="
+echo "\n\n"
 git add CHANGELOG.md
 
 print_rainbow "Generando commit"
 print_blue "==========================="
+echo "\n\n"
 git commit -m "docs(changelog): :memo: se sube changelog"
 
 #================================================
 print_blue "3. Subiendo los cambio al repositorio"
 print_rainbow "Realizando push al repositorio"
 print_blue "==============================="
+echo "\n\n"
 git push
