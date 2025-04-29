@@ -5,12 +5,12 @@ RESET='\033[0m'
 
 get_color() {
   case $1 in
-    0) echo '\033[1;31m' ;;  # Rojo negrita
-    1) echo '\033[1;33m' ;;  # Amarillo negrita
-    2) echo '\033[1;32m' ;;  # Verde negrita
-    3) echo '\033[1;36m' ;;  # Cian negrita
-    4) echo '\033[1;34m' ;;  # Azul negrita
-    5) echo '\033[1;35m' ;;  # Magenta negrita
+    0) echo '\033[31m' ;;  # Rojo negrita
+    1) echo '\033[33m' ;;  # Amarillo negrita
+    2) echo '\033[32m' ;;  # Verde negrita
+    3) echo '\033[36m' ;;  # Cian negrita
+    4) echo '\033[34m' ;;  # Azul negrita
+    5) echo '\033[35m' ;;  # Magenta negrita
     *) echo '\033[0m'    ;;  # Reset
   esac
 }
