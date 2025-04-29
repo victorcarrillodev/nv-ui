@@ -1,3 +1,11 @@
+## <small>0.22.3 (2025-04-29)</small>
+
+* chore: release v0.22.3 ([91aa80d](https://github.com/VictorManuelCarrillo/vue-ui/commit/91aa80d))
+* chore(easter): :egg: se agrega pequeño easter ([80cf74f](https://github.com/VictorManuelCarrillo/vue-ui/commit/80cf74f))
+* docs(changelog): :memo: se sube changelog ([6782a11](https://github.com/VictorManuelCarrillo/vue-ui/commit/6782a11))
+
+
+
 ## <small>0.22.2 (2025-04-29)</small>
 
 * chore: release v0.22.2 ([ea85bd0](https://github.com/VictorManuelCarrillo/vue-ui/commit/ea85bd0))
