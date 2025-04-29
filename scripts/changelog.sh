@@ -1,3 +1,36 @@
+#!/bin/sh
+
+TEXT="Hola mundo arcoíris en bash!"
+RESET='\033[0m'
+
+get_color() {
+  case $1 in
+    0) echo '\033[31m' ;;  # Rojo
+    1) echo '\033[33m' ;;  # Amarillo
+    2) echo '\033[32m' ;;  # Verde
+    3) echo '\033[36m' ;;  # Cian
+    4) echo '\033[34m' ;;  # Azul
+    5) echo '\033[35m' ;;  # Magenta
+    *) echo '\033[0m'  ;;  # Reset
+  esac
+}
+
+i=0
+length=6
+
+j=0
+while [ "$j" -lt "$(echo "$TEXT" | wc -c)" ]; do
+  char=$(printf '%s' "$TEXT" | cut -c $((j + 1)))
+  color=$(get_color $((i % length)))
+  printf "%b%s%b" "$color" "$char" "$RESET"
+  i=$((i + 1))
+  j=$((j + 1))
+done
+
+echo
+
+
+
 echo "estamos haciendo tu changelog papito, espere mamawebo"
 echo "estamos haciendo tu changelog papito, espere mamawebo"
 echo "estamos haciendo tu changelog papito, espere mamawebo"
