@@ -5,13 +5,13 @@ RESET='\033[0m'
 
 get_color() {
   case $1 in
-    0) echo '\033[31m' ;;  # Rojo
-    1) echo '\033[33m' ;;  # Amarillo
-    2) echo '\033[32m' ;;  # Verde
-    3) echo '\033[36m' ;;  # Cian
-    4) echo '\033[34m' ;;  # Azul
-    5) echo '\033[35m' ;;  # Magenta
-    *) echo '\033[0m'  ;;  # Reset
+    0) echo '\033[1;31m' ;;  # Rojo negrita
+    1) echo '\033[1;33m' ;;  # Amarillo negrita
+    2) echo '\033[1;32m' ;;  # Verde negrita
+    3) echo '\033[1;36m' ;;  # Cian negrita
+    4) echo '\033[1;34m' ;;  # Azul negrita
+    5) echo '\033[1;35m' ;;  # Magenta negrita
+    *) echo '\033[0m'    ;;  # Reset
   esac
 }
 
@@ -38,9 +38,9 @@ print_blue() {
 
 # First process - creating changelog
 #================================================
-echo "\n\n"
+print_blue "1. Iniciando el proceso \n"
 print_rainbow "Corriendo script 'CHANGELOG', comenzando con el proceso..."
-print_blue "#================================================"
+print_blue "==========================================================="
 echo "\n\n"
 conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0
 
