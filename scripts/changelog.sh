@@ -31,7 +31,7 @@ print_rainbow() {
 }
 
 print_blue() {
-  BLUE='\033[34m'
+  BLUE='\033[1;34m'
   RESET='\033[0m'
   printf "%b%s%b\n" "$BLUE" "$1" "$RESET"
 }
@@ -39,7 +39,6 @@ print_blue() {
 # First process - creating changelog
 #================================================
 print_blue "1. Iniciando el proceso"
-echo "\n"
 print_rainbow "Corriendo script 'CHANGELOG', comenzando con el proceso..."
 print_blue "==========================================================="
 echo "\n\n"
