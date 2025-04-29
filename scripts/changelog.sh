@@ -1,5 +1,6 @@
 #!/bin/sh
-
+# Functions
+#================================================
 RESET='\033[0m'
 
 get_color() {
@@ -29,8 +30,18 @@ print_rainbow() {
   echo
 }
 
+print_blue() {
+  BLUE='\033[34m'
+  RESET='\033[0m'
+  printf "%b%s%b\n" "$BLUE" "$1" "$RESET"
+}
+
+# First process - creating changelog
 #================================================
+echo "\n\n"
 print_rainbow "Corriendo script 'CHANGELOG', comenzando con el proceso..."
+print_blue "#================================================"
+echo "\n\n"
 conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0
 
 #================================================
