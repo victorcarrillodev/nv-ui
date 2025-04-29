@@ -38,7 +38,8 @@ print_blue() {
 
 # First process - creating changelog
 #================================================
-print_blue "1. Iniciando el proceso \n"
+print_blue "1. Iniciando el proceso"
+echo "\n"
 print_rainbow "Corriendo script 'CHANGELOG', comenzando con el proceso..."
 print_blue "==========================================================="
 echo "\n\n"
