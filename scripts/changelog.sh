@@ -1,3 +1,22 @@
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+echo "estamos haciendo tu changelog papito, espere mamawebo"
+
 conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0
 
 git add CHANGELOG.md
