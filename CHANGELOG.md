@@ -1,3 +1,20 @@
+## <small>0.22.4 (2025-04-29)</small>
+
+* chore: release v0.22.4 ([e8d3b64](https://github.com/VictorManuelCarrillo/vue-ui/commit/e8d3b64))
+* chore(scripts): :egg: easter egg en comandos ([540ed13](https://github.com/VictorManuelCarrillo/vue-ui/commit/540ed13))
+* docs(changelog): :memo: se sube changelog ([4bba9d2](https://github.com/VictorManuelCarrillo/vue-ui/commit/4bba9d2))
+* docs(changelog): :memo: se sube changelog ([ce945b3](https://github.com/VictorManuelCarrillo/vue-ui/commit/ce945b3))
+* docs(changelog): :memo: se sube changelog ([6c161e2](https://github.com/VictorManuelCarrillo/vue-ui/commit/6c161e2))
+* docs(changelog): :memo: se sube changelog ([7190268](https://github.com/VictorManuelCarrillo/vue-ui/commit/7190268))
+* docs(changelog): :memo: se sube changelog ([1ba56e1](https://github.com/VictorManuelCarrillo/vue-ui/commit/1ba56e1))
+* docs(changelog): :memo: se sube changelog ([4975790](https://github.com/VictorManuelCarrillo/vue-ui/commit/4975790))
+* docs(changelog): :memo: se sube changelog ([b336514](https://github.com/VictorManuelCarrillo/vue-ui/commit/b336514))
+* docs(changelog): :memo: se sube changelog ([3af6109](https://github.com/VictorManuelCarrillo/vue-ui/commit/3af6109))
+* docs(changelog): :memo: se sube changelog ([8fb1b25](https://github.com/VictorManuelCarrillo/vue-ui/commit/8fb1b25))
+* docs(changelog): :memo: se sube changelog ([6ac78bf](https://github.com/VictorManuelCarrillo/vue-ui/commit/6ac78bf))
+
+
+
 ## <small>0.22.3 (2025-04-29)</small>
 
 * chore: release v0.22.3 ([91aa80d](https://github.com/VictorManuelCarrillo/vue-ui/commit/91aa80d))
