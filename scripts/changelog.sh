@@ -1,6 +1,5 @@
 #!/bin/sh
 
-TEXT="Corriendo script 'CHANGELOG', comenzando con el proceso..."
 RESET='\033[0m'
 
 get_color() {
@@ -15,23 +14,30 @@ get_color() {
   esac
 }
 
-i=0
-length=6
-
-j=0
-while [ "$j" -lt "$(echo "$TEXT" | wc -c)" ]; do
-  char=$(printf '%s' "$TEXT" | cut -c $((j + 1)))
-  color=$(get_color $((i % length)))
-  printf "%b%s%b" "$color" "$char" "$RESET"
-  i=$((i + 1))
-  j=$((j + 1))
-done
-
-echo
+print_rainbow() {
+  TEXT="$1"
+  i=0
+  length=6
+  j=0
+  while [ "$j" -lt "$(printf "%s" "$TEXT" | wc -c)" ]; do
+    char=$(printf '%s' "$TEXT" | cut -c $((j + 1)))
+    color=$(get_color $((i % length)))
+    printf "%b%s%b" "$color" "$char" "$RESET"
+    i=$((i + 1))
+    j=$((j + 1))
+  done
+  echo
+}
 
 #================================================
+print_rainbow "Corriendo script 'CHANGELOG', comenzando con el proceso..."
 conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0
+
 #================================================
+print_rainbow "Agregando cambios al stage"
 git add CHANGELOG.md
 git commit -m "docs(changelog): :memo: se sube changelog"
+
+#================================================
+print_rainbow "Realizando push al repositorio"
 git push
