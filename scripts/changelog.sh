@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TEXT="Hola mundo arcoíris en bash!"
+TEXT="Corriendo script 'CHANGELOG', comenzando con el proceso..."
 RESET='\033[0m'
 
 get_color() {
@@ -29,29 +29,9 @@ done
 
 echo
 
-
-
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-echo "estamos haciendo tu changelog papito, espere mamawebo"
-
+#================================================
 conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0
-
+#================================================
 git add CHANGELOG.md
 git commit -m "docs(changelog): :memo: se sube changelog"
 git push
