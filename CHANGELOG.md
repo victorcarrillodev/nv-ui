@@ -1,3 +1,13 @@
+## <small>0.22.5 (2025-04-30)</small>
+
+* chore: release v0.22.5 ([44d412c](https://github.com/VictorManuelCarrillo/vue-ui/commit/44d412c))
+* refactor(utils): :zap: se refactoriza código ([cd042c2](https://github.com/VictorManuelCarrillo/vue-ui/commit/cd042c2))
+* refactor(utils): :zap: se refactoriza código ([86a9f5c](https://github.com/VictorManuelCarrillo/vue-ui/commit/86a9f5c))
+* docs(changelog): :memo: se sube changelog ([c492554](https://github.com/VictorManuelCarrillo/vue-ui/commit/c492554))
+* docs(changelog): :memo: se sube changelog ([93a9884](https://github.com/VictorManuelCarrillo/vue-ui/commit/93a9884))
+
+
+
 ## <small>0.22.4 (2025-04-29)</small>
 
 * chore: release v0.22.4 ([e8d3b64](https://github.com/VictorManuelCarrillo/vue-ui/commit/e8d3b64))
