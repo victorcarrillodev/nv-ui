@@ -9,6 +9,6 @@ import ThemedMove from './ThemedMove.vue';
     <div>perra</div>
     <div>ola</div>
     <ThemedMove/>
-    <nv-button>ola</nv-button>
+    <nv-button :color="{xs: 'error', md: 'primary', lg: 'warning'}">ola</nv-button>
   </ThemeProvider>
 </template>
