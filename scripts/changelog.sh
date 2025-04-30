@@ -39,26 +39,26 @@ print_blue() {
 # First process - creating changelog
 #================================================
 print_blue "1. Iniciando el proceso"
-print_rainbow "Corriendo script 'CHANGELOG', comenzando con el proceso..."
-print_blue "==========================================================="
+print_rainbow ">> Corriendo script 'CHANGELOG', comenzando con el proceso..."
+print_blue "-----------------------------------------------------------"
 echo "\n\n"
 conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0
 
 #================================================
 print_blue "2. Comenzando con GIT"
-print_rainbow "Agregando cambios al stage"
-print_blue "==========================="
+print_rainbow ">> Agregando cambios al stage"
+print_blue "---------------------------"
 echo "\n\n"
 git add CHANGELOG.md
 
-print_rainbow "Generando commit"
-print_blue "==========================="
+print_rainbow ">> Generando commit"
+print_blue "---------------------------"
 echo "\n\n"
 git commit -m "docs(changelog): :memo: se sube changelog"
 
 #================================================
 print_blue "3. Subiendo los cambio al repositorio"
-print_rainbow "Realizando push al repositorio"
-print_blue "==============================="
+print_rainbow ">> Realizando push al repositorio"
+print_blue "-------------------------------"
 echo "\n\n"
 git push
