@@ -1,6 +1,6 @@
-import { Component, ConcreteComponent } from 'vue';
+import type { Component, ConcreteComponent, ComputedRef } from 'vue';
 
-type ElementType = keyof HTMLElementTagNameMap | Component | ConcreteComponent;
+export type ElementType = keyof HTMLElementTagNameMap | Component | ConcreteComponent;
 export type ButtonVariant = 'filled' | 'outlined' | 'text';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonColor = 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
@@ -10,23 +10,23 @@ export type ResponsiveProp<T> = T | Partial<Record<'xs' | 'sm' | 'md' | 'lg' | '
 
 export interface ButtonProps {
   disabled?: boolean;
-  variant?: ButtonVariant;
+  variant?: ResponsiveProp<ButtonVariant>;
   size?: ResponsiveProp<ButtonSize>;
   color?: ResponsiveProp<ButtonColor>;
-  shape?: ButtonShape;
+  shape?: ResponsiveProp<ButtonShape>;
   shadow?: number | string;
   component?: ElementType;
 }
 
 export interface ButtonClassesOptions {
-  disabled: boolean;
-  variant: ButtonVariant;
-  size: ButtonSize;
-  color: ButtonColor;
-  className?: string;
-  shape: ButtonShape;
-  shadow: number | string;
-  component: ElementType;
+  variant: ComputedRef<ButtonVariant>;
+  size: ComputedRef<ButtonSize>;
+  color: ComputedRef<ButtonColor>;
+  shape: ComputedRef<ButtonShape>;
+  shadow: ComputedRef<number | string>;
+  disabled: ComputedRef<boolean>;
 }
 
-export type ButtonStylesOptions = ButtonClassesOptions;
+export interface ButtonStylesOptions extends ButtonClassesOptions {
+  className: ComputedRef<string>;
+}

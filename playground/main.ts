@@ -10,14 +10,16 @@
 
 // // Opcional: usar componentes globales durante desarrollo
 // Object.entries(NvUI).forEach(([name, comp]) => {
-//   if (comp && typeof comp === 'object' && 'name' in comp) {
-//     app.component(name, comp as { name: string });
-//   }
-// });
+  //   if (comp && typeof comp === 'object' && 'name' in comp) {
+    //     app.component(name, comp as { name: string });
+    //   }
+    // });
 
-// app.mount('#app');
+    // app.mount('#app');
 
 import { createApp } from 'vue';
+
+
 import App from './App.vue';
 
 createApp(App).mount('#app');

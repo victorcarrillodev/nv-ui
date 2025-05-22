@@ -1,40 +1,27 @@
-import { computed, ref, onMounted, onUnmounted } from 'vue';
-import { useTheme } from '../useTheme';
+import { computed } from 'vue';
+import { currentBreakpoint, breakpointsOrder } from '@/utils/responsive';
+import type { Breakpoint } from '@/utils/responsive';
 
-type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-type ResponsiveProp<T> = T | Partial<Record<Breakpoint, T>>;
+/**
+ * Dado un prop que puede ser responsivo (ej. { sm: 1, md: 2 }),
+ * retorna el valor correspondiente al breakpoint actual.
+ */
+export function useResponsiveProp<T>(prop: T | Partial<Record<Breakpoint, T>>) {
+  return computed(() => {
+    if (typeof prop !== 'object' || prop === null) {
+      return prop;
+    }
 
-export function useResponsiveProp<T>(prop: ResponsiveProp<T>) {
-  const theme = useTheme();
-  const width = ref(typeof window !== 'undefined' ? window.innerWidth : 0);
+    const bp = currentBreakpoint.value;
+    const bpIndex = breakpointsOrder.indexOf(bp);
 
-  const updateWidth = () => (width.value = window.innerWidth);
-
-  onMounted(() => {
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-  });
-
-  onUnmounted(() => {
-    window.removeEventListener('resize', updateWidth);
-  });
-
-  const currentValue = computed(() => {
-    if (typeof prop !== 'object') return prop;
-
-    const sorted = Object.entries(theme.theme.value.breakpoints).sort(([, a], [, b]) => (b as number) - (a as number)) as [
-      Breakpoint,
-      number,
-    ][];
-
-    for (const [bp, px] of sorted) {
-      if (width.value >= px && typeof prop === 'object' && prop !== null && bp in prop) {
-        return (prop as Partial<Record<Breakpoint, T>>)[bp];
+    for (let i = bpIndex; i >= 0; i--) {
+      const key = breakpointsOrder[i];
+      if ((prop as Partial<Record<Breakpoint, T>>)[key] !== undefined) {
+        return (prop as Partial<Record<Breakpoint, T>>)[key] as T;
       }
     }
 
-    return typeof prop === 'object' && prop !== null ? Object.values(prop)[0] : prop; // fallback
+    return Object.values(prop)[0] as T;
   });
-
-  return currentValue;
 }

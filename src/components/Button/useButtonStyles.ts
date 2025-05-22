@@ -1,80 +1,79 @@
-// src/components/Button/useButtonStyles.ts
-import { computed, toRef } from 'vue';
+import { computed } from 'vue';
 import type { ButtonStylesOptions } from './types';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import type { PaletteColor } from '@/theme/types/theme';
 import { convertKeysToKebabCase } from '@/utils/style-utils';
 import type { StyleObject } from '@/theme/types/useDynamicStyles';
 
+const sizeMap = {
+  sm: { padding: '0.25rem 1rem', fontSize: '0.875rem' },
+  md: { padding: '0.5rem 1.25rem', fontSize: '1rem' },
+  lg: { padding: '0.75rem 1.5rem', fontSize: '1.125rem' },
+};
+
+const borderRadiusMap = {
+  normal: '0.25rem',
+  rounded: '0.75rem',
+  pill: '9999px',
+};
+
 export const useButtonStyles = (options: ButtonStylesOptions, themeContext: ThemeContext) => {
-  const theme = toRef(themeContext, 'theme');
+  const theme = computed(() => themeContext.theme.value);
 
   const styles = computed<StyleObject>(() => {
-    const { variant, size, color, shape, shadow, disabled } = options;
-    const palette = theme.value.palette[color] as PaletteColor;
+    const palette = theme.value.palette[options.color.value] as PaletteColor;
 
     const base: StyleObject = {
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
       fontWeight: '600',
-      fontSize: '1rem',
       fontFamily: theme.value.typography.fontFamily,
-      cursor: disabled ? 'not-allowed' : 'pointer',
-      opacity: disabled ? '0.6' : '1',
+      cursor: options.disabled.value ? 'not-allowed' : 'pointer',
+      opacity: options.disabled.value ? '0.6' : '1',
       border: 'none',
       transition: 'all 0.3s ease',
-      boxShadow: theme.value.shadows[+shadow || 1],
+      boxShadow: theme.value.shadows[+options.shadow.value] || 'none',
+      ...sizeMap[options.size.value],
+      borderRadius: borderRadiusMap[options.shape.value],
     };
-
-    const sizeMap = {
-      sm: { padding: '0.25rem 1rem', fontSize: '0.875rem' },
-      md: { padding: '0.5rem 1.25rem', fontSize: '1rem' },
-      lg: { padding: '0.75rem 1.5rem', fontSize: '1.125rem' },
-    };
-
-    Object.assign(base, sizeMap[size]);
-
-    base.borderRadius = {
-      normal: '0.25rem',
-      rounded: '0.75rem',
-      pill: '9999px',
-    }[shape];
 
     const hover: Record<string, string> = {};
 
-    switch (variant) {
+    switch (options.variant.value) {
       case 'filled':
         Object.assign(base, {
           backgroundColor: palette.main,
           color: palette.contrastText,
         });
-        if (!disabled) {
+        if (!options.disabled.value) {
           Object.assign(hover, {
             backgroundColor: palette.light,
             filter: 'brightness(1.05)',
           });
         }
         break;
+
       case 'outlined':
         Object.assign(base, {
           backgroundColor: 'transparent',
           color: palette.main,
           border: `2px solid ${palette.main}`,
         });
-        if (!disabled) {
+        if (!options.disabled.value) {
           Object.assign(hover, {
             backgroundColor: palette.light,
             color: palette.contrastText,
           });
         }
         break;
+
       case 'text':
         Object.assign(base, {
           backgroundColor: 'transparent',
           color: palette.main,
         });
-        if (!disabled) {
+        if (!options.disabled.value) {
           Object.assign(hover, {
             color: palette.dark,
             textDecoration: 'underline',
@@ -84,7 +83,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
     }
 
     const final: StyleObject = convertKeysToKebabCase(base) as StyleObject;
-    if (Object.keys(hover).length) {
+    if (Object.keys(hover).length > 0) {
       final[':hover'] = convertKeysToKebabCase(hover);
     }
 
