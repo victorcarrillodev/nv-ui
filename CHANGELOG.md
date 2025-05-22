@@ -1,3 +1,11 @@
+## <small>0.22.6 (2025-05-22)</small>
+
+* chore: release v0.22.6 ([76dc4e2](https://github.com/VictorManuelCarrillo/vue-ui/commit/76dc4e2))
+* fix(responsive): :bug: se arreglan problemas responsivos ([5cf49b6](https://github.com/VictorManuelCarrillo/vue-ui/commit/5cf49b6))
+* docs(changelog): :memo: se sube changelog ([fcc982e](https://github.com/VictorManuelCarrillo/vue-ui/commit/fcc982e))
+
+
+
 ## <small>0.22.5 (2025-04-30)</small>
 
 * chore: release v0.22.5 ([44d412c](https://github.com/VictorManuelCarrillo/vue-ui/commit/44d412c))
