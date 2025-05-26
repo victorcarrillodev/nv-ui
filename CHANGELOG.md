@@ -1,3 +1,11 @@
+## 0.23.0 (2025-05-26)
+
+* chore: release v0.23.0 ([b0aeda1](https://github.com/VictorManuelCarrillo/vue-ui/commit/b0aeda1))
+* refactor(all): :sparkles: se hacen cambios significativos ([384016f](https://github.com/VictorManuelCarrillo/vue-ui/commit/384016f))
+* docs(changelog): :memo: se sube changelog ([e87d4e6](https://github.com/VictorManuelCarrillo/vue-ui/commit/e87d4e6))
+
+
+
 ## <small>0.22.6 (2025-05-22)</small>
 
 * chore: release v0.22.6 ([76dc4e2](https://github.com/VictorManuelCarrillo/vue-ui/commit/76dc4e2))
