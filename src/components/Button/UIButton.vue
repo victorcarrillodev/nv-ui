@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   shape: 'normal',
   shadow: 1,
   component: 'button',
+  disabledElevation: false,
 });
 
 const themeContext = useTheme();
@@ -27,6 +28,9 @@ const theme = toRef(themeContext, 'theme');
 const instanceId = getCurrentInstance()?.uid ?? Math.random().toString(36).slice(2);
 
 // Props como computed reactivas
+
+const disabledElevation = useResponsiveProp(props.disabledElevation);
+
 const variant = useResponsiveProp(props.variant);
 const size = useResponsiveProp(props.size);
 const color = useResponsiveProp(props.color);
@@ -40,6 +44,7 @@ const uniqueHash = computed(() => {
   return `NvButton-${hashString(
     JSON.stringify({
       variant: variant.value,
+      disabledElevation: disabledElevation.value,
       size: size.value,
       color: color.value,
       shape: shape.value,
@@ -58,6 +63,7 @@ const styleSelector = computed(() => `.${uniqueHash.value}`);
 const { styles } = useButtonStyles(
   {
     variant,
+    disabledElevation,
     size,
     color,
     shape,
@@ -72,6 +78,7 @@ const { styles } = useButtonStyles(
 const buttonClasses = computed(() => [
   ...useButtonClasses({
     variant,
+    disabledElevation,
     size,
     color,
     shape,

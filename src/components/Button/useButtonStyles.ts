@@ -33,7 +33,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
       opacity: options.disabled.value ? '0.6' : '1',
       border: 'none',
       transition: 'all 0.3s ease',
-      boxShadow: theme.value.shadows[+options.shadow.value] || 'none',
+      boxShadow: options.disabledElevation.value ? 'none' : theme.value.shadows[+options.shadow.value] || 'none',
       ...sizeMap[options.size.value],
       borderRadius: borderRadiusMap[options.shape.value],
     };

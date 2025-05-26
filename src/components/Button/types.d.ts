@@ -9,22 +9,25 @@ export type ButtonShape = 'normal' | 'rounded' | 'pill';
 export type ResponsiveProp<T> = T | Partial<Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', T>>;
 
 export interface ButtonProps {
+  component?: ElementType;
   disabled?: boolean;
+  disabledElevation?: boolean;
   variant?: ResponsiveProp<ButtonVariant>;
   size?: ResponsiveProp<ButtonSize>;
   color?: ResponsiveProp<ButtonColor>;
   shape?: ResponsiveProp<ButtonShape>;
   shadow?: number | string;
-  component?: ElementType;
 }
 
 export interface ButtonClassesOptions {
+  component?: ElementType;
+  disabled: ComputedRef<boolean>;
+  disabledElevation: ComputedRef<boolean>;
   variant: ComputedRef<ButtonVariant>;
   size: ComputedRef<ButtonSize>;
   color: ComputedRef<ButtonColor>;
   shape: ComputedRef<ButtonShape>;
   shadow: ComputedRef<number | string>;
-  disabled: ComputedRef<boolean>;
 }
 
 export interface ButtonStylesOptions extends ButtonClassesOptions {

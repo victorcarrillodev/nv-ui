@@ -27,7 +27,7 @@ function getCurrentBreakpoint(width: number): Breakpoint {
 }
 
 /**
- * Usar dentro de setup() de un componente para activar la reactividad real
+ * Usar dentro de setup() de un componente para activar lo reactivo real
  */
 export function useBreakpointListener(): void {
   if (typeof window === 'undefined') return;
