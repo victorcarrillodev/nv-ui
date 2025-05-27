@@ -8,20 +8,44 @@ import TestResponsive from '@/components/TestResponsive.vue';
 
 <template>
   <ThemeProvider>
-    <CssBaseline/>
-    <TestResponsive></TestResponsive>
-    <div>perra</div>
-    <div>ola</div>
-    <ThemedMove />
-    <nv-button
-      :color="{ xs: 'error', sm: 'info', md: 'primary', lg: 'success' }"
-      shadow="4"
-      disabled-elevation
-      component="table"
-      :size="{ xs: 'sm', sm: 'md', md: 'lg', lg: 'sm' }"
-      >ola</nv-button
-    >
-    <nv-button       disabled-elevation
- :color="{ xs: 'success', sm: 'error', md: 'success', lg: 'info' }" shadow="15">ola 2</nv-button>
+    <CssBaseline />
+    <TestResponsive/>
+    <ThemedMove/>
+    <br><br><br>
+    <section style="margin: 1rem;">
+      <h1>Buttons</h1>
+      <h3>colors</h3>
+      <!-- color section -->
+      <section>
+        <NvButton color="primary">primary</NvButton>
+        <NvButton color="secondary">secondary</NvButton>
+        <NvButton color="success">success</NvButton>
+        <NvButton color="info">info</NvButton>
+        <NvButton color="error">error</NvButton>
+        <NvButton color="warning">warning</NvButton>
+      </section>
+
+      <h3>component</h3>
+      <!-- component section -->
+      <section>
+        <NvButton component="a">component a</NvButton>
+        <NvButton component="div">component div</NvButton>
+        <NvButton component="button">component button</NvButton>
+      </section>
+
+      <h3>disabled</h3>
+      <!-- disabled section -->
+      <section>
+        <NvButton disabled>disabled</NvButton>
+        <NvButton>active</NvButton>
+      </section>
+
+      <h3>disabled elevation</h3>
+      <!-- disabled elevation section -->
+       <section>
+        <NvButton disabledElevation>disabled elevation</NvButton>
+        <NvButton>elevation</NvButton>
+       </section>
+    </section>
   </ThemeProvider>
 </template>
