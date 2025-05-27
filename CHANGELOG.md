@@ -1,3 +1,11 @@
+## <small>0.23.1 (2025-05-27)</small>
+
+* chore: release v0.23.1 ([5a47c75](https://github.com/VictorManuelCarrillo/vue-ui/commit/5a47c75))
+* fix(Button): :zap: se mejora estructura ([dcc4c7f](https://github.com/VictorManuelCarrillo/vue-ui/commit/dcc4c7f))
+* docs(changelog): :memo: se sube changelog ([ef253ae](https://github.com/VictorManuelCarrillo/vue-ui/commit/ef253ae))
+
+
+
 ## 0.23.0 (2025-05-26)
 
 * chore: release v0.23.0 ([b0aeda1](https://github.com/VictorManuelCarrillo/vue-ui/commit/b0aeda1))
