@@ -1,3 +1,4 @@
+// src/components/Button/useButtonStyles.ts
 import { computed } from 'vue';
 import type { ButtonStylesOptions } from './types';
 import type { ThemeContext } from '@/theme/types/theme-provider';
@@ -83,10 +84,10 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
     }
 
     const final: StyleObject = convertKeysToKebabCase(base) as StyleObject;
+
     if (Object.keys(hover).length > 0) {
       final[':hover'] = convertKeysToKebabCase(hover);
     }
-
     return final;
   });
 

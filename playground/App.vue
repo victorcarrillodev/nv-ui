@@ -4,6 +4,7 @@ import { NvButton } from '@/components/Button';
 import CssBaseline from '@/components/BaseLine/CssBaseline.vue';
 import ThemedMove from './ThemedMove.vue';
 import TestResponsive from '@/components/TestResponsive.vue';
+import IconCheck from '@/icons/IconCheck.vue';
 </script>
 
 <template>
@@ -44,7 +45,9 @@ import TestResponsive from '@/components/TestResponsive.vue';
       <!-- disabled elevation section -->
        <section>
         <NvButton disabledElevation>disabled elevation</NvButton>
-        <NvButton>elevation</NvButton>
+        <NvButton :endIcon="IconCheck" :startIcon="IconCheck" size="sm">elevation</NvButton>
+        <NvButton :endIcon="IconCheck" size="md">elevation</NvButton>
+        <NvButton :endIcon="IconCheck" size="lg">elevation</NvButton>
        </section>
     </section>
   </ThemeProvider>

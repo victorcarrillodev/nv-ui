@@ -6,7 +6,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonColor = 'primary' | 'secondary' | 'success' | 'info' | 'error' | 'warning';
 export type ButtonShape = 'normal' | 'rounded' | 'pill';
 
-export type ResponsiveProp<T> = T | Partial<Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', T>>;
+export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ResponsiveProp<T> = T | Partial<Record<Breakpoint, T>>;
 
 export interface ButtonProps {
   component?: ElementType;
@@ -17,6 +18,11 @@ export interface ButtonProps {
   color?: ResponsiveProp<ButtonColor>;
   shape?: ResponsiveProp<ButtonShape>;
   shadow?: number | string;
+  /**
+   * Componente o ícono a renderizar al final del contenido del botón
+   */
+  endIcon?: Component | ConcreteComponent | null;
+  startIcon?: Component | ConcreteComponent | null;
 }
 
 export interface ButtonClassesOptions {
@@ -28,6 +34,8 @@ export interface ButtonClassesOptions {
   color: ComputedRef<ButtonColor>;
   shape: ComputedRef<ButtonShape>;
   shadow: ComputedRef<number | string>;
+  endIcon: ComputedRef<Component | ConcreteComponent | null | undefined>;
+  startIcon: ComputedRef<Component | ConcreteComponent | null | undefined>;
 }
 
 export interface ButtonStylesOptions extends ButtonClassesOptions {
