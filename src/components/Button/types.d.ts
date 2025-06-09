@@ -1,3 +1,4 @@
+// src/components/Button/types.d.ts
 import type { Component, ConcreteComponent, ComputedRef } from 'vue';
 
 export type ElementType = keyof HTMLElementTagNameMap | Component | ConcreteComponent;
@@ -18,11 +19,12 @@ export interface ButtonProps {
   color?: ResponsiveProp<ButtonColor>;
   shape?: ResponsiveProp<ButtonShape>;
   shadow?: number | string;
-  /**
-   * Componente o ícono a renderizar al final del contenido del botón
-   */
   endIcon?: Component | ConcreteComponent | null;
   startIcon?: Component | ConcreteComponent | null;
+  rippleDuration?: number;
+  rippleColor?: string;
+  disableRipple?: boolean;
+  rippleOpacity?: number;
 }
 
 export interface ButtonClassesOptions {
