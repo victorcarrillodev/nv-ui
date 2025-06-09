@@ -1,3 +1,11 @@
+## <small>0.23.3 (2025-06-09)</small>
+
+* chore: release v0.23.3 ([a94a286](https://github.com/VictorManuelCarrillo/vue-ui/commit/a94a286))
+* feat(button): :sparkles: se agrega nueva característica ([6efb94d](https://github.com/VictorManuelCarrillo/vue-ui/commit/6efb94d))
+* docs(changelog): :memo: se sube changelog ([c469449](https://github.com/VictorManuelCarrillo/vue-ui/commit/c469449))
+
+
+
 ## <small>0.23.2 (2025-05-29)</small>
 
 * chore: release v0.23.2 ([4fc578b](https://github.com/VictorManuelCarrillo/vue-ui/commit/4fc578b))
