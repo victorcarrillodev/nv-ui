@@ -18,7 +18,7 @@ import IconCheck from '@/icons/IconCheck.vue';
       <h3>colors</h3>
       <!-- color section -->
       <section>
-        <NvButton color="primary">primary</NvButton>
+        <NvButton :color="{ xs: 'primary', md: 'error' }">primary</NvButton>
         <NvButton color="secondary">secondary</NvButton>
         <NvButton color="success">success</NvButton>
         <NvButton color="info">info</NvButton>
