@@ -1,3 +1,11 @@
+## <small>0.23.4 (2025-06-10)</small>
+
+* chore: release v0.23.4 ([1a6c728](https://github.com/VictorManuelCarrillo/vue-ui/commit/1a6c728))
+* fix(buttton): :bug: realizando operaciones ([ba5d74b](https://github.com/VictorManuelCarrillo/vue-ui/commit/ba5d74b))
+* docs(changelog): :memo: se sube changelog ([d546d24](https://github.com/VictorManuelCarrillo/vue-ui/commit/d546d24))
+
+
+
 ## <small>0.23.3 (2025-06-09)</small>
 
 * chore: release v0.23.3 ([a94a286](https://github.com/VictorManuelCarrillo/vue-ui/commit/a94a286))
