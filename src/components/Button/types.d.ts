@@ -14,17 +14,19 @@ export interface ButtonProps {
   component?: ElementType;
   disabled?: boolean;
   disabledElevation?: boolean;
+  disableRipple?: boolean;
+  endIcon?: Component | ConcreteComponent | null;
   variant?: ResponsiveProp<ButtonVariant>;
   size?: ResponsiveProp<ButtonSize>;
   color?: ResponsiveProp<ButtonColor>;
   shape?: ResponsiveProp<ButtonShape>;
   shadow?: number | string;
-  endIcon?: Component | ConcreteComponent | null;
   startIcon?: Component | ConcreteComponent | null;
   rippleDuration?: number;
   rippleColor?: string;
-  disableRipple?: boolean;
   rippleOpacity?: number;
+
+  fullWidth?: boolean;
 }
 
 export interface ButtonClassesOptions {
@@ -38,6 +40,8 @@ export interface ButtonClassesOptions {
   shadow: ComputedRef<number | string>;
   endIcon: ComputedRef<Component | ConcreteComponent | null | undefined>;
   startIcon: ComputedRef<Component | ConcreteComponent | null | undefined>;
+
+  fullWidth: ComputedRef<boolean>;
 }
 
 export interface ButtonStylesOptions extends ButtonClassesOptions {

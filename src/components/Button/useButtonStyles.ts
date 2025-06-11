@@ -26,6 +26,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
 
     const base: StyleObject = {
       display: 'inline-flex',
+      width: options.fullWidth.value === true ? '100%' : 'auto',
       alignItems: 'center',
       justifyContent: 'center',
       fontWeight: '600',

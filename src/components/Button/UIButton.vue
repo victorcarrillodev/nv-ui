@@ -27,6 +27,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   rippleColor: undefined,
   disableRipple: false,
   rippleOpacity: 0.3,
+  fullWidth: false,
 });
 
 const themeContext = useTheme();
@@ -44,6 +45,7 @@ const disabled = computed(() => props.disabled);
 const component = computed(() => props.component);
 const endIcon = computed(() => props.endIcon);
 const startIcon = computed(() => props.startIcon);
+const fullWidth = computed(() => props.fullWidth);
 
 // Ripple effect state
 const ripples = ref<Array<{ id: number; x: number; y: number; size: number }>>([]);
@@ -109,6 +111,7 @@ const uniqueHash = computed(
         themeMode: theme.value.palette.mode,
         breakpoint: currentBreakpoint.value,
         instanceId,
+        fullWidth: fullWidth.value,
       }),
     )}`,
 );
@@ -128,6 +131,7 @@ const { styles } = useButtonStyles(
     endIcon,
     startIcon,
     className: styleSelector,
+    fullWidth,
   },
   themeContext,
 );
@@ -144,6 +148,7 @@ const buttonClasses = computed(() => [
     disabledElevation,
     endIcon,
     startIcon,
+    fullWidth,
   }).value,
   uniqueHash.value,
   'NvButton',

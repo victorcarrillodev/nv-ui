@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ThemeProvider from '@/theme/providers/ThemeProvider.vue';
 import { NvButton } from '@/components/Button';
-import CssBaseline from '@/components/BaseLine/CssBaseline.vue';
+// import CssBaseline from '@/components/BaseLine/CssBaseline.vue';
 import ThemedMove from './ThemedMove.vue';
 import TestResponsive from '@/components/TestResponsive.vue';
 import IconCheck from '@/icons/IconCheck.vue';
@@ -9,7 +9,7 @@ import IconCheck from '@/icons/IconCheck.vue';
 
 <template>
   <ThemeProvider>
-    <CssBaseline />
+    <!-- <CssBaseline /> -->
     <TestResponsive/>
     <ThemedMove/>
     <br><br><br>
@@ -18,7 +18,7 @@ import IconCheck from '@/icons/IconCheck.vue';
       <h3>colors</h3>
       <!-- color section -->
       <section>
-        <NvButton :color="{ xs: 'primary', md: 'error' }">primary</NvButton>
+        <NvButton color="primary">primary</NvButton>
         <NvButton color="secondary">secondary</NvButton>
         <NvButton color="success">success</NvButton>
         <NvButton color="info">info</NvButton>
