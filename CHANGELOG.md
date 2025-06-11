@@ -1,3 +1,11 @@
+## 0.24.0 (2025-06-11)
+
+* chore: release v0.24.0 ([8d8b12a](https://github.com/VictorManuelCarrillo/vue-ui/commit/8d8b12a))
+* feat(button): :sparkles: se agrega nueva propiedad ([22758fe](https://github.com/VictorManuelCarrillo/vue-ui/commit/22758fe))
+* docs(changelog): :memo: se sube changelog ([4bcfce9](https://github.com/VictorManuelCarrillo/vue-ui/commit/4bcfce9))
+
+
+
 ## <small>0.23.4 (2025-06-10)</small>
 
 * chore: release v0.23.4 ([1a6c728](https://github.com/VictorManuelCarrillo/vue-ui/commit/1a6c728))
