@@ -1,3 +1,16 @@
+## <small>0.25.1 (2025-06-13)</small>
+
+* chore: release v0.25.1 ([d32c569](https://github.com/VictorManuelCarrillo/vue-ui/commit/d32c569))
+* refactor(Button): :bug: se refactorizan archivos ([3fe2b64](https://github.com/VictorManuelCarrillo/vue-ui/commit/3fe2b64))
+* refactor(Playground): :bug: se realizan pruebas del componente Button ([37774e9](https://github.com/VictorManuelCarrillo/vue-ui/commit/37774e9))
+* fix(Button): :bug: se arreglan errores ([8375d92](https://github.com/VictorManuelCarrillo/vue-ui/commit/8375d92))
+* fix(Button): :bug: se resuelven problemas de git ([fa65911](https://github.com/VictorManuelCarrillo/vue-ui/commit/fa65911))
+* fix(git): :bug: tratando de resolver porblemas de git ([114e85d](https://github.com/VictorManuelCarrillo/vue-ui/commit/114e85d))
+* fix(types): :bug: se ordenan types ([8e46a00](https://github.com/VictorManuelCarrillo/vue-ui/commit/8e46a00))
+* docs(changelog): :memo: se sube changelog ([5bfb355](https://github.com/VictorManuelCarrillo/vue-ui/commit/5bfb355))
+
+
+
 ## 0.25.0 (2025-06-13)
 
 * chore: release v0.25.0 ([42922fc](https://github.com/VictorManuelCarrillo/vue-ui/commit/42922fc))
