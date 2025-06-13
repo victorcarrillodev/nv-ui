@@ -45,12 +45,12 @@ const instanceId = getCurrentInstance()?.uid ?? Math.random().toString(36).slice
 
 const variant = useResponsiveProp(props.variant);
 const size = useResponsiveProp(props.size);
+const fullWidth = useResponsiveProp(props.fullWidth);
 const color = useResponsiveProp(props.color);
 const shape = useResponsiveProp(props.shape);
 const shadow = useResponsiveProp(props.shadow);
 const disabledElevation = useResponsiveProp(props.disabledElevation);
 const disabled = computed(() => props.disabled || props.loading);
-const fullWidth = computed(() => props.fullWidth);
 const startIcon = computed(() => props.startIcon);
 const endIcon = computed(() => props.endIcon);
 const loading = computed(() => props.loading);
