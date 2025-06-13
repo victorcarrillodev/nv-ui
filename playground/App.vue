@@ -16,7 +16,7 @@ import IconCheck from '@/icons/IconCheck.vue';
     <section style="margin: 1rem;">
       <h1>Buttons</h1>
       <h3>colors</h3>
-      <!-- color section -->
+      <!-- ?color section -->
       <section>
         <NvButton color="primary" >primary</NvButton>
         <NvButton color="secondary">secondary</NvButton>
@@ -27,7 +27,7 @@ import IconCheck from '@/icons/IconCheck.vue';
       </section>
 
       <h3>component</h3>
-      <!-- component section -->
+      <!-- ?component section -->
       <section>
         <NvButton component="a">component a</NvButton>
         <NvButton component="div">component div</NvButton>
@@ -35,21 +35,38 @@ import IconCheck from '@/icons/IconCheck.vue';
       </section>
 
       <h3>disabled</h3>
-      <!-- disabled section -->
+      <!-- ?disabled section -->
       <section>
         <NvButton disabled>disabled</NvButton>
         <NvButton>active</NvButton>
       </section>
 
       <h3>disabled elevation</h3>
-      <!-- disabled elevation section -->
+      <!-- ?disabled elevation section -->
        <section>
         <NvButton disabledElevation>disabled elevation</NvButton>
-        <NvButton :endIcon="IconCheck" :startIcon="IconCheck" size="sm">elevation</NvButton>
-        <NvButton :endIcon="IconCheck" size="md">elevation</NvButton>
-        <NvButton :endIcon="IconCheck" size="lg">elevation</NvButton>
-        <NvButton :loading="true" loadingPosition="end">dddddddddddddd</NvButton>
+        <NvButton>elevation</NvButton>
+       </section>
 
+      <h3>disabled ripple</h3>
+      <!-- ?disabled ripple section -->
+       <section>
+         <NvButton :disableRipple="true">disable ripple</NvButton>
+         <NvButton>ripple</NvButton>
+       </section>
+
+      <h3>icons</h3>
+      <!-- ?icons section -->
+       <section>
+         <NvButton :endIcon="{IconCheck}">EndIcon</NvButton>
+        <NvButton :startIcon="{IconCheck}">Start Icon</NvButton>
+       </section>
+
+      <h3>full width</h3>
+      <!-- ?icons section -->
+       <section>
+         <NvButton :fullWidth="true">full width</NvButton>
+        <NvButton>normal width</NvButton>
        </section>
     </section>
   </ThemeProvider>
