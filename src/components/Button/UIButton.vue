@@ -69,7 +69,7 @@ const ripples = ref<Array<{ id: number; x: number; y: number; size: number }>>([
 let nextRippleId = 0;
 
 const createRipple = (event: MouseEvent) => {
-  if (props.disabled || props.disableRipple || loading.value) return;
+  if (disabled.value || props.disableRipple) return;
   const el = event.currentTarget as HTMLElement;
   const diameter = Math.max(el.clientWidth, el.clientHeight);
   const radius = diameter / 2;
@@ -203,9 +203,9 @@ watch(
           '--ripple-y': `${r.y}px`,
           '--ripple-size': `${r.size}px`,
           '--ripple-color': getRippleColor,
-          '--ripple-duration': `${rippleDuration.valueOf}ms`,
+          '--ripple-duration': `${rippleDuration}ms`,
         }"
-      ></span>
+      />
     </transition-group>
   </component>
 </template>
