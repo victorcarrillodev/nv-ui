@@ -50,25 +50,26 @@ const color = useResponsiveProp(props.color);
 const shape = useResponsiveProp(props.shape);
 const shadow = useResponsiveProp(props.shadow);
 const disabledElevation = useResponsiveProp(props.disabledElevation);
-const disabled = computed(() => props.disabled || props.loading);
-const startIcon = computed(() => props.startIcon);
-const endIcon = computed(() => props.endIcon);
-const loading = computed(() => props.loading);
-const loadingIndicator = computed(() => props.loadingIndicator);
-const loadingPosition = computed(() => props.loadingPosition);
+const disabled = computed(() => useResponsiveProp(props.disabled).value || useResponsiveProp(props.loading).value);
+const startIcon = computed(() => useResponsiveProp(props.startIcon).value ?? null);
+const endIcon = computed(() => useResponsiveProp(props.endIcon).value ?? null);
+const loading = useResponsiveProp(props.loading);
+const loadingIndicator = useResponsiveProp(props.loadingIndicator);
+const loadingPosition = useResponsiveProp(props.loadingPosition);
+const rippleDuration = useResponsiveProp(props.rippleDuration);
+const rippleOpacity = useResponsiveProp(props.rippleOpacity);
+const rippleColor = useResponsiveProp(props.rippleColor);
+const component = computed(() => (props.href ? 'a' : useResponsiveProp(props.component).value));
 
 const showStartIcon = computed(() => (loading.value ? loadingPosition.value === 'start' : !!startIcon.value));
 const showEndIcon = computed(() => (loading.value ? loadingPosition.value === 'end' : !!endIcon.value));
 const showCenterIndicator = computed(() => loading.value && loadingPosition.value === 'center');
 
-const component = computed(() => (props.href ? 'a' : props.component));
-
-// Ripple logic
 const ripples = ref<Array<{ id: number; x: number; y: number; size: number }>>([]);
 let nextRippleId = 0;
 
 const createRipple = (event: MouseEvent) => {
-  if (props.disabled || props.disableRipple || loading.value) return;
+  if (disabled.value || useResponsiveProp(props.disableRipple).value || loading.value) return;
   const el = event.currentTarget as HTMLElement;
   const diameter = Math.max(el.clientWidth, el.clientHeight);
   const radius = diameter / 2;
@@ -79,18 +80,18 @@ const createRipple = (event: MouseEvent) => {
   ripples.value.push({ id, x, y, size: diameter });
   setTimeout(() => {
     ripples.value = ripples.value.filter((r) => r.id !== id);
-  }, props.rippleDuration);
+  }, rippleDuration.value);
 };
 
 const getRippleColor = computed(() => {
-  if (props.rippleColor) return props.rippleColor;
+  if (rippleColor.value) return rippleColor.value;
   const palette = theme.value.palette[color.value] as PaletteColor;
-  if (variant.value === 'filled') return `rgba(0, 0, 0, ${props.rippleOpacity})`;
+  if (variant.value === 'filled') return `rgba(0, 0, 0, ${rippleOpacity.value})`;
   const rgb = (() => {
     const hex = palette.main.replace('#', '');
     return `${parseInt(hex.substr(0, 2), 16)},${parseInt(hex.substr(2, 2), 16)},${parseInt(hex.substr(4, 2), 16)}`;
   })();
-  return `rgba(${rgb}, ${props.rippleOpacity})`;
+  return `rgba(${rgb}, ${rippleOpacity.value})`;
 });
 
 const uniqueHash = computed(
@@ -185,81 +186,9 @@ watch(
           '--ripple-y': `${r.y}px`,
           '--ripple-size': `${r.size}px`,
           '--ripple-color': getRippleColor,
-          '--ripple-duration': `${props.rippleDuration}ms`,
+          '--ripple-duration': `${rippleDuration.valueOf}ms`,
         }"
       ></span>
     </transition-group>
   </component>
 </template>
-
-<style scoped>
-.NvButton {
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  isolation: isolate;
-}
-
-.NvButton--loading {
-  pointer-events: none;
-}
-
-.NvButton__start-icon,
-.NvButton__end-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-
-.NvButton__center-loader {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-
-.NvButton__default-spinner {
-  width: 1em;
-  height: 1em;
-  border: 2px solid currentColor;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.NvButton__ripple {
-  position: absolute;
-  border-radius: 50%;
-  background-color: var(--ripple-color);
-  transform: scale(0);
-  animation: ripple-animation var(--ripple-duration) linear forwards;
-  width: var(--ripple-size);
-  height: var(--ripple-size);
-  left: var(--ripple-x);
-  top: var(--ripple-y);
-  opacity: 1;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform, opacity;
-}
-
-@keyframes ripple-animation {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-</style>
