@@ -43,16 +43,14 @@ const themeContext = useTheme();
 const theme = toRef(themeContext, 'theme');
 const instanceId = getCurrentInstance()?.uid ?? Math.random().toString(36).slice(2);
 
+// Responsivas
 const variant = useResponsiveProp(props.variant);
 const size = useResponsiveProp(props.size);
-const fullWidth = useResponsiveProp(props.fullWidth);
 const color = useResponsiveProp(props.color);
 const shape = useResponsiveProp(props.shape);
 const shadow = useResponsiveProp(props.shadow);
+const fullWidth = useResponsiveProp(props.fullWidth);
 const disabledElevation = useResponsiveProp(props.disabledElevation);
-const disabled = computed(() => useResponsiveProp(props.disabled).value || useResponsiveProp(props.loading).value);
-const startIcon = computed(() => useResponsiveProp(props.startIcon).value ?? null);
-const endIcon = computed(() => useResponsiveProp(props.endIcon).value ?? null);
 const loading = useResponsiveProp(props.loading);
 const loadingIndicator = useResponsiveProp(props.loadingIndicator);
 const loadingPosition = useResponsiveProp(props.loadingPosition);
@@ -61,15 +59,17 @@ const rippleOpacity = useResponsiveProp(props.rippleOpacity);
 const rippleColor = useResponsiveProp(props.rippleColor);
 const component = computed(() => (props.href ? 'a' : useResponsiveProp(props.component).value));
 
-const showStartIcon = computed(() => (loading.value ? loadingPosition.value === 'start' : !!startIcon.value));
-const showEndIcon = computed(() => (loading.value ? loadingPosition.value === 'end' : !!endIcon.value));
-const showCenterIndicator = computed(() => loading.value && loadingPosition.value === 'center');
+// Icons
+const startIcon = computed(() => useResponsiveProp(props.startIcon).value ?? null);
+const endIcon = computed(() => useResponsiveProp(props.endIcon).value ?? null);
+const disabled = computed(() => useResponsiveProp(props.disabled).value || loading.value);
 
+// Ripple
 const ripples = ref<Array<{ id: number; x: number; y: number; size: number }>>([]);
 let nextRippleId = 0;
 
 const createRipple = (event: MouseEvent) => {
-  if (disabled.value || useResponsiveProp(props.disableRipple).value || loading.value) return;
+  if (disabled.value || props.disableRipple) return;
   const el = event.currentTarget as HTMLElement;
   const diameter = Math.max(el.clientWidth, el.clientHeight);
   const radius = diameter / 2;
@@ -87,28 +87,34 @@ const getRippleColor = computed(() => {
   if (rippleColor.value) return rippleColor.value;
   const palette = theme.value.palette[color.value] as PaletteColor;
   if (variant.value === 'filled') return `rgba(0, 0, 0, ${rippleOpacity.value})`;
-  const rgb = (() => {
-    const hex = palette.main.replace('#', '');
-    return `${parseInt(hex.substr(0, 2), 16)},${parseInt(hex.substr(2, 2), 16)},${parseInt(hex.substr(4, 2), 16)}`;
-  })();
-  return `rgba(${rgb}, ${rippleOpacity.value})`;
+  const hex = palette.main.replace('#', '');
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${rippleOpacity.value})`;
 });
 
+// Loading indicator logic
+const showStartIcon = computed(() => (loading.value ? loadingPosition.value === 'start' : !!startIcon.value));
+const showEndIcon = computed(() => (loading.value ? loadingPosition.value === 'end' : !!endIcon.value));
+const showCenterIndicator = computed(() => loading.value && loadingPosition.value === 'center');
+
+// Dynamic styles
 const uniqueHash = computed(
   () =>
     `NvButton-${hashString(
       JSON.stringify({
         variant: variant.value,
-        disabledElevation: disabledElevation.value,
         size: size.value,
         color: color.value,
         shape: shape.value,
         shadow: shadow.value,
         disabled: disabled.value,
+        disabledElevation: disabledElevation.value,
         themeMode: theme.value.palette.mode,
         breakpoint: currentBreakpoint.value,
-        instanceId,
         fullWidth: fullWidth.value,
+        instanceId,
       }),
     )}`,
 );
@@ -133,7 +139,18 @@ const { styles } = useButtonStyles(
 );
 
 const buttonClasses = computed(() => [
-  ...useButtonClasses({ variant, size, color, shape, shadow, disabled, disabledElevation, endIcon, startIcon, fullWidth }).value,
+  ...useButtonClasses({
+    variant,
+    size,
+    color,
+    shape,
+    shadow,
+    disabled,
+    disabledElevation,
+    endIcon,
+    startIcon,
+    fullWidth,
+  }).value,
   uniqueHash.value,
   'NvButton',
   loading.value ? 'NvButton--loading' : '',
@@ -186,9 +203,74 @@ watch(
           '--ripple-y': `${r.y}px`,
           '--ripple-size': `${r.size}px`,
           '--ripple-color': getRippleColor,
-          '--ripple-duration': `${rippleDuration.valueOf}ms`,
+          '--ripple-duration': `${rippleDuration}ms`,
         }"
-      ></span>
+      />
     </transition-group>
   </component>
 </template>
+
+<style scoped>
+.NvButton {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  isolation: isolate;
+}
+
+.NvButton--loading {
+  pointer-events: none;
+}
+
+.NvButton__start-icon,
+.NvButton__end-icon,
+.NvButton__center-loader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.NvButton__default-spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.NvButton__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--ripple-color);
+  transform: scale(0);
+  animation: ripple-animation var(--ripple-duration) linear forwards;
+  width: var(--ripple-size);
+  height: var(--ripple-size);
+  left: var(--ripple-x);
+  top: var(--ripple-y);
+  opacity: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+</style>
