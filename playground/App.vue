@@ -18,7 +18,7 @@ import IconCheck from '@/icons/IconCheck.vue';
       <h3>colors</h3>
       <!-- color section -->
       <section>
-        <NvButton color="primary">primary</NvButton>
+        <NvButton color="primary" >primary</NvButton>
         <NvButton color="secondary">secondary</NvButton>
         <NvButton color="success">success</NvButton>
         <NvButton color="info">info</NvButton>
@@ -48,6 +48,8 @@ import IconCheck from '@/icons/IconCheck.vue';
         <NvButton :endIcon="IconCheck" :startIcon="IconCheck" size="sm">elevation</NvButton>
         <NvButton :endIcon="IconCheck" size="md">elevation</NvButton>
         <NvButton :endIcon="IconCheck" size="lg">elevation</NvButton>
+        <NvButton :loading="true" loadingPosition="end">dddddddddddddd</NvButton>
+
        </section>
     </section>
   </ThemeProvider>

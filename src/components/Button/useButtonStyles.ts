@@ -26,7 +26,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
 
     const base: StyleObject = {
       display: 'inline-flex',
-      width: options.fullWidth.value === true ? '100%' : 'auto',
+      width: options.fullWidth.value ? '100%' : 'auto',
       alignItems: 'center',
       justifyContent: 'center',
       fontWeight: '600',
@@ -86,11 +86,12 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
         break;
     }
 
-    const final: StyleObject = convertKeysToKebabCase(base) as StyleObject;
+    const final: StyleObject = convertKeysToKebabCase(base);
 
     if (Object.keys(hover).length > 0) {
       final[':hover'] = convertKeysToKebabCase(hover);
     }
+
     return final;
   });
 

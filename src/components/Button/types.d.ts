@@ -16,6 +16,9 @@ export interface ButtonProps {
   disabledElevation?: boolean;
   disableRipple?: boolean;
   endIcon?: Component | ConcreteComponent | null;
+  fullWidth?: boolean;
+  href?: string;
+  target?: '_blank' | '_self' | '_parent' | '_top';
   variant?: ResponsiveProp<ButtonVariant>;
   size?: ResponsiveProp<ButtonSize>;
   color?: ResponsiveProp<ButtonColor>;
@@ -26,7 +29,9 @@ export interface ButtonProps {
   rippleColor?: string;
   rippleOpacity?: number;
 
-  fullWidth?: boolean;
+  loading?: boolean;
+  loadingIndicator?: Component | ConcreteComponent | null;
+  loadingPosition?: 'start' | 'end' | 'center';
 }
 
 export interface ButtonClassesOptions {
@@ -40,7 +45,6 @@ export interface ButtonClassesOptions {
   shadow: ComputedRef<number | string>;
   endIcon: ComputedRef<Component | ConcreteComponent | null | undefined>;
   startIcon: ComputedRef<Component | ConcreteComponent | null | undefined>;
-
   fullWidth: ComputedRef<boolean>;
 }
 

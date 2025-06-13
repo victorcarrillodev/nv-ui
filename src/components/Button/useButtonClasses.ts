@@ -1,10 +1,8 @@
+// src/components/Button/useButtonClasses.ts
 import { computed } from 'vue';
 import type { ButtonClassesOptions } from './types';
 import { generateComponentClasses } from '@/utils/class-utils';
 
-/**
- * Genera las clases del botón en base a sus props reactivas.
- */
 export const useButtonClasses = (options: ButtonClassesOptions) => {
   return computed(() =>
     generateComponentClasses('NvButton', {
