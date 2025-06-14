@@ -39,26 +39,26 @@ export interface ButtonProps {
 }
 
 export interface ButtonClassesOptions {
-  color?: ComputedRef<ButtonColor>;
-  component?: ComputedRef<ElementType>;
-  disabled?: ComputedRef<boolean>;
-  disabledElevation?: ComputedRef<boolean>;
-  disableRipple?: ComputedRef<boolean>;
-  endIcon?: ComputedRef<EndIcon>;
-  fullWidth?: ComputedRef<boolean>;
-  href?: ComputedRef<string>;
-  loading?: ComputedRef<boolean>;
-  loadingIndicator?: ComputedRef<LoadingIndicator>;
-  loadingPosition?: ComputedRef<LoadingPosition>;
-  rippleColor?: ComputedRef<string>;
-  rippleDuration?: ComputedRef<number>;
-  rippleOpacity?: ComputedRef<number>;
-  size?: ComputedRef<ButtonSize>;
-  shape?: ComputedRef<ButtonShape>;
-  shadow?: ComputedRef<number | string>;
-  startIcon?: ComputedRef<StartIcon>;
-  target?: ComputedRef<'_blank' | '_self' | '_parent' | '_top'>;
-  variant?: ComputedRef<ButtonVariant>;
+  color: ComputedRef<ButtonColor>;
+  component: ComputedRef<ElementType>;
+  disabled: ComputedRef<boolean>;
+  disabledElevation: ComputedRef<boolean>;
+  disableRipple: ComputedRef<boolean>;
+  endIcon: ComputedRef<EndIcon>;
+  fullWidth: ComputedRef<boolean>;
+  href: ComputedRef<string>;
+  loading: ComputedRef<boolean>;
+  loadingIndicator: ComputedRef<LoadingIndicator>;
+  loadingPosition: ComputedRef<LoadingPosition>;
+  rippleColor: ComputedRef<string>;
+  rippleDuration: ComputedRef<number>;
+  rippleOpacity: ComputedRef<number>;
+  size: ComputedRef<ButtonSize>;
+  shape: ComputedRef<ButtonShape>;
+  shadow: ComputedRef<number | string>;
+  startIcon: ComputedRef<StartIcon>;
+  target: ComputedRef<'_blank' | '_self' | '_parent' | '_top'>;
+  variant: ComputedRef<ButtonVariant>;
 }
 
 export interface ButtonStylesOptions extends ButtonClassesOptions {

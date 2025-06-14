@@ -56,7 +56,7 @@ const loadingIndicator = useResponsiveProp(props.loadingIndicator);
 const loadingPosition = useResponsiveProp(props.loadingPosition);
 const rippleDuration = useResponsiveProp(props.rippleDuration);
 const rippleOpacity = useResponsiveProp(props.rippleOpacity);
-const rippleColor = useResponsiveProp(props.rippleColor);
+const rippleColor = computed(() => useResponsiveProp(props.rippleColor).value ?? '');
 const component = computed(() => (props.href ? 'a' : useResponsiveProp(props.component).value));
 
 // Icons
@@ -134,6 +134,16 @@ const { styles } = useButtonStyles(
     startIcon,
     className: styleSelector,
     fullWidth,
+    component,
+    disableRipple: computed(() => !!useResponsiveProp(props.disableRipple).value),
+    href: computed(() => useResponsiveProp(props.href).value ?? ''),
+    loading,
+    loadingIndicator,
+    loadingPosition,
+    rippleDuration,
+    rippleOpacity,
+    rippleColor,
+    target: computed(() => useResponsiveProp(props.target).value ?? '_self'),
   },
   themeContext,
 );
@@ -150,6 +160,16 @@ const buttonClasses = computed(() => [
     endIcon,
     startIcon,
     fullWidth,
+    component,
+    disableRipple: computed(() => !!useResponsiveProp(props.disableRipple).value),
+    href: computed(() => useResponsiveProp(props.href).value ?? ''),
+    loading,
+    loadingIndicator,
+    loadingPosition,
+    rippleDuration,
+    rippleOpacity,
+    rippleColor,
+    target: computed(() => useResponsiveProp(props.target).value ?? '_self'),
   }).value,
   uniqueHash.value,
   'NvButton',
