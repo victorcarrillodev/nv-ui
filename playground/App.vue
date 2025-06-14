@@ -60,6 +60,7 @@ import IconCheck from '@/icons/IconCheck.vue';
        <section>
          <NvButton :endIcon="{IconCheck}">EndIcon</NvButton>
         <NvButton :startIcon="{IconCheck}">Start Icon</NvButton>
+        <NvButton :startIcon="{IconCheck}" :endIcon="{IconCheck}">Start & end Icon</NvButton>
        </section>
 
       <h3>full width</h3>
