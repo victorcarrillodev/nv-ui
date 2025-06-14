@@ -1,3 +1,11 @@
+## <small>0.25.2 (2025-06-14)</small>
+
+* chore: release v0.25.2 ([582f384](https://github.com/VictorManuelCarrillo/vue-ui/commit/582f384))
+* refactor(Button): :bug: se organiza mejor la estructura ([4979202](https://github.com/VictorManuelCarrillo/vue-ui/commit/4979202))
+* docs(changelog): :memo: se sube changelog ([aee1425](https://github.com/VictorManuelCarrillo/vue-ui/commit/aee1425))
+
+
+
 ## <small>0.25.1 (2025-06-13)</small>
 
 * chore: release v0.25.1 ([d32c569](https://github.com/VictorManuelCarrillo/vue-ui/commit/d32c569))
