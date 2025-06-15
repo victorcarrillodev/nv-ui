@@ -37,7 +37,7 @@ import IconCheck from '@/icons/IconCheck.vue';
       <h3>disabled</h3>
       <!-- ?disabled section -->
       <section>
-        <NvButton disabled>disabled</NvButton>
+        <NvButton :disabled="true">disabled</NvButton>
         <NvButton>active</NvButton>
       </section>
 
@@ -58,9 +58,9 @@ import IconCheck from '@/icons/IconCheck.vue';
       <h3>icons</h3>
       <!-- ?icons section -->
        <section>
-         <NvButton :endIcon="{IconCheck}">EndIcon</NvButton>
-        <NvButton :startIcon="{IconCheck}">Start Icon</NvButton>
-        <NvButton :startIcon="{IconCheck}" :endIcon="{IconCheck}">Start & end Icon</NvButton>
+         <NvButton >EndIcon</NvButton>
+        <NvButton >Start Icon</NvButton>
+        <NvButton :startIcon={IconCheck} :endIcon={IconCheck}>Start & end Icon</NvButton>
        </section>
 
       <h3>full width</h3>

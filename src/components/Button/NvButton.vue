@@ -231,40 +231,28 @@ watch(
 </template>
 
 <style scoped>
-.NvButton {
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  isolation: isolate;
-}
-
 .NvButton--loading {
   pointer-events: none;
 }
-
+/*
 .NvButton__start-icon,
 .NvButton__end-icon,
 .NvButton__center-loader {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
-}
+  z-index: 0;
+  font-size: 1;
+} */
 
-.NvButton__default-spinner {
+/* .NvButton__default-spinner {
   width: 1em;
   height: 1em;
   border: 2px solid currentColor;
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
-}
+} */
 
 @keyframes spin {
   to {

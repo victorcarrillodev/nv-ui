@@ -32,7 +32,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
       fontWeight: '600',
       fontFamily: theme.value.typography.fontFamily,
       cursor: options.disabled.value ? 'not-allowed' : 'pointer',
-      opacity: options.disabled.value ? '0.6' : '1',
+      opacity: options.disabled.value ? '0.5' : '1',
       border: 'none',
       transition: 'all 0.3s ease',
       boxShadow: options.disabledElevation.value ? 'none' : theme.value.shadows[+options.shadow.value] || 'none',
