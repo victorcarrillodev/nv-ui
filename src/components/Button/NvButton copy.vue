@@ -1,16 +1,12 @@
 <script setup lang="ts">
-// Vue Defaults
 import { computed, toRef, watch, getCurrentInstance, ref, h } from 'vue';
-// Composables
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
 import { updateStyles } from '@/theme/composables/useDynamicStyles';
 import { useResponsiveProp } from '@/theme/composables/props/useResponsiveProp';
-// Utils
 import { currentBreakpoint, useBreakpointListener } from '@/utils/responsive';
 import { hashString } from '@/utils/hash';
-// Types
 import type { ButtonProps } from './types';
 import type { PaletteColor } from '@/theme/types/theme';
 
@@ -235,34 +231,33 @@ watch(
 </template>
 
 <style scoped>
-.NvButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  vertical-align: middle;
-}
-
 .NvButton--loading {
   pointer-events: none;
 }
-
+/*
 .NvButton__start-icon,
 .NvButton__end-icon,
 .NvButton__center-loader {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: inherit;
-  line-height: 1;
-}
+  z-index: 0;
+  font-size: 1;
+} */
 
-.NvButton__start-icon {
-  margin-right: 0.5em;
-}
+/* .NvButton__default-spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+} */
 
-.NvButton__end-icon {
-  margin-left: 0.5em;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .NvButton__ripple {
@@ -284,12 +279,6 @@ watch(
   to {
     transform: scale(4);
     opacity: 0;
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
   }
 }
 </style>
