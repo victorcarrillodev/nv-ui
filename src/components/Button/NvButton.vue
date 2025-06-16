@@ -240,7 +240,6 @@ watch(
   align-items: center;
   justify-content: center;
   position: relative;
-  vertical-align: middle;
 }
 
 .NvButton--loading {

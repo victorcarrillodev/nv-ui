@@ -25,6 +25,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
     const palette = theme.value.palette[options.color.value] as PaletteColor;
 
     const base: StyleObject = {
+      verticalAlign: 'middle',
       display: 'inline-flex',
       width: options.fullWidth.value ? '100%' : 'auto',
       alignItems: 'center',
