@@ -16,19 +16,19 @@ export const lightThemeColors: Palette = {
     main: '#BE6E94',
     light: '#DE90AE',
     dark: '#A25E7E',
-    contrastText: '#000',
+    contrastText: '#fff',
   },
   success: {
     main: '#95CD50',
     light: '#CAE95B',
     dark: '#7FAF44',
-    contrastText: '#000',
+    contrastText: '#fff',
   },
   info: {
     main: '#A292B4',
     light: '#D1D2E6',
     dark: '#887A97',
-    contrastText: '#000',
+    contrastText: '#fff',
   },
   error: {
     main: '#FF6150',
@@ -40,7 +40,7 @@ export const lightThemeColors: Palette = {
     main: '#D99441',
     light: '#F8C44B',
     dark: '#BD8239',
-    contrastText: '#000',
+    contrastText: '#fff',
   },
   grey: {
     50: '#f9f9f9',
