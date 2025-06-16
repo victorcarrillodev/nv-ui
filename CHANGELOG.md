@@ -1,3 +1,15 @@
+## <small>0.25.3 (2025-06-16)</small>
+
+* chore: release v0.25.3 ([8fa6901](https://github.com/VictorManuelCarrillo/vue-ui/commit/8fa6901))
+* fix(Button): :bug: se corrigen errores menores ([42d9552](https://github.com/VictorManuelCarrillo/vue-ui/commit/42d9552))
+* fix(playground): :bug: se agregan ejemplos ([020d021](https://github.com/VictorManuelCarrillo/vue-ui/commit/020d021))
+* refactor(eslint.config.ts): :bug: se formatea el codigo de eslint ([547beed](https://github.com/VictorManuelCarrillo/vue-ui/commit/547beed))
+* refactor(index): :bug: se elimina codigo comentado ([94940ef](https://github.com/VictorManuelCarrillo/vue-ui/commit/94940ef))
+* refactor(package0): :sparkles: Se agregan entry points ([a5adabb](https://github.com/VictorManuelCarrillo/vue-ui/commit/a5adabb))
+* docs(changelog): :memo: se sube changelog ([bdd17d7](https://github.com/VictorManuelCarrillo/vue-ui/commit/bdd17d7))
+
+
+
 ## <small>0.25.2 (2025-06-14)</small>
 
 * chore: release v0.25.2 ([582f384](https://github.com/VictorManuelCarrillo/vue-ui/commit/582f384))
