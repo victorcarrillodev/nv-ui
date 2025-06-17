@@ -12,11 +12,12 @@ type ThemeMode = 'light' | 'dark';
 const props = defineProps<{ defaultMode?: ThemeMode }>();
 
 /**
- * Obtiene el modo de tema almacenado en localStorage o usa el predeterminado.
+ * Gets and validates the stored mode from LocalStorage
  */
 function getInitialTheme(): ThemeMode {
   if (typeof window === 'undefined') return 'light';
-  return (localStorage.getItem(THEME_KEY) as ThemeMode) || props.defaultMode || 'light';
+  const stored = localStorage.getItem(THEME_KEY) as ThemeMode;
+  return stored === 'light' || stored === 'dark' ? stored : props.defaultMode || 'light';
 }
 
 const initialMode = getInitialTheme();

@@ -63,13 +63,14 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
         Object.assign(base, {
           backgroundColor: `${palette.main}20`,
           color: palette.main,
-          outline: `2px solid ${palette.main}`,
           // border: `2px solid ${palette.main}`,
+          boxShadow: `inset 0 0 0 2px ${palette.main}`,
         });
         if (!options.disabled.value) {
           Object.assign(hover, {
             backgroundColor: palette.light,
             color: palette.contrastText,
+            boxShadow: `inset 0 0 0 2px ${palette.light}`,
           });
         }
         break;
