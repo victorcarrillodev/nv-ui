@@ -61,7 +61,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
 
       case 'outlined':
         Object.assign(base, {
-          backgroundColor: `${palette.main}20`,
+          backgroundColor: `${palette.main}00`,
           color: palette.main,
           // border: `2px solid ${palette.main}`,
           boxShadow: `inset 0 0 0 2px ${palette.main}`,
