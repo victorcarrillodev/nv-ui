@@ -61,9 +61,10 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
 
       case 'outlined':
         Object.assign(base, {
-          backgroundColor: 'transparent',
+          backgroundColor: `${palette.main}20`,
           color: palette.main,
-          border: `2px solid ${palette.main}`,
+          outline: `2px solid ${palette.main}`,
+          // border: `2px solid ${palette.main}`,
         });
         if (!options.disabled.value) {
           Object.assign(hover, {

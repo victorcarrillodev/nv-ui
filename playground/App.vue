@@ -15,9 +15,16 @@ import IconCheck from '@/icons/IconCheck.vue';
     <br><br><br>
     <section style="margin: 1rem;">
       <h1>Buttons</h1>
-      <h3>colors</h3>
       <!-- ?color section -->
       <section>
+        <h3>colors</h3>
+        <NvButton variant="filled">primary</NvButton>
+        <NvButton variant="outlined">secondary</NvButton>
+        <NvButton variant="text">success</NvButton>
+      </section>
+      <!-- ?color section -->
+      <section>
+        <h3>colors</h3>
         <NvButton color="primary" >primary</NvButton>
         <NvButton color="secondary">secondary</NvButton>
         <NvButton color="success">success</NvButton>
@@ -26,46 +33,46 @@ import IconCheck from '@/icons/IconCheck.vue';
         <NvButton color="warning">warning</NvButton>
       </section>
 
-      <h3>component</h3>
       <!-- ?component section -->
       <section>
+        <h3>component</h3>
         <NvButton component="a">component a</NvButton>
         <NvButton component="div">component div</NvButton>
         <NvButton component="button">component button</NvButton>
       </section>
 
-      <h3>disabled</h3>
       <!-- ?disabled section -->
       <section>
+        <h3>disabled</h3>
         <NvButton :disabled="true">disabled</NvButton>
         <NvButton>active</NvButton>
       </section>
 
-      <h3>disabled elevation</h3>
       <!-- ?disabled elevation section -->
-       <section>
+      <section>
+         <h3>disabled elevation</h3>
         <NvButton disabledElevation>disabled elevation</NvButton>
         <NvButton>elevation</NvButton>
        </section>
 
-      <h3>disabled ripple</h3>
-      <!-- ?disabled ripple section -->
+       <!-- ?disabled ripple section -->
        <section>
+         <h3>disabled ripple</h3>
          <NvButton :disableRipple="true">disable ripple</NvButton>
          <NvButton>ripple</NvButton>
        </section>
 
-      <h3>icons</h3>
-      <!-- ?icons section -->
+       <!-- ?icons section -->
        <section>
+         <h3>icons</h3>
          <NvButton >EndIcon</NvButton>
         <NvButton >Start Icon</NvButton>
         <NvButton :startIcon={IconCheck} :endIcon={IconCheck}>Start & end Icon</NvButton>
        </section>
 
-      <h3>full width</h3>
-      <!-- ?icons section -->
+       <!-- ?icons section -->
        <section>
+         <h3>full width</h3>
          <NvButton :fullWidth="true">full width</NvButton>
         <NvButton>normal width</NvButton>
        </section>

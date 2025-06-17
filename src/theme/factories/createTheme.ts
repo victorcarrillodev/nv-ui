@@ -44,7 +44,7 @@ const defaultZIndex: ZIndex = {
 
 // ========== TRANSITIONS ==========
 const defaultTransitions: Transitions = {
-  create: (props, options = {}) => {
+  create: (props: string | string[], options = {}) => {
     const propStr = Array.isArray(props) ? props.join(', ') : props;
     const duration = options.duration ?? 300;
     const easing = options.easing ?? 'ease-in-out';
