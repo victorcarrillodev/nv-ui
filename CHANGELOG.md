@@ -1,3 +1,11 @@
+## <small>0.25.7 (2025-06-18)</small>
+
+* chore: release v0.25.7 ([225bf63](https://github.com/VictorManuelCarrillo/vue-ui/commit/225bf63))
+* refactor(Button): :bulb: Se actualizan los comentarios ([6a89b06](https://github.com/VictorManuelCarrillo/vue-ui/commit/6a89b06))
+* docs(changelog): :memo: se sube changelog ([13adf9a](https://github.com/VictorManuelCarrillo/vue-ui/commit/13adf9a))
+
+
+
 ## <small>0.25.6 (2025-06-18)</small>
 
 * chore: release v0.25.6 ([4ab523c](https://github.com/VictorManuelCarrillo/vue-ui/commit/4ab523c))
