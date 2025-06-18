@@ -1,12 +1,14 @@
 // Vue defaults
 import { computed } from 'vue';
+// Types imports
 import type { ButtonStylesOptions } from './types';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import type { PaletteColor } from '@/theme/types/theme';
 import type { StyleObject } from '@/theme/types/useDynamicStyles';
+// Utils imports
 import { convertKeysToKebabCase } from '@/utils/style-utils';
 
-// 🎯 Mapas de tamaño y bordes
+// Borders & Sizes maps
 const SIZE_MAP = {
   sm: { padding: '0.25rem 1rem', fontSize: '0.875rem' },
   md: { padding: '0.5rem 1.25rem', fontSize: '1rem' },
@@ -20,7 +22,7 @@ const RADIUS_MAP = {
 } as const;
 
 /**
- * Composable para generar estilos dinámicos del botón basado en el tema y las props.
+ * Composable for generate dynamics styles of button based on theme and props
  */
 export const useButtonStyles = (options: ButtonStylesOptions, themeContext: ThemeContext) => {
   const theme = computed(() => themeContext.theme.value);
@@ -28,7 +30,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
   const styles = computed<StyleObject>(() => {
     const palette = theme.value.palette[options.color.value] as PaletteColor;
 
-    // 🧱 Estilos base
+    // Base Styles
     const base: StyleObject = {
       alignItems: 'center',
       border: 'none',
@@ -49,10 +51,10 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
       ...SIZE_MAP[options.size.value],
     };
 
-    // ✨ Estilos hover
+    // Hover Styles
     const hover: StyleObject = {};
 
-    // 🎨 Variante del botón
+    // Button Variants
     switch (options.variant.value) {
       case 'filled':
         Object.assign(base, {
@@ -101,7 +103,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
         break;
     }
 
-    // 🧪 Conversión a CSS kebab-case y ensamblaje final
+    // Conversion to CSS kebab-case & final assembly
     const final: StyleObject = convertKeysToKebabCase(base);
 
     if (Object.keys(hover).length > 0) {
