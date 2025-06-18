@@ -1,4 +1,4 @@
-// src/components/Button/useButtonStyles.ts
+// Vue defaults
 import { computed } from 'vue';
 import type { ButtonStylesOptions } from './types';
 import type { ThemeContext } from '@/theme/types/theme-provider';
@@ -89,12 +89,13 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
       case 'text':
         Object.assign(base, {
           backgroundColor: 'transparent',
+          boxShadow: 'none',
           color: palette.main,
         });
 
         if (!options.disabled.value) {
           Object.assign(hover, {
-            color: palette.dark,
+            color: palette.light,
           });
         }
         break;
