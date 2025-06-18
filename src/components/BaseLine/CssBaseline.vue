@@ -59,7 +59,7 @@ const insertGlobalStyles = () => {
     }
 
     button {
-      // all: unset;
+      all: unset;
       cursor: pointer;
     }
 

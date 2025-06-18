@@ -30,22 +30,23 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
 
     // 🧱 Estilos base
     const base: StyleObject = {
-      verticalAlign: 'middle',
-      display: 'inline-flex',
-      width: options.fullWidth.value ? '100%' : 'auto',
       alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: '600',
-      fontFamily: theme.value.typography.fontFamily,
-      cursor: options.disabled.value ? 'not-allowed' : 'pointer',
-      opacity: options.disabled.value ? '0.5' : '1',
       border: 'none',
-      transition: 'all 0.3s ease',
-      position: 'relative',
-      overflow: 'hidden',
-      boxShadow: options.disabledElevation.value ? 'none' : (theme.value.shadows[+options.shadow.value] ?? 'none'),
-      ...SIZE_MAP[options.size.value],
       borderRadius: RADIUS_MAP[options.shape.value],
+      boxShadow: options.disabledElevation.value ? 'none' : (theme.value.shadows[+options.shadow.value] ?? 'none'),
+      cursor: options.disabled.value ? 'not-allowed' : 'pointer',
+      display: 'inline-flex',
+      fontWeight: 600,
+      fontFamily: theme.value.typography.fontFamily,
+      justifyContent: 'center',
+      margin: '0.1rem',
+      opacity: options.disabled.value ? '0.5' : '1',
+      overflow: 'hidden',
+      position: 'relative',
+      transition: 'all 0.3s ease',
+      verticalAlign: 'middle',
+      width: options.fullWidth.value ? '100%' : 'auto',
+      ...SIZE_MAP[options.size.value],
     };
 
     // ✨ Estilos hover
@@ -70,15 +71,17 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
       case 'outlined':
         Object.assign(base, {
           backgroundColor: 'transparent',
-          color: palette.main,
           boxShadow: `inset 0 0 0 2px ${palette.main}`,
+          color: palette.main,
+          filter: 'brightness(1.05)',
+          inset: '1rem solid red',
         });
 
         if (!options.disabled.value) {
           Object.assign(hover, {
-            backgroundColor: palette.light,
-            color: palette.contrastText,
+            backgroundColor: `${palette.main}15`,
             boxShadow: `inset 0 0 0 2px ${palette.light}`,
+            color: palette.light,
           });
         }
         break;
@@ -92,7 +95,6 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
         if (!options.disabled.value) {
           Object.assign(hover, {
             color: palette.dark,
-            textDecoration: 'underline',
           });
         }
         break;
