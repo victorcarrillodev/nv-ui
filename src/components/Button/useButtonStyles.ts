@@ -3,27 +3,32 @@ import { computed } from 'vue';
 import type { ButtonStylesOptions } from './types';
 import type { ThemeContext } from '@/theme/types/theme-provider';
 import type { PaletteColor } from '@/theme/types/theme';
-import { convertKeysToKebabCase } from '@/utils/style-utils';
 import type { StyleObject } from '@/theme/types/useDynamicStyles';
+import { convertKeysToKebabCase } from '@/utils/style-utils';
 
-const sizeMap = {
+// 🎯 Mapas de tamaño y bordes
+const SIZE_MAP = {
   sm: { padding: '0.25rem 1rem', fontSize: '0.875rem' },
   md: { padding: '0.5rem 1.25rem', fontSize: '1rem' },
   lg: { padding: '0.75rem 1.5rem', fontSize: '1.125rem' },
-};
+} as const;
 
-const borderRadiusMap = {
+const RADIUS_MAP = {
   normal: '0.25rem',
   rounded: '0.75rem',
   pill: '9999px',
-};
+} as const;
 
+/**
+ * Composable para generar estilos dinámicos del botón basado en el tema y las props.
+ */
 export const useButtonStyles = (options: ButtonStylesOptions, themeContext: ThemeContext) => {
   const theme = computed(() => themeContext.theme.value);
 
   const styles = computed<StyleObject>(() => {
     const palette = theme.value.palette[options.color.value] as PaletteColor;
 
+    // 🧱 Estilos base
     const base: StyleObject = {
       verticalAlign: 'middle',
       display: 'inline-flex',
@@ -36,21 +41,24 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
       opacity: options.disabled.value ? '0.5' : '1',
       border: 'none',
       transition: 'all 0.3s ease',
-      boxShadow: options.disabledElevation.value ? 'none' : theme.value.shadows[+options.shadow.value] || 'none',
       position: 'relative',
       overflow: 'hidden',
-      ...sizeMap[options.size.value],
-      borderRadius: borderRadiusMap[options.shape.value],
+      boxShadow: options.disabledElevation.value ? 'none' : (theme.value.shadows[+options.shadow.value] ?? 'none'),
+      ...SIZE_MAP[options.size.value],
+      borderRadius: RADIUS_MAP[options.shape.value],
     };
 
-    const hover: Record<string, string> = {};
+    // ✨ Estilos hover
+    const hover: StyleObject = {};
 
+    // 🎨 Variante del botón
     switch (options.variant.value) {
       case 'filled':
         Object.assign(base, {
           backgroundColor: palette.main,
           color: palette.contrastText,
         });
+
         if (!options.disabled.value) {
           Object.assign(hover, {
             backgroundColor: palette.light,
@@ -61,11 +69,11 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
 
       case 'outlined':
         Object.assign(base, {
-          backgroundColor: `${palette.main}00`,
+          backgroundColor: 'transparent',
           color: palette.main,
-          // border: `2px solid ${palette.main}`,
           boxShadow: `inset 0 0 0 2px ${palette.main}`,
         });
+
         if (!options.disabled.value) {
           Object.assign(hover, {
             backgroundColor: palette.light,
@@ -80,6 +88,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
           backgroundColor: 'transparent',
           color: palette.main,
         });
+
         if (!options.disabled.value) {
           Object.assign(hover, {
             color: palette.dark,
@@ -89,6 +98,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
         break;
     }
 
+    // 🧪 Conversión a CSS kebab-case y ensamblaje final
     const final: StyleObject = convertKeysToKebabCase(base);
 
     if (Object.keys(hover).length > 0) {

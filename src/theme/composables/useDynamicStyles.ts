@@ -1,11 +1,18 @@
+// src/theme/composables/useDynamicStyles.ts
 import { ref } from 'vue';
 
-const STYLE_MAP = new Map<string, { cssText: string; index: number }>();
+const STYLE_MAP = new Map<string, StyleCacheItem>();
 const styleElement = ref<HTMLStyleElement | null>(null);
+
 const isServer = typeof window === 'undefined';
 
+interface StyleCacheItem {
+  cssText: string;
+  index: number;
+}
+
 /**
- * Crea o recupera el stylesheet dinámico.
+ * Obtiene (o crea si no existe) el <style> dinámico y su hoja de estilos.
  */
 const getStyleSheet = (): CSSStyleSheet | null => {
   if (isServer) return null;
@@ -21,102 +28,117 @@ const getStyleSheet = (): CSSStyleSheet | null => {
 
     return styleElement.value.sheet ?? null;
   } catch (err) {
-    console.error('[getStyleSheet] Error creando stylesheet:', err);
+    console.error('[useDynamicStyles/getStyleSheet] Error creando stylesheet:', err);
     return null;
   }
 };
 
 /**
- * Convierte un objeto de estilo en string CSS.
+ * Convierte un objeto de estilo plano en una cadena CSS válida.
  */
-const generateCssText = (styles: Record<string, string>): string =>
-  Object.entries(styles)
+const generateCssText = (styles: Record<string, string>): string => {
+  return Object.entries(styles)
     .filter(([, val]) => val !== undefined && val !== null)
     .map(([prop, val]) => `${prop}:${val};`)
     .join('');
+};
 
 /**
- * Inserta o reemplaza reglas CSS dinámicamente en el DOM.
+ * Inserta o reemplaza reglas CSS dinámicamente.
  */
-export const updateStyles = (selector: string, styles: Record<string, unknown>) => {
+export const updateStyles = (selector: string, styles: Record<string, unknown>): void => {
   if (isServer || !styles) return;
 
   const sheet = getStyleSheet();
   if (!sheet) return;
 
-  const flatStyles: Record<string, string> = {};
-  const nestedStyles: Record<string, Record<string, string>> = {};
+  const flat: Record<string, string> = {};
+  const nested: Record<string, Record<string, string>> = {};
 
-  for (const [key, value] of Object.entries(styles)) {
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      nestedStyles[key] = value as Record<string, string>;
-    } else if (value !== undefined && value !== null) {
-      flatStyles[key] = String(value);
+  // Clasifica entre propiedades planas y anidadas (:hover, etc.)
+  for (const [prop, val] of Object.entries(styles)) {
+    if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
+      nested[prop] = val as Record<string, string>;
+    } else if (val !== undefined && val !== null) {
+      flat[prop] = String(val);
     }
   }
 
-  // Eliminar regla base existente
+  // 💥 Reemplazar regla base si ya existe
   const existing = STYLE_MAP.get(selector);
   if (existing && existing.index >= 0 && existing.index < sheet.cssRules.length) {
     try {
       sheet.deleteRule(existing.index);
-    } catch (e) {
-      console.warn(`[updateStyles] No se pudo eliminar la regla existente (${selector}):`, e);
+    } catch (err) {
+      console.warn(`[useDynamicStyles/updateStyles] No se pudo eliminar la regla existente (${selector})`, err);
     }
   }
 
-  // Insertar nueva regla base
+  // ✅ Insertar nueva regla base
   try {
-    const cssText = generateCssText(flatStyles);
+    const cssText = generateCssText(flat);
     const rule = `${selector} { ${cssText} }`;
     const index = sheet.insertRule(rule, sheet.cssRules.length);
     STYLE_MAP.set(selector, { cssText, index });
   } catch (err) {
-    console.error(`[updateStyles] Error insertando regla base (${selector}):`, err);
+    console.error(`[useDynamicStyles/updateStyles] Error insertando regla base (${selector})`, err);
   }
 
-  // Insertar reglas anidadas como :hover, :focus, etc.
-  for (const [nestedKey, nestedStyle] of Object.entries(nestedStyles)) {
-    const nestedSelector = `${selector}${nestedKey}`;
+  // 🎯 Insertar reglas anidadas (:hover, :focus, etc.)
+  Object.entries(nested).forEach(([pseudo, nestedStyle]) => {
+    const nestedSelector = `${selector}${pseudo}`;
     try {
       const cssText = generateCssText(nestedStyle);
       const rule = `${nestedSelector} { ${cssText} }`;
       const index = sheet.insertRule(rule, sheet.cssRules.length);
       STYLE_MAP.set(nestedSelector, { cssText, index });
     } catch (err) {
-      console.error(`[updateStyles] Error insertando regla anidada (${nestedSelector}):`, err);
+      console.error(`[useDynamicStyles/updateStyles] Error insertando regla anidada (${nestedSelector})`, err);
     }
-  }
+  });
 };
 
 /**
- * Elimina estilos previamente insertados.
+ * Elimina todas las reglas asociadas a un selector base y sus variantes.
  */
-export const removeStyles = (selector: string) => {
+export const removeStyles = (selector: string): void => {
   const sheet = getStyleSheet();
   if (!sheet) return;
 
-  for (const [key, entry] of STYLE_MAP.entries()) {
-    if (key === selector || key.startsWith(`${selector}:`) || key.startsWith(`${selector}.`)) {
-      try {
-        if (entry.index >= 0 && entry.index < sheet.cssRules.length) {
-          sheet.deleteRule(entry.index);
-        }
-      } catch (e) {
-        console.warn(`[removeStyles] Error eliminando regla (${key}):`, e);
+  for (const [key, entry] of [...STYLE_MAP.entries()]) {
+    const isMatch = key === selector || key.startsWith(`${selector}:`) || key.startsWith(`${selector}.`);
+    if (!isMatch) continue;
+
+    try {
+      if (entry.index >= 0 && entry.index < sheet.cssRules.length) {
+        sheet.deleteRule(entry.index);
       }
-      STYLE_MAP.delete(key);
+    } catch (err) {
+      console.warn(`[useDynamicStyles/removeStyles] Error eliminando regla (${key})`, err);
     }
+
+    STYLE_MAP.delete(key);
   }
 };
 
 /**
- * Limpia completamente los estilos dinámicos del DOM.
+ * Elimina el elemento <style> del DOM y limpia la caché.
  */
-export const resetDynamicStyles = () => {
-  if (styleElement.value && document.head.contains(styleElement.value)) {
+export const resetDynamicStyles = (): void => {
+  if (!isServer && styleElement.value && document.head.contains(styleElement.value)) {
     document.head.removeChild(styleElement.value);
     styleElement.value = null;
   }
+
   STYLE_MAP.clear();
 };
+
+/**
+ * Devuelve el número de reglas actualmente activas.
+ */
+export const getCacheSize = (): number => STYLE_MAP.size;
+
+/**
+ * Devuelve el elemento <style> dinámico.
+ */
+export const getStyleElement = (): HTMLStyleElement | null => styleElement.value;
