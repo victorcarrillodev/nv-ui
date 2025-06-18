@@ -1,3 +1,11 @@
+## <small>0.25.6 (2025-06-18)</small>
+
+* chore: release v0.25.6 ([4ab523c](https://github.com/VictorManuelCarrillo/vue-ui/commit/4ab523c))
+* fix(Button): :bug: Se corrigen estilos ([d5097e6](https://github.com/VictorManuelCarrillo/vue-ui/commit/d5097e6))
+* docs(changelog): :memo: se sube changelog ([9bb65ea](https://github.com/VictorManuelCarrillo/vue-ui/commit/9bb65ea))
+
+
+
 ## <small>0.25.5 (2025-06-18)</small>
 
 * chore: release v0.25.5 ([5da30b7](https://github.com/VictorManuelCarrillo/vue-ui/commit/5da30b7))
