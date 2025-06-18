@@ -1,3 +1,17 @@
+## <small>0.25.4 (2025-06-18)</small>
+
+* chore: release v0.25.4 ([03cfc49](https://github.com/VictorManuelCarrillo/vue-ui/commit/03cfc49))
+* refactor(createTheme): :label: se editan tipos ([234045b](https://github.com/VictorManuelCarrillo/vue-ui/commit/234045b))
+* refactor(src): :construction: Se refactorizan archivos ([54e1afd](https://github.com/VictorManuelCarrillo/vue-ui/commit/54e1afd))
+* fix(Button): :bug: se corrigen estilos ([2a3c2e5](https://github.com/VictorManuelCarrillo/vue-ui/commit/2a3c2e5))
+* fix(button): :bug: Se hacen pruebas ([e5e084a](https://github.com/VictorManuelCarrillo/vue-ui/commit/e5e084a))
+* feat(dependecias): :package: se agrega el paquete csstype ([9c3ac1c](https://github.com/VictorManuelCarrillo/vue-ui/commit/9c3ac1c))
+* feat(imports): :sparkles: se agregan importaciones ([8eb4676](https://github.com/VictorManuelCarrillo/vue-ui/commit/8eb4676))
+* style(theme): :lipstick: se corrigen estilos ([f69c0e9](https://github.com/VictorManuelCarrillo/vue-ui/commit/f69c0e9))
+* docs(changelog): :memo: se sube changelog ([caf9304](https://github.com/VictorManuelCarrillo/vue-ui/commit/caf9304))
+
+
+
 ## <small>0.25.3 (2025-06-16)</small>
 
 * chore: release v0.25.3 ([8fa6901](https://github.com/VictorManuelCarrillo/vue-ui/commit/8fa6901))
