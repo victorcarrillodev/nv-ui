@@ -1,12 +1,15 @@
+import type { Properties as CSSProperties } from 'csstype';
+
+type NestedStyles = {
+  [K in `:${string}` | `@media ${string}`]?: StyleObject;
+};
+
+export type StyleObject = CSSProperties<string | number> & NestedStyles;
 /**
  * Tipos mejorados para estilos dinámicos
  */
 export type StyleValue = string | number | null | unknown | undefined | Record<string, string>;
 export type StyleNestedObject = Record<string, string | number>;
-
-export interface StyleObject {
-  [key: string]: StyleValue;
-}
 
 export interface StyleCacheItem {
   cssText: string;

@@ -1,29 +1,37 @@
 <script setup lang="ts">
 import ThemeProvider from '@/theme/providers/ThemeProvider.vue';
 import { NvButton } from '@/components/Button';
-import CssBaseline from '@/components/BaseLine/CssBaseline.vue';
+// import CssBaseline from '@/components/BaseLine/CssBaseline.vue';
 import ThemedMove from './ThemedMove.vue';
-import TestResponsive from '@/components/TestResponsive.vue';
-import IconCheck from '@/icons/IconCheck.vue';
+// import TestResponsive from '@/components/TestResponsive.vue';
+// import IconCheck from '@/icons/IconCheck.vue';
 </script>
 
 <template>
   <ThemeProvider>
+    <ThemedMove/>
+    <NvButton color="secondary">ola </NvButton>
+    <NvButton color="primary">ola </NvButton>
+    <NvButton color="error">ola </NvButton>
+    <NvButton color="warning">ola </NvButton>
+    <NvButton color="info">ola </NvButton>
+  </ThemeProvider>
+</template>
+<!-- <template>
+  <ThemeProvider>
     <CssBaseline />
     <TestResponsive/>
-    <ThemedMove/>
     <br><br><br>
     <section style="margin: 1rem;">
       <h1>Buttons</h1>
-      <!-- ?color section -->
-      <section>
+       <section>
         <h3>colors</h3>
         <NvButton variant="filled">primary</NvButton>
         <NvButton variant="outlined">secondary</NvButton>
         <NvButton variant="text">success</NvButton>
-      </section>
-      <!-- ?color section -->
-      <section>
+      </section> -->
+<!-- ?color section -->
+<!-- <section>
         <h3>colors</h3>
         <NvButton color="primary" >primary</NvButton>
         <NvButton color="secondary">secondary</NvButton>
@@ -31,51 +39,51 @@ import IconCheck from '@/icons/IconCheck.vue';
         <NvButton color="info">info</NvButton>
         <NvButton color="error">error</NvButton>
         <NvButton color="warning">warning</NvButton>
-      </section>
+      </section> -->
 
-      <!-- ?component section -->
-      <section>
+<!-- ?component section -->
+<!-- <section>
         <h3>component</h3>
         <NvButton component="a">component a</NvButton>
         <NvButton component="div">component div</NvButton>
         <NvButton component="button">component button</NvButton>
-      </section>
+      </section> -->
 
-      <!-- ?disabled section -->
-      <section>
+<!-- ?disabled section -->
+<!-- <section>
         <h3>disabled</h3>
         <NvButton :disabled="true">disabled</NvButton>
         <NvButton>active</NvButton>
-      </section>
+      </section> -->
 
-      <!-- ?disabled elevation section -->
-      <section>
+<!-- ?disabled elevation section -->
+<!-- <section>
          <h3>disabled elevation</h3>
         <NvButton disabledElevation>disabled elevation</NvButton>
         <NvButton>elevation</NvButton>
-       </section>
+       </section> -->
 
-       <!-- ?disabled ripple section -->
-       <section>
+<!-- ?disabled ripple section -->
+<!-- <section>
          <h3>disabled ripple</h3>
          <NvButton :disableRipple="true">disable ripple</NvButton>
          <NvButton>ripple</NvButton>
-       </section>
+       </section> -->
 
-       <!-- ?icons section -->
-       <section>
+<!-- ?icons section -->
+<!-- <section>
          <h3>icons</h3>
          <NvButton >EndIcon</NvButton>
         <NvButton >Start Icon</NvButton>
         <NvButton :startIcon={IconCheck} :endIcon={IconCheck}>Start & end Icon</NvButton>
-       </section>
+       </section> -->
 
-       <!-- ?icons section -->
-       <section>
-         <h3>full width</h3>
-         <NvButton :fullWidth="true">full width</NvButton>
-        <NvButton>normal width</NvButton>
-       </section>
-    </section>
-  </ThemeProvider>
-</template>
+<!-- ?icons section -->
+<!-- <section> -->
+<!-- <h3>full width</h3> -->
+<!-- <NvButton :fullWidth="true">full width</NvButton> -->
+<!-- <NvButton>normal width</NvButton> -->
+<!-- </section> -->
+<!-- </section> -->
+<!-- </ThemeProvider> -->
+<!-- </template> -->
