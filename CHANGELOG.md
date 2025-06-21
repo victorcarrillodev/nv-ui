@@ -1,3 +1,10 @@
+## <small>0.25.8 (2025-06-21)</small>
+
+* chore: release v0.25.8 ([8b42623](https://github.com/VictorManuelCarrillo/vue-ui/commit/8b42623))
+* docs(changelog): :memo: se sube changelog ([195c132](https://github.com/VictorManuelCarrillo/vue-ui/commit/195c132))
+
+
+
 ## <small>0.25.7 (2025-06-18)</small>
 
 * chore: release v0.25.7 ([225bf63](https://github.com/VictorManuelCarrillo/vue-ui/commit/225bf63))
