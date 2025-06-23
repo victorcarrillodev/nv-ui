@@ -6,11 +6,19 @@
   "main": "./dist/nv-ui.umd.js",
   "module": "./dist/nv-ui.es.js",
   "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/nv-ui.es.js",
-      "require": "./dist/nv-ui.umd.js",
-      "types": "./dist/types/index.d.ts"
+      "types": "./dist/types/index.d.ts",
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/nv-ui.es.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/nv-ui.umd.js"
+      },
+      "default": "./dist/nv-ui.es.js"
     }
   },
   "files": [
