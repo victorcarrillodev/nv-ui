@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ThemeProvider from '@/theme/providers/ThemeProvider.vue';
-import { NvButton } from '@/core/Button';
+import NvButton from '@/core/Button/NvButton.vue';
 import CssBaseline from '@/core/BaseLine/CssBaseline.vue';
 import ThemedMove from './ThemedMove.vue';
 import TestResponsive from '@/core/TestResponsive.vue';
