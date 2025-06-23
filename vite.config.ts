@@ -2,74 +2,44 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import dts from 'vite-plugin-dts'
 
 /**
- * Configuración principal de Vite para proyectos Vue
- * @see https://vitejs.dev/config/
+ * Configuración de Vite para empaquetar una librería Vue 3
  */
 export default defineConfig({
-  optimizeDeps: {
-    include: [
-      'vue',
-      '@vueuse/core', // Si lo usas
-      'lodash-es' // Para árbol sacudido
-    ]
-  },
-  build: {
-    cssCodeSplit: true,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vue: ['vue', 'vue-router'],
-          theme: ['@/theme']
-        }
-      }
-    }
-  },
-  /**
-   * Plugins utilizados en el proyecto
-   * @property {Plugin} vue - Plugin oficial de Vue
-   * @property {Plugin} vueDevTools - Integración con Vue DevTools
-   */
   plugins: [
-    vue(), // Plugin esencial para soporte de SFC (.vue)
-    vueDevTools(), // Herramientas de desarrollo mejoradas
+    vue(),
+    vueDevTools(),
+    dts({
+      entryRoot: 'src',
+      outDir: 'dist/types',
+      tsconfigPath: './tsconfig.json'
+    })
   ],
 
-  /**
-   * Configuración de resolución de módulos
-   */
-  resolve: {
-    /**
-     * Alias para importaciones
-     * @property {string} '@' - Ruta corta para el directorio src/
-     * @property {string} 'vue' - Resolución explícita del paquete ESM
-     */
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)), // Transforma URL a ruta de sistema de archivos
-      'vue': 'vue/dist/vue.esm-bundler.js' // Usa versión ESM con características de compilación
+  build: {
+    lib: {
+      entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+      name: 'NvUI',
+      formats: ['es', 'umd'],
+      fileName: (format) => `nv-ui.${format}.js`
     },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    },
+    cssCodeSplit: true
   },
 
-  /**
-   * Configuraciones adicionales recomendadas (opcionales):
-   *
-   * server: {
-   *   port: 3000, // Puerto personalizado
-   *   open: true // Abrir navegador automáticamente
-   * },
-   *
-   * css: {
-   *   preprocessorOptions: {
-   *     scss: {
-   *       additionalData: `@import "@/assets/styles/_variables.scss";`
-   *     }
-   *   }
-   * },
-   *
-   * build: {
-   *   outDir: 'dist',
-   *   assetsDir: 'assets'
-   * }
-   */
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'vue': 'vue/dist/vue.esm-bundler.js'
+    }
+  }
 })

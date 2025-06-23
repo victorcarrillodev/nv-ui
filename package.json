@@ -3,16 +3,27 @@
   "version": "0.25.11",
   "private": false,
   "type": "module",
+  "main": "./dist/nv-ui.umd.js",
+  "module": "./dist/nv-ui.es.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/nv-ui.es.js",
+      "require": "./dist/nv-ui.umd.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "prepare": "husky",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "release": "bumpp --commit --push --tag",
@@ -49,6 +60,7 @@
     "start-server-and-test": "^2.0.10",
     "typescript": "~5.8.0",
     "vite": "^6.2.1",
+    "vite-plugin-dts": "^4.5.4",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vitest": "^3.0.8",
     "vue-tsc": "^2.2.8"
@@ -60,17 +72,10 @@
       "esbuild"
     ]
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "peerDependencies": {
     "vue": "^3.3.0 || ^3.4.0 || ^3.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

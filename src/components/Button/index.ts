@@ -1,4 +1,1 @@
-import NvButton from './NvButton.vue';
-
-export { NvButton };
-export default NvButton;
+export * from '@/components/Button';
