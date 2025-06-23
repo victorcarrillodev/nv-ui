@@ -15,7 +15,7 @@ import IconCheck from '@/icons/IconCheck.vue';
     <br><br><br>
     <section style="margin: 1rem;">
       <h1>Buttons</h1>
-      <!-- ?color section -->
+      <!-- ?color section  -->
       <section>
         <h3>colors</h3>
         <NvButton variant="filled">primary</NvButton>
