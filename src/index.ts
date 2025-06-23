@@ -1,4 +1,4 @@
 // Entrada principal de la libreria
-export * from './components/Button';
+export * from './components';
 
-export * from './theme/providers/ThemeProvider.vue';
+// export * from './theme/providers/ThemeProvider.vue';
