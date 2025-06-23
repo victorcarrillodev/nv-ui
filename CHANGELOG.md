@@ -1,3 +1,20 @@
+## <small>0.27.1 (2025-06-23)</small>
+
+* chore: release v0.27.1 ([d9e2e4c](https://github.com/victorcarrillodev/nv-ui/commit/d9e2e4c))
+* fix(chore): :bug: Se cambia nombre del paquete ([5b58f60](https://github.com/victorcarrillodev/nv-ui/commit/5b58f60))
+* fix(chore): :bug: Se cambia nombre del proyecto ([c99a423](https://github.com/victorcarrillodev/nv-ui/commit/c99a423))
+* fix(chore): :bug: Se corrigen errores menores ([d034392](https://github.com/victorcarrillodev/nv-ui/commit/d034392))
+* fix(chore): :bug: Se corrigen problemas ([6aebc5b](https://github.com/victorcarrillodev/nv-ui/commit/6aebc5b))
+* fix(chore): :bug: Se corrigen problemas menores ([ec0e848](https://github.com/victorcarrillodev/nv-ui/commit/ec0e848))
+* fix(chore): :bug: Se hacen cambios menores ([74da654](https://github.com/victorcarrillodev/nv-ui/commit/74da654))
+* fix(chore): :bug: Se hacen cambios menores ([450205e](https://github.com/victorcarrillodev/nv-ui/commit/450205e))
+* fix(npm): :bug: Se arreglan errores ([659f722](https://github.com/victorcarrillodev/nv-ui/commit/659f722))
+* fix(package): :bug: Se cambia el nombre del proyrcto ([eff2866](https://github.com/victorcarrillodev/nv-ui/commit/eff2866))
+* fix(package): :bug: se corrigen importaciones de paquete ([c12af25](https://github.com/victorcarrillodev/nv-ui/commit/c12af25))
+* docs(changelog): :memo: se sube changelog ([0d9badd](https://github.com/victorcarrillodev/nv-ui/commit/0d9badd))
+
+
+
 ## 0.27.0 (2025-06-23)
 
 * chore: release v0.26.0 ([e75d46d](https://github.com/victorcarrillodev/nv-ui/commit/e75d46d))
