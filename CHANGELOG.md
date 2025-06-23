@@ -1,3 +1,11 @@
+## <small>0.27.2 (2025-06-23)</small>
+
+* chore: release v0.27.2 ([ac61db3](https://github.com/victorcarrillodev/nv-ui/commit/ac61db3))
+* fix(test): :bug: se corrige playground ([cdf6efc](https://github.com/victorcarrillodev/nv-ui/commit/cdf6efc))
+* docs(changelog): :memo: se sube changelog ([877a17a](https://github.com/victorcarrillodev/nv-ui/commit/877a17a))
+
+
+
 ## <small>0.27.1 (2025-06-23)</small>
 
 * chore: release v0.27.1 ([d9e2e4c](https://github.com/victorcarrillodev/nv-ui/commit/d9e2e4c))
