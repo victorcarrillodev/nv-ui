@@ -1,7 +1,7 @@
 {
-  "name": "vn-ui",
+  "name": "vnui",
   "version": "0.27.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "main": "./dist/nv-ui.umd.js",
   "module": "./dist/nv-ui.es.js",
