@@ -8,12 +8,14 @@ import IconCheck from '@/icons/IconCheck.vue';
 </script>
 
 <template>
+  <NvButton variant="filled">primary</NvButton>
+
   <ThemeProvider>
     <CssBaseline />
-    <TestResponsive/>
-    <ThemedMove/>
-    <br><br><br>
-    <section style="margin: 1rem;">
+    <TestResponsive />
+    <ThemedMove />
+    <br /><br /><br />
+    <section style="margin: 1rem">
       <h1>Buttons</h1>
       <!-- ?color section  -->
       <section>
@@ -25,7 +27,7 @@ import IconCheck from '@/icons/IconCheck.vue';
       <!-- ?color section -->
       <section>
         <h3>colors</h3>
-        <NvButton color="primary" >primary</NvButton>
+        <NvButton color="primary">primary</NvButton>
         <NvButton color="secondary">secondary</NvButton>
         <NvButton color="success">success</NvButton>
         <NvButton color="info">info</NvButton>
@@ -50,32 +52,32 @@ import IconCheck from '@/icons/IconCheck.vue';
 
       <!-- ?disabled elevation section -->
       <section>
-         <h3>disabled elevation</h3>
+        <h3>disabled elevation</h3>
         <NvButton disabledElevation>disabled elevation</NvButton>
         <NvButton>elevation</NvButton>
-       </section>
+      </section>
 
-       <!-- ?disabled ripple section -->
-       <section>
-         <h3>disabled ripple</h3>
-         <NvButton :disableRipple="true">disable ripple</NvButton>
-         <NvButton>ripple</NvButton>
-       </section>
+      <!-- ?disabled ripple section -->
+      <section>
+        <h3>disabled ripple</h3>
+        <NvButton :disableRipple="true">disable ripple</NvButton>
+        <NvButton>ripple</NvButton>
+      </section>
 
-       <!-- ?icons section -->
-       <section>
-         <h3>icons</h3>
-         <NvButton >EndIcon</NvButton>
-        <NvButton >Start Icon</NvButton>
-        <NvButton :startIcon={IconCheck} :endIcon={IconCheck}>Start & end Icon</NvButton>
-       </section>
+      <!-- ?icons section -->
+      <section>
+        <h3>icons</h3>
+        <NvButton>EndIcon</NvButton>
+        <NvButton>Start Icon</NvButton>
+        <NvButton :startIcon="{ IconCheck }" :endIcon="{ IconCheck }">Start & end Icon</NvButton>
+      </section>
 
-       <!-- ?icons section -->
-       <section>
-         <h3>full width</h3>
-         <NvButton :fullWidth="true">full width</NvButton>
+      <!-- ?icons section -->
+      <section>
+        <h3>full width</h3>
+        <NvButton :fullWidth="true">full width</NvButton>
         <NvButton>normal width</NvButton>
-       </section>
+      </section>
     </section>
   </ThemeProvider>
 </template>
