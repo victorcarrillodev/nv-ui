@@ -4,17 +4,16 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import dts from 'vite-plugin-dts'
 
-/**
- * Configuración de Vite para empaquetar una librería Vue 3
- */
 export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
     dts({
-      entryRoot: 'src',
-      outDir: 'dist/types',
-      tsconfigPath: './tsconfig.json'
+      // Elimina 'entryRoot' si no es necesario dividir por carpetas internas
+      outDir: 'dist',
+      tsconfigPath: './tsconfig.json',
+      insertTypesEntry: true, // Agrega "types": "./dist/index.d.ts" automáticamente si falta
+      copyDtsFiles: true // Copia todos los archivos .d.ts necesarios
     })
   ],
 
@@ -22,8 +21,8 @@ export default defineConfig({
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
       name: 'NvUI',
-      formats: ['es', 'umd'],
-      fileName: (format) => `nv-ui.${format}.js`
+      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format}.js`
     },
     rollupOptions: {
       external: ['vue'],
@@ -39,7 +38,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      'vue': 'vue/dist/vue.esm-bundler.js'
+      vue: 'vue/dist/vue.esm-bundler.js'
     }
   }
 })
