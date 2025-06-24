@@ -1,3 +1,11 @@
+## <small>0.27.4 (2025-06-24)</small>
+
+* chore: release v0.27.4 ([a373766](https://github.com/victorcarrillodev/nv-ui/commit/a373766))
+* fix(theme): :rotating_light: Se corrigen problemas del theme ([e2417b0](https://github.com/victorcarrillodev/nv-ui/commit/e2417b0))
+* docs(changelog): :memo: se sube changelog ([7cdcd32](https://github.com/victorcarrillodev/nv-ui/commit/7cdcd32))
+
+
+
 ## <small>0.27.3 (2025-06-24)</small>
 
 * chore: release v0.27.3 ([16509d4](https://github.com/victorcarrillodev/nv-ui/commit/16509d4))
