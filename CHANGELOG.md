@@ -1,3 +1,11 @@
+## <small>0.27.3 (2025-06-24)</small>
+
+* chore: release v0.27.3 ([16509d4](https://github.com/victorcarrillodev/nv-ui/commit/16509d4))
+* chore(package): :bug: Se corrigen temas de empaquetado ([cfb1def](https://github.com/victorcarrillodev/nv-ui/commit/cfb1def))
+* docs(changelog): :memo: se sube changelog ([eff6371](https://github.com/victorcarrillodev/nv-ui/commit/eff6371))
+
+
+
 ## <small>0.27.2 (2025-06-23)</small>
 
 * chore: release v0.27.2 ([ac61db3](https://github.com/victorcarrillodev/nv-ui/commit/ac61db3))
