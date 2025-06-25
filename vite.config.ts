@@ -17,7 +17,6 @@ export default defineConfig({
       cleanVueFileName: true
     })
   ],
-
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
@@ -35,7 +34,6 @@ export default defineConfig({
     },
     cssCodeSplit: true
   },
-
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

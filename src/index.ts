@@ -1,2 +1,2 @@
 // Entrada principal de la libreria
-export * from './components';
+export { default as NvButton } from './components/Button/NvButton.vue';

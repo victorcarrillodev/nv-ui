@@ -15,9 +15,7 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "sideEffects": false,
   "scripts": {
     "dev": "vite",
@@ -75,9 +73,6 @@
   },
   "packageManager": "pnpm@10.6.5",
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "cypress",
-      "esbuild"
-    ]
+    "onlyBuiltDependencies": ["cypress", "esbuild"]
   }
 }
