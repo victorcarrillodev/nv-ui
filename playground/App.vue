@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ThemeProvider from '@/theme/providers/ThemeProvider.vue';
-import NvButton from '@/core/Button/NvButton.vue';
-import CssBaseline from '@/core/BaseLine/CssBaseline.vue';
+import NvButton from '@/components/Button/NvButton.vue';
+import CssBaseline from '@/components/BaseLine/CssBaseline.vue';
 import ThemedMove from './ThemedMove.vue';
-import TestResponsive from '@/core/TestResponsive.vue';
+import TestResponsive from '@/components/TestResponsive.vue';
 import IconCheck from '@/icons/IconCheck.vue';
 </script>
 

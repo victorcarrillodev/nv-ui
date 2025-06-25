@@ -1,4 +1,14 @@
 {
+  "compilerOptions": {
+    "module": "NodeNext",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+    "composite": true,
+    "skipLibCheck": true,
+    "strict": true
+  },
   "files": [],
   "references": [
     {
@@ -10,8 +20,5 @@
     {
       "path": "./tsconfig.vitest.json"
     }
-  ],
-  "compilerOptions": {
-    "module": "NodeNext"
-  }
+  ]
 }
