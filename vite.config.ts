@@ -9,11 +9,12 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     dts({
-      // Elimina 'entryRoot' si no es necesario dividir por carpetas internas
       outDir: 'dist',
       tsconfigPath: './tsconfig.json',
-      insertTypesEntry: true, // Agrega "types": "./dist/index.d.ts" automáticamente si falta
-      copyDtsFiles: true // Copia todos los archivos .d.ts necesarios
+      insertTypesEntry: true,
+      copyDtsFiles: true,
+      rollupTypes: true,
+      cleanVueFileName: true
     })
   ],
 
