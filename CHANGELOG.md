@@ -1,3 +1,11 @@
+## <small>0.27.8 (2025-06-25)</small>
+
+* chore: release v0.27.8 ([c782d7e](https://github.com/victorcarrillodev/nv-ui/commit/c782d7e))
+* fix(package): :bug: Se hacen pruebas ([6419a06](https://github.com/victorcarrillodev/nv-ui/commit/6419a06))
+* docs(changelog): :memo: se sube changelog ([f69b3de](https://github.com/victorcarrillodev/nv-ui/commit/f69b3de))
+
+
+
 ## <small>0.27.7 (2025-06-25)</small>
 
 * chore: release v0.27.7 ([77247bf](https://github.com/victorcarrillodev/nv-ui/commit/77247bf))
