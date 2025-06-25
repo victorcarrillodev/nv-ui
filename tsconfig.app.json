@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["src", "src/**/*.vue", "src/shims.d.ts"],
+  "include": ["env.d.ts","src", "src/**/*.vue", "src/shims.d.ts"],
   // "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "playground"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {

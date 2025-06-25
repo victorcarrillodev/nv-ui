@@ -1,1 +1,3 @@
-export { default as NvButton } from './Button/NvButton.vue';
+import NvButton from './Button/NvButton.vue';
+
+export { NvButton };
