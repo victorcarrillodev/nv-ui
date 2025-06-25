@@ -1,6 +1,6 @@
 {
   "name": "@n-v/vue-ui",
-  "version": "0.27.8",
+  "version": "0.27.9",
   "private": false,
   "type": "module",
   "main": "./dist/index.cjs.js",
