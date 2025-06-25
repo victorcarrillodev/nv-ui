@@ -1,3 +1,25 @@
+## <small>0.27.7 (2025-06-25)</small>
+
+* chore: release v0.27.7 ([77247bf](https://github.com/victorcarrillodev/nv-ui/commit/77247bf))
+* fix(package): :bug: Se hacen test ([bc1afd5](https://github.com/victorcarrillodev/nv-ui/commit/bc1afd5))
+
+
+
+## <small>0.27.6 (2025-06-24)</small>
+
+* chore: release v0.27.6 ([347a9de](https://github.com/victorcarrillodev/nv-ui/commit/347a9de))
+* fix(package): :bug: Se corrigen exportaciones ([7579320](https://github.com/victorcarrillodev/nv-ui/commit/7579320))
+
+
+
+## <small>0.27.5 (2025-06-24)</small>
+
+* chore: release v0.27.5 ([8295834](https://github.com/victorcarrillodev/nv-ui/commit/8295834))
+* fix(package): :bug: Se relaizan pruebas ([c133ce5](https://github.com/victorcarrillodev/nv-ui/commit/c133ce5))
+* docs(changelog): :memo: se sube changelog ([c1b682b](https://github.com/victorcarrillodev/nv-ui/commit/c1b682b))
+
+
+
 ## <small>0.27.4 (2025-06-24)</small>
 
 * chore: release v0.27.4 ([a373766](https://github.com/victorcarrillodev/nv-ui/commit/a373766))
