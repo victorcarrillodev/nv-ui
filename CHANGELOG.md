@@ -1,3 +1,11 @@
+## 0.28.0 (2025-06-26)
+
+* chore: release v0.28.0 ([206f36f](https://github.com/victorcarrillodev/nv-ui/commit/206f36f))
+* feat((styles): :sparkles: Se integra soporte ([8bf0882](https://github.com/victorcarrillodev/nv-ui/commit/8bf0882))
+* docs(changelog): :memo: se sube changelog ([5eb7a59](https://github.com/victorcarrillodev/nv-ui/commit/5eb7a59))
+
+
+
 ## <small>0.27.12 (2025-06-26)</small>
 
 * chore: release v0.27.12 ([c8286af](https://github.com/victorcarrillodev/nv-ui/commit/c8286af))
