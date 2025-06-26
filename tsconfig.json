@@ -1,24 +1,48 @@
+// {
+//   "compilerOptions": {
+//     "module": "NodeNext",
+//     "declaration": true,
+//     "emitDeclarationOnly": true,
+//     "declarationDir": "./dist",
+//     "outDir": "./dist",
+//     "composite": true,
+//     "skipLibCheck": true,
+//     "strict": true
+//   },
+//   "files": [],
+//   "references": [
+//     {
+//       "path": "./tsconfig.node.json"
+//     },
+//     {
+//       "path": "./tsconfig.app.json"
+//     },
+//     {
+//       "path": "./tsconfig.vitest.json"
+//     }
+//   ]
+// }
+
 {
   "compilerOptions": {
-    "module": "NodeNext",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationDir": "./dist",
     "outDir": "./dist",
-    "composite": true,
     "skipLibCheck": true,
-    "strict": true
-  },
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.vitest.json"
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
     }
-  ]
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
 }

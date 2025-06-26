@@ -11,8 +11,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/vue-ui.es.js",
       "require": "./dist/vue-ui.umd.js"
-    },
-    "./*": "./*"
+    }
   },
   "files": ["dist"],
   "sideEffects": false,

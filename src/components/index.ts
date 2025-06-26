@@ -1,14 +1,12 @@
-export { default as NvButton } from './Button/NvButton.vue';
-import NvButton from './Button/NvButton.vue';
-// ...otros componentes
-
-// Plugin de instalación global
 import type { App } from 'vue';
+import NvButton from './Button/NvButton.vue';
 
+// Puedes importar y registrar otros componentes aquí
 const components = {
   NvButton,
-  // ...otros componentes
 };
+
+export { NvButton };
 
 export default {
   install(app: App) {
