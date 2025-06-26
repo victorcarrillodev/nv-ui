@@ -1,3 +1,33 @@
+## <small>0.27.12 (2025-06-26)</small>
+
+* chore: release v0.27.12 ([c8286af](https://github.com/victorcarrillodev/nv-ui/commit/c8286af))
+* fix(package): :bug: Se hacen cambios en vite.config ([4199dba](https://github.com/victorcarrillodev/nv-ui/commit/4199dba))
+
+
+
+## <small>0.27.11 (2025-06-26)</small>
+
+* chore: release v0.27.11 ([4dc567a](https://github.com/victorcarrillodev/nv-ui/commit/4dc567a))
+* fix(package): :bug: Se hacen tests ([fc29af0](https://github.com/victorcarrillodev/nv-ui/commit/fc29af0))
+
+
+
+## <small>0.27.10 (2025-06-26)</small>
+
+* chore: release v0.27.10 ([20c3f3c](https://github.com/victorcarrillodev/nv-ui/commit/20c3f3c))
+* fix(package): :bug: Se hacen test ([ecf7e46](https://github.com/victorcarrillodev/nv-ui/commit/ecf7e46))
+
+
+
+## <small>0.27.9 (2025-06-25)</small>
+
+* chore: release v0.27.9 ([f06ac9c](https://github.com/victorcarrillodev/nv-ui/commit/f06ac9c))
+* fix(package): :bug: Se hacen test ([4bcd0f0](https://github.com/victorcarrillodev/nv-ui/commit/4bcd0f0))
+* fix(package): :bug: Se hacen tests ([d414597](https://github.com/victorcarrillodev/nv-ui/commit/d414597))
+* docs(changelog): :memo: se sube changelog ([4279bed](https://github.com/victorcarrillodev/nv-ui/commit/4279bed))
+
+
+
 ## <small>0.27.8 (2025-06-25)</small>
 
 * chore: release v0.27.8 ([c782d7e](https://github.com/victorcarrillodev/nv-ui/commit/c782d7e))
