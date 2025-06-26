@@ -198,6 +198,12 @@ watch(
   },
   { immediate: true, deep: true },
 );
+
+// import { onMounted } from 'vue';
+
+// onMounted(() => {
+//   console.log('NvButton mounted:', styleSelector.value, styles.value);
+// });
 </script>
 
 <template>
@@ -250,7 +256,7 @@ watch(
   </component>
 </template>
 
-<style scoped>
+<style>
 .NvButton {
   display: inline-flex;
   align-items: center;
