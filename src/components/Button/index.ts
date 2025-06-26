@@ -1,4 +1,6 @@
-import NvButton from './NvButton.vue';
+import type { DefineComponent } from 'vue';
+import type { ButtonProps } from './types';
+import NvButtonVue from './NvButton.vue';
 
-export { NvButton };
-export default NvButton;
+export const NvButton = NvButtonVue as DefineComponent<ButtonProps>;
+export type { ButtonProps };

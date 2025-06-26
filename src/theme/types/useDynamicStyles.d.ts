@@ -1,12 +1,17 @@
-/**
- * Tipos mejorados para estilos dinámicos
- */
-export type StyleValue = string | number | null | unknown | undefined | Record<string, string>;
-export type StyleNestedObject = Record<string, string | number>;
+import type * as CSS from 'csstype';
 
-export interface StyleObject {
-  [key: string]: StyleValue;
-}
+export type StyleValue = string | number | null | undefined;
+
+/**
+ * Tipado para objetos de estilos dinámicos, con soporte para pseudoclases como :hover, :focus, etc.
+ */
+export type StyleObject = {
+  [K in keyof CSS.Properties<string | number>]?: CSS.Properties<string | number>[K];
+} & {
+  [pseudoSelector in `:${string}`]?: {
+    [K in keyof CSS.Properties<string | number>]?: CSS.Properties<string | number>[K];
+  };
+};
 
 export interface StyleCacheItem {
   cssText: string;
@@ -14,9 +19,9 @@ export interface StyleCacheItem {
 }
 
 export interface DynamicStylesAPI {
-  updateStyles: (selector: string, styles: StyleObject) => void;
-  resetDynamicStyles: () => void;
-  hasStyle: (selector: string) => boolean;
-  getCacheSize: () => number;
-  getStyleElement: () => HTMLStyleElement | null;
+  updateStyles(selector: string, styles: StyleObject): void;
+  resetDynamicStyles(): void;
+  hasStyle(selector: string): boolean;
+  getCacheSize(): number;
+  getStyleElement(): HTMLStyleElement | null;
 }

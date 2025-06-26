@@ -1,22 +1,9 @@
-/**
- * Converts a string on camelCase to kebab-case.
- * Example: "backgroundColor" -> "background-color"
- */
-
 export function toKebabCase(str: string): string {
   return str
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2') // Insert hyphen between lowercase/number and uppercase.
-    .replace(/[\s_]+/g, '-') // Converts spaces and underscores to hyphens.
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
     .toLowerCase();
 }
-
-/**
- * Converts all object's keys (and sub objects) to kebab-case.
- * Doesn't transform arrays or primitive values
- *
- * @param obj Object that can have keys in camelCase
- * @returns New object with keys in kebab-case
- */
 
 export function convertKeysToKebabCase<T = unknown>(obj: T): T {
   if (Array.isArray(obj)) {
