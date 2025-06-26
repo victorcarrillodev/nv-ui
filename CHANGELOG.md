@@ -1,3 +1,11 @@
+## <small>0.28.1 (2025-06-26)</small>
+
+* chore: release v0.28.1 ([db5d5b9](https://github.com/victorcarrillodev/nv-ui/commit/db5d5b9))
+* fix(button): :bug: Se hacen test para ripple ([dccbff0](https://github.com/victorcarrillodev/nv-ui/commit/dccbff0))
+* docs(changelog): :memo: se sube changelog ([860375d](https://github.com/victorcarrillodev/nv-ui/commit/860375d))
+
+
+
 ## 0.28.0 (2025-06-26)
 
 * chore: release v0.28.0 ([206f36f](https://github.com/victorcarrillodev/nv-ui/commit/206f36f))
