@@ -1,2 +1,2 @@
-export { NvButton } from './components';
-// Entrada principal de la libreria
+export * from './components';
+export { default } from './components';
