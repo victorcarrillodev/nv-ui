@@ -29,7 +29,7 @@ export default defineConfig({
         exports: 'named'
       }
     },
-    cssCodeSplit: true
+    cssCodeSplit: false
   },
   resolve: {
     alias: {
