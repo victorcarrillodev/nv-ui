@@ -230,7 +230,8 @@ watch(
     </transition-group>
   </component>
 </template>
-<style>
+
+<style scoped>
 .NvButton {
   display: inline-flex;
   align-items: center;
