@@ -1,10 +1,2 @@
-import type { App } from 'vue';
-import { NvButton } from './Button';
-
-export { NvButton };
-
-export default {
-  install(app: App) {
-    app.component('NvButton', NvButton);
-  },
-};
+export { NvButton } from './Button';
+// más componentes luego...
