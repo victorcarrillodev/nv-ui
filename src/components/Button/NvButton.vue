@@ -195,6 +195,7 @@ watch(
     :disabled="!props.href && disabled"
     role="button"
     @click="createRipple"
+    style="position: relative; overflow: hidden"
   >
     <span v-if="showStartIcon" class="NvButton__start-icon">
       <component v-if="!loading" :is="startIcon" />
@@ -231,7 +232,7 @@ watch(
   </component>
 </template>
 
-<style scoped>
+<style>
 .NvButton {
   display: inline-flex;
   align-items: center;
