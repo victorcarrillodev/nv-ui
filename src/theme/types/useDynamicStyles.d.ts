@@ -3,14 +3,18 @@ import type * as CSS from 'csstype';
 export type StyleValue = string | number | null | undefined;
 
 /**
- * Tipado para objetos de estilos dinámicos, con soporte para pseudoclases como :hover, :focus, etc.
+ * Tipado para objetos de estilos dinámicos, con soporte para:
+ * - propiedades CSS
+ * - pseudoclases (':hover', etc.)
+ * - selectores arbitrarios ('.my-class', '#id', etc.)
  */
 export type StyleObject = {
   [K in keyof CSS.Properties<string | number>]?: CSS.Properties<string | number>[K];
 } & {
-  [pseudoSelector in `:${string}`]?: {
-    [K in keyof CSS.Properties<string | number>]?: CSS.Properties<string | number>[K];
-  };
+  [pseudo in `:${string}`]?: StyleObject;
+} & {
+  // ==== Índice genérico: permite cualquier selector de nivel superior ====
+  [selector: string]: StyleObject | StyleValue | undefined;
 };
 
 export interface StyleCacheItem {

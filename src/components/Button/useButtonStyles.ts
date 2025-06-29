@@ -50,12 +50,7 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
         Object.assign(base, {
           backgroundColor: palette.main,
           color: palette.contrastText,
-          //! ya funciona
-          //           ':hover': {
-          //   backgroundColor: 'red'
-          // }
         });
-
         if (!options.disabled.value) {
           Object.assign(hover, {
             backgroundColor: palette.light,
@@ -70,7 +65,6 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
           boxShadow: `inset 0 0 0 2px ${palette.main}`,
           color: palette.main,
         });
-
         if (!options.disabled.value) {
           Object.assign(hover, {
             backgroundColor: `${palette.main}15`,
@@ -86,7 +80,6 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
           boxShadow: 'none',
           color: palette.main,
         });
-
         if (!options.disabled.value) {
           Object.assign(hover, {
             color: palette.light,
@@ -100,6 +93,39 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
     if (Object.keys(hover).length > 0) {
       final[':hover'] = convertKeysToKebabCase(hover);
     }
+
+    // estructura base de clases (únicas por hash)
+    const cls = options.className.value as string;
+    final[cls] = {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'relative',
+    };
+    final[`${cls}--loading`] = { pointerEvents: 'none' };
+    final[`${cls}__start-icon`] = {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 'inherit',
+      lineHeight: '1',
+      marginRight: '0.5em',
+    };
+    final[`${cls}__end-icon`] = {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 'inherit',
+      lineHeight: '1',
+      marginLeft: '0.5em',
+    };
+    final[`${cls}__center-loader`] = {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 'inherit',
+      lineHeight: '1',
+    };
 
     return final;
   });

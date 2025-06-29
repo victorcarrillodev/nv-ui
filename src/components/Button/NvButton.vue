@@ -1,19 +1,17 @@
 <script setup lang="ts">
-// Vue core
-import { computed, toRef, watch, getCurrentInstance, ref, h } from 'vue';
+// 1) Inyecta el CSS global UNA sola vez
+import { useButtonGlobalStyles } from './useButtonGlobalStyles';
+useButtonGlobalStyles();
 
-// Composables
+// 2) Resto de tu lógica
+import { computed, toRef, watch, getCurrentInstance, ref, h } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
 import { updateStyles } from '@/theme/composables/useDynamicStyles';
 import { useResponsiveProp } from '@/theme/composables/props/useResponsiveProp';
-
-// Utils
 import { currentBreakpoint, useBreakpointListener } from '@/utils/responsive';
 import { hashString } from '@/utils/hash';
-
-// Types
 import type { ButtonProps } from './types';
 import type { PaletteColor } from '@/theme/types/theme';
 
@@ -177,13 +175,10 @@ const buttonClasses = computed(() => [
   loading.value ? 'NvButton--loading' : '',
 ]);
 
-watch(
-  [styleSelector, styles, theme, currentBreakpoint],
-  () => {
-    updateStyles(styleSelector.value, styles.value);
-  },
-  { immediate: true, deep: true },
-);
+watch([styleSelector, styles, theme, currentBreakpoint], () => updateStyles(styleSelector.value, styles.value), {
+  immediate: true,
+  deep: true,
+});
 </script>
 
 <template>
@@ -230,56 +225,3 @@ watch(
     </transition-group>
   </component>
 </template>
-
-<style global>
-.NvButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.NvButton--loading {
-  pointer-events: none;
-}
-
-.NvButton__start-icon,
-.NvButton__end-icon,
-.NvButton__center-loader {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: inherit;
-  line-height: 1;
-}
-
-.NvButton__start-icon {
-  margin-right: 0.5em;
-}
-
-.NvButton__end-icon {
-  margin-left: 0.5em;
-}
-
-.NvButton__ripple {
-  position: absolute;
-  border-radius: 50%;
-  background-color: var(--ripple-color);
-  transform: scale(0);
-  animation: ripple-animation var(--ripple-duration) linear forwards;
-  width: var(--ripple-size);
-  height: var(--ripple-size);
-  left: var(--ripple-x);
-  top: var(--ripple-y);
-  opacity: 1;
-  pointer-events: none;
-  z-index: 0;
-}
-
-@keyframes ripple-animation {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-</style>
