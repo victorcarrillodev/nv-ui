@@ -23,28 +23,30 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
   const styles = computed<StyleObject>(() => {
     const palette = theme.value.palette[options.color.value] as PaletteColor;
 
+    // Estilos base
     const base: StyleObject = {
+      display: 'inline-flex',
       alignItems: 'center',
+      justifyContent: 'center',
+      position: 'relative',
+      // alignItems: 'center',
       border: 'none',
       borderRadius: RADIUS_MAP[options.shape.value],
       boxShadow: options.disabledElevation.value ? 'none' : (theme.value.shadows[+options.shadow.value] ?? 'none'),
       cursor: options.disabled.value ? 'not-allowed' : 'pointer',
-      display: 'inline-flex',
       fontWeight: 600,
       fontFamily: theme.value.typography.fontFamily,
-      justifyContent: 'center',
       margin: '0.1rem',
       opacity: options.disabled.value ? 0.5 : 1,
       overflow: 'hidden',
-      position: 'relative',
       transition: 'all 0.3s ease',
       verticalAlign: 'middle',
       width: options.fullWidth.value ? '100%' : 'auto',
       ...SIZE_MAP[options.size.value],
     };
 
+    // Estilos de hover
     const hover: StyleObject = {};
-
     switch (options.variant.value) {
       case 'filled':
         Object.assign(base, {
@@ -58,7 +60,6 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
           });
         }
         break;
-
       case 'outlined':
         Object.assign(base, {
           backgroundColor: 'transparent',
@@ -73,7 +74,6 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
           });
         }
         break;
-
       case 'text':
         Object.assign(base, {
           backgroundColor: 'transparent',
@@ -88,13 +88,13 @@ export const useButtonStyles = (options: ButtonStylesOptions, themeContext: Them
         break;
     }
 
+    // Convierte a kebab-case
     const final: StyleObject = convertKeysToKebabCase(base);
-
-    if (Object.keys(hover).length > 0) {
+    if (Object.keys(hover).length) {
       final[':hover'] = convertKeysToKebabCase(hover);
     }
 
-    // estructura base de clases (únicas por hash)
+    // ==== Estilos estructurales por selector hash ====
     const cls = options.className.value as string;
     final[cls] = {
       display: 'inline-flex',
