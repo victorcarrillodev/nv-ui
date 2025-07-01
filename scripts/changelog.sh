@@ -61,4 +61,4 @@ print_blue "3. Subiendo los cambio al repositorio"
 print_rainbow ">> Realizando push al repositorio"
 print_blue "-------------------------------"
 echo "\n\n"
-git push
+#git push
