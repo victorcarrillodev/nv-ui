@@ -2,6 +2,7 @@
 // Injection of global styles once
 import { useButtonGlobalStyles } from './useButtonGlobalStyles';
 useButtonGlobalStyles();
+
 // Imports and Vue Composables
 import { computed, toRef, watch, getCurrentInstance, ref, h } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
@@ -13,6 +14,7 @@ import { currentBreakpoint, useBreakpointListener } from '@/utils/responsive';
 import { hashString } from '@/utils/hash';
 import type { ButtonProps } from './types';
 import type { PaletteColor } from '@/theme/types/theme';
+
 // Spinner by default on loading state
 const DefaultSpinner = {
   name: 'DefaultSpinner',
@@ -20,8 +22,10 @@ const DefaultSpinner = {
     return h('span', { class: 'NvButton__default-spinner' });
   },
 };
+
 // Listen active breakpoints
 useBreakpointListener();
+
 // Define props and default values
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled',
@@ -42,10 +46,12 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   loadingIndicator: null,
   loadingPosition: 'center',
 });
+
 // State and current theme
 const themeContext = useTheme();
 const theme = toRef(themeContext, 'theme');
 const instanceId = getCurrentInstance()?.uid ?? Math.random().toString(36).slice(2);
+
 // Responsive reactive props
 const variant = useResponsiveProp(props.variant);
 const size = useResponsiveProp(props.size);
@@ -67,6 +73,7 @@ const target = computed(() => useResponsiveProp(props.target).value ?? '_self');
 const href = computed(() => useResponsiveProp(props.href).value ?? '');
 const disableRipple = computed(() => !!useResponsiveProp(props.disableRipple).value);
 const disabled = computed(() => useResponsiveProp(props.disabled).value || loading.value);
+
 // Internal state for ripple effect
 const ripples = ref<Array<{ id: number; x: number; y: number; size: number }>>([]);
 let nextRippleId = 0;
@@ -103,16 +110,12 @@ const getRippleColor = computed(() => {
   return `rgba(${r}, ${g}, ${b}, ${rippleOpacity.value})`;
 });
 
-// =====================
-// Control visual por posición del ícono
-// =====================
+// Visual control for icon position
 const showStartIcon = computed(() => (loading.value ? loadingPosition.value === 'start' : !!startIcon.value));
 const showEndIcon = computed(() => (loading.value ? loadingPosition.value === 'end' : !!endIcon.value));
 const showCenterIndicator = computed(() => loading.value && loadingPosition.value === 'center');
 
-// =====================
-// Hash único para inyectar estilos específicos
-// =====================
+// Unique has to inject specific styles
 const uniqueHash = computed(() => {
   return `NvButton-${hashString(
     JSON.stringify({
@@ -133,9 +136,7 @@ const uniqueHash = computed(() => {
 
 const styleSelector = computed(() => `.${uniqueHash.value}`);
 
-// =====================
-// Computed para estilos y clases
-// =====================
+// Computed for styles & classes
 const { styles } = useButtonStyles(
   {
     variant,
@@ -191,9 +192,8 @@ const buttonClasses = computed(() => [
   loading.value ? 'NvButton--loading' : '',
 ]);
 
-// =====================
 // Inyección dinámica de estilos únicos por combinación
-// =====================
+// Dynamic unique styles injection for combination
 watch(
   [styleSelector, styles, theme, currentBreakpoint],
   () => {
