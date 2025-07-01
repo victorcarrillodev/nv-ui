@@ -1,10 +1,10 @@
 <script setup lang="ts">
-// Injection of global styles once
+// === Global styles ===
 import { useButtonGlobalStyles } from './useButtonGlobalStyles';
 useButtonGlobalStyles();
 
-// Imports and Vue Composables
-import { computed, toRef, watch, getCurrentInstance, ref, h } from 'vue';
+// === Imports ===
+import { computed, toRef, watch, getCurrentInstance, h } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
 import { useButtonClasses } from './useButtonClasses';
@@ -12,10 +12,12 @@ import { updateStyles } from '@/theme/composables/useDynamicStyles';
 import { useResponsiveProp } from '@/theme/composables/props/useResponsiveProp';
 import { currentBreakpoint, useBreakpointListener } from '@/utils/responsive';
 import { hashString } from '@/utils/hash';
+import { useRipple } from './useRipple'; // 👈 nuevo import
+
 import type { ButtonProps } from './types';
 import type { PaletteColor } from '@/theme/types/theme';
 
-// Spinner by default on loading state
+// === Spinner por defecto ===
 const DefaultSpinner = {
   name: 'DefaultSpinner',
   render() {
@@ -23,10 +25,9 @@ const DefaultSpinner = {
   },
 };
 
-// Listen active breakpoints
 useBreakpointListener();
 
-// Define props and default values
+// === Props y responsive props ===
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled',
   size: 'md',
@@ -47,12 +48,10 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   loadingPosition: 'center',
 });
 
-// State and current theme
 const themeContext = useTheme();
 const theme = toRef(themeContext, 'theme');
 const instanceId = getCurrentInstance()?.uid ?? Math.random().toString(36).slice(2);
 
-// Responsive reactive props
 const variant = useResponsiveProp(props.variant);
 const size = useResponsiveProp(props.size);
 const color = useResponsiveProp(props.color);
@@ -65,7 +64,7 @@ const loadingIndicator = useResponsiveProp(props.loadingIndicator);
 const loadingPosition = useResponsiveProp(props.loadingPosition);
 const rippleDuration = useResponsiveProp(props.rippleDuration);
 const rippleOpacity = useResponsiveProp(props.rippleOpacity);
-const rippleColor = computed(() => useResponsiveProp(props.rippleColor).value ?? '');
+const rippleColorProp = useResponsiveProp(props.rippleColor);
 const component = computed(() => (props.href ? 'a' : useResponsiveProp(props.component).value));
 const startIcon = computed(() => useResponsiveProp(props.startIcon).value ?? null);
 const endIcon = computed(() => useResponsiveProp(props.endIcon).value ?? null);
@@ -74,35 +73,11 @@ const href = computed(() => useResponsiveProp(props.href).value ?? '');
 const disableRipple = computed(() => !!useResponsiveProp(props.disableRipple).value);
 const disabled = computed(() => useResponsiveProp(props.disabled).value || loading.value);
 
-// Internal state for ripple effect
-const ripples = ref<Array<{ id: number; x: number; y: number; size: number }>>([]);
-let nextRippleId = 0;
-
-const createRipple = (event: MouseEvent) => {
-  if (disabled.value || disableRipple.value) return;
-
-  const el = event.currentTarget as HTMLElement;
-  const diameter = Math.max(el.clientWidth, el.clientHeight);
-  const radius = diameter / 2;
-  const rect = el.getBoundingClientRect();
-  const x = event.clientX - rect.left - radius;
-  const y = event.clientY - rect.top - radius;
-  const id = nextRippleId++;
-
-  ripples.value.push({ id, x, y, size: diameter });
-
-  setTimeout(() => {
-    ripples.value = ripples.value.filter((r) => r.id !== id);
-  }, rippleDuration.value);
-};
-
-// Ripple color according to the theme or prop
-
+// === Cálculo del color del ripple ===
 const getRippleColor = computed(() => {
-  if (rippleColor.value) return rippleColor.value;
+  if (rippleColorProp.value) return rippleColorProp.value;
   const palette = theme.value.palette[color.value] as PaletteColor;
   if (variant.value === 'filled') return `rgba(0, 0, 0, ${rippleOpacity.value})`;
-
   const hex = palette.main.replace('#', '');
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
@@ -110,12 +85,21 @@ const getRippleColor = computed(() => {
   return `rgba(${r}, ${g}, ${b}, ${rippleOpacity.value})`;
 });
 
-// Visual control for icon position
+// === Composable para el ripple ===
+const { ripples, createRipple, rippleStyle } = useRipple({
+  disabled: disabled.value,
+  disableRipple: disableRipple.value,
+  duration: rippleDuration.value,
+  color: getRippleColor.value,
+  opacity: rippleOpacity.value,
+});
+
+// === Mostrar iconos e indicador ===
 const showStartIcon = computed(() => (loading.value ? loadingPosition.value === 'start' : !!startIcon.value));
 const showEndIcon = computed(() => (loading.value ? loadingPosition.value === 'end' : !!endIcon.value));
 const showCenterIndicator = computed(() => loading.value && loadingPosition.value === 'center');
 
-// Unique has to inject specific styles
+// === Generación de hash único para los estilos ===
 const uniqueHash = computed(() => {
   return `NvButton-${hashString(
     JSON.stringify({
@@ -136,7 +120,7 @@ const uniqueHash = computed(() => {
 
 const styleSelector = computed(() => `.${uniqueHash.value}`);
 
-// Computed for styles & classes
+// === Estilos y clases ===
 const { styles } = useButtonStyles(
   {
     variant,
@@ -158,7 +142,7 @@ const { styles } = useButtonStyles(
     loadingPosition,
     rippleDuration,
     rippleOpacity,
-    rippleColor,
+    rippleColor: getRippleColor,
     target,
   },
   themeContext,
@@ -184,7 +168,7 @@ const buttonClasses = computed(() => [
     loadingPosition,
     rippleDuration,
     rippleOpacity,
-    rippleColor,
+    rippleColor: getRippleColor,
     target,
   }).value,
   uniqueHash.value,
@@ -192,8 +176,7 @@ const buttonClasses = computed(() => [
   loading.value ? 'NvButton--loading' : '',
 ]);
 
-// Inyección dinámica de estilos únicos por combinación
-// Dynamic unique styles injection for combination
+// === Inyección de estilos ===
 watch(
   [styleSelector, styles, theme, currentBreakpoint],
   () => {
@@ -207,9 +190,9 @@ watch(
   <component
     :is="component"
     :class="buttonClasses"
-    :href="props.href"
-    :target="props.href ? props.target : undefined"
-    :disabled="!props.href && disabled"
+    :href="href"
+    :target="href ? target : undefined"
+    :disabled="!href && disabled"
     role="button"
     @click="createRipple"
   >
@@ -232,18 +215,7 @@ watch(
     </span>
 
     <transition-group name="ripple">
-      <span
-        v-for="r in ripples"
-        :key="r.id"
-        class="NvButton__ripple"
-        :style="{
-          '--ripple-x': `${r.x}px`,
-          '--ripple-y': `${r.y}px`,
-          '--ripple-size': `${r.size}px`,
-          '--ripple-color': getRippleColor,
-          '--ripple-duration': `${rippleDuration}ms`,
-        }"
-      />
+      <span v-for="r in ripples" :key="r.id" class="NvButton__ripple" :style="rippleStyle(r)" />
     </transition-group>
   </component>
 </template>
