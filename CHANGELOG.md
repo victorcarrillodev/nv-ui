@@ -1,3 +1,17 @@
+## <small>0.28.11 (2025-07-01)</small>
+
+* chore: release v0.28.11 ([ec3bcc6](https://github.com/victorcarrillodev/nv-ui/commit/ec3bcc6))
+* test(husky): :bug: Se hacen pruebas de changelog ([e39b2f4](https://github.com/victorcarrillodev/nv-ui/commit/e39b2f4))
+* test(husky): :bug: Se hacen test de pre-push ([5790703](https://github.com/victorcarrillodev/nv-ui/commit/5790703))
+* test(husky): :bug: Se hacen tests ([cd0f233](https://github.com/victorcarrillodev/nv-ui/commit/cd0f233))
+* test(package): :bug: Se hacen test en exports ([69387be](https://github.com/victorcarrillodev/nv-ui/commit/69387be))
+* refactor(button): :sparkles: Se separa la logica del ripple ([612f5e9](https://github.com/victorcarrillodev/nv-ui/commit/612f5e9))
+* docs(button): :memo: Se actualizan comentarios ([166ea7d](https://github.com/victorcarrillodev/nv-ui/commit/166ea7d))
+* docs(changelog): :memo: se sube changelog ([04c4348](https://github.com/victorcarrillodev/nv-ui/commit/04c4348))
+* docs(readme): :memo: Se actualiza readme.md ([bd55b14](https://github.com/victorcarrillodev/nv-ui/commit/bd55b14))
+
+
+
 ## <small>0.28.10 (2025-06-29)</small>
 
 * chore: release v0.28.10 ([a9a1ba0](https://github.com/victorcarrillodev/nv-ui/commit/a9a1ba0))
