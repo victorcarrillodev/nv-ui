@@ -1,4 +1,4 @@
-import CssBaseline from './CssBaseline.vue';
+import CssBaselineComponent from './CssBaseline.vue';
+import type { DefineComponent } from 'vue';
 
-export { CssBaseline };
-export default CssBaseline;
+export const CssBaseline = CssBaselineComponent as DefineComponent;

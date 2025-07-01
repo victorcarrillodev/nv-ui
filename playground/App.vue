@@ -2,8 +2,8 @@
 import ThemeProvider from '../src/theme/providers/ThemeProvider.vue';
 // import NvButton from '@/components/Button/NvButton.vue';
 // import CssBaseline from '@/components/BaseLine/CssBaseline.vue';
-// import ThemedMove from './ThemedMove.vue';
-// import TestResponsive from '@/components/TestResponsive.vue';
+import ThemedMove from './ThemedMove.vue';
+import TestResponsive from '../src/components/TestResponsive.vue';
 import IconCheck from '../src/icons/IconCheck.vue';
 import NvButton from '../src/components/Button/NvButton.vue'
 </script>
@@ -21,7 +21,7 @@ import NvButton from '../src/components/Button/NvButton.vue'
       <!-- ?color section  -->
       <section>
         <h3>colors</h3>
-        <NvButton variant="filled">primary</NvButton>
+        <NvButton variant="filled" shadow="8">primary</NvButton>
         <NvButton variant="outlined">secondary</NvButton>
         <NvButton variant="text">success</NvButton>
       </section>
