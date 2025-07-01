@@ -1,8 +1,9 @@
 <script setup lang="ts">
-// Injection of global styles once
+// 1) Inyecta el CSS global UNA sola vez
 import { useButtonGlobalStyles } from './useButtonGlobalStyles';
 useButtonGlobalStyles();
-// Imports and Vue Composables
+
+// 2) Resto de tu lógica
 import { computed, toRef, watch, getCurrentInstance, ref, h } from 'vue';
 import { useTheme } from '@/theme/composables/useTheme';
 import { useButtonStyles } from './useButtonStyles';
@@ -13,16 +14,16 @@ import { currentBreakpoint, useBreakpointListener } from '@/utils/responsive';
 import { hashString } from '@/utils/hash';
 import type { ButtonProps } from './types';
 import type { PaletteColor } from '@/theme/types/theme';
-// Spinner by default on loading state
+
 const DefaultSpinner = {
   name: 'DefaultSpinner',
   render() {
     return h('span', { class: 'NvButton__default-spinner' });
   },
 };
-// Listen active breakpoints
+
 useBreakpointListener();
-// Define props and default values
+
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled',
   size: 'md',
@@ -42,11 +43,11 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   loadingIndicator: null,
   loadingPosition: 'center',
 });
-// State and current theme
+
 const themeContext = useTheme();
 const theme = toRef(themeContext, 'theme');
 const instanceId = getCurrentInstance()?.uid ?? Math.random().toString(36).slice(2);
-// Responsive reactive props
+
 const variant = useResponsiveProp(props.variant);
 const size = useResponsiveProp(props.size);
 const color = useResponsiveProp(props.color);
@@ -63,17 +64,13 @@ const rippleColor = computed(() => useResponsiveProp(props.rippleColor).value ??
 const component = computed(() => (props.href ? 'a' : useResponsiveProp(props.component).value));
 const startIcon = computed(() => useResponsiveProp(props.startIcon).value ?? null);
 const endIcon = computed(() => useResponsiveProp(props.endIcon).value ?? null);
-const target = computed(() => useResponsiveProp(props.target).value ?? '_self');
-const href = computed(() => useResponsiveProp(props.href).value ?? '');
-const disableRipple = computed(() => !!useResponsiveProp(props.disableRipple).value);
 const disabled = computed(() => useResponsiveProp(props.disabled).value || loading.value);
-// Internal state for ripple effect
+
 const ripples = ref<Array<{ id: number; x: number; y: number; size: number }>>([]);
 let nextRippleId = 0;
 
 const createRipple = (event: MouseEvent) => {
-  if (disabled.value || disableRipple.value) return;
-
+  if (disabled.value || props.disableRipple) return;
   const el = event.currentTarget as HTMLElement;
   const diameter = Math.max(el.clientWidth, el.clientHeight);
   const radius = diameter / 2;
@@ -81,21 +78,16 @@ const createRipple = (event: MouseEvent) => {
   const x = event.clientX - rect.left - radius;
   const y = event.clientY - rect.top - radius;
   const id = nextRippleId++;
-
   ripples.value.push({ id, x, y, size: diameter });
-
   setTimeout(() => {
     ripples.value = ripples.value.filter((r) => r.id !== id);
   }, rippleDuration.value);
 };
 
-// Ripple color according to the theme or prop
-
 const getRippleColor = computed(() => {
   if (rippleColor.value) return rippleColor.value;
   const palette = theme.value.palette[color.value] as PaletteColor;
   if (variant.value === 'filled') return `rgba(0, 0, 0, ${rippleOpacity.value})`;
-
   const hex = palette.main.replace('#', '');
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
@@ -103,39 +95,31 @@ const getRippleColor = computed(() => {
   return `rgba(${r}, ${g}, ${b}, ${rippleOpacity.value})`;
 });
 
-// =====================
-// Control visual por posición del ícono
-// =====================
 const showStartIcon = computed(() => (loading.value ? loadingPosition.value === 'start' : !!startIcon.value));
 const showEndIcon = computed(() => (loading.value ? loadingPosition.value === 'end' : !!endIcon.value));
 const showCenterIndicator = computed(() => loading.value && loadingPosition.value === 'center');
 
-// =====================
-// Hash único para inyectar estilos específicos
-// =====================
-const uniqueHash = computed(() => {
-  return `NvButton-${hashString(
-    JSON.stringify({
-      variant: variant.value,
-      size: size.value,
-      color: color.value,
-      shape: shape.value,
-      shadow: shadow.value,
-      disabled: disabled.value,
-      disabledElevation: disabledElevation.value,
-      themeMode: theme.value.palette.mode,
-      breakpoint: currentBreakpoint.value,
-      fullWidth: fullWidth.value,
-      instanceId,
-    }),
-  )}`;
-});
+const uniqueHash = computed(
+  () =>
+    `NvButton-${hashString(
+      JSON.stringify({
+        variant: variant.value,
+        size: size.value,
+        color: color.value,
+        shape: shape.value,
+        shadow: shadow.value,
+        disabled: disabled.value,
+        disabledElevation: disabledElevation.value,
+        themeMode: theme.value.palette.mode,
+        breakpoint: currentBreakpoint.value,
+        fullWidth: fullWidth.value,
+        instanceId,
+      }),
+    )}`,
+);
 
 const styleSelector = computed(() => `.${uniqueHash.value}`);
 
-// =====================
-// Computed para estilos y clases
-// =====================
 const { styles } = useButtonStyles(
   {
     variant,
@@ -150,15 +134,15 @@ const { styles } = useButtonStyles(
     className: styleSelector,
     fullWidth,
     component,
-    disableRipple,
-    href,
+    disableRipple: computed(() => !!useResponsiveProp(props.disableRipple).value),
+    href: computed(() => useResponsiveProp(props.href).value ?? ''),
     loading,
     loadingIndicator,
     loadingPosition,
     rippleDuration,
     rippleOpacity,
     rippleColor,
-    target,
+    target: computed(() => useResponsiveProp(props.target).value ?? '_self'),
   },
   themeContext,
 );
@@ -176,31 +160,25 @@ const buttonClasses = computed(() => [
     startIcon,
     fullWidth,
     component,
-    disableRipple,
-    href,
+    disableRipple: computed(() => !!useResponsiveProp(props.disableRipple).value),
+    href: computed(() => useResponsiveProp(props.href).value ?? ''),
     loading,
     loadingIndicator,
     loadingPosition,
     rippleDuration,
     rippleOpacity,
     rippleColor,
-    target,
+    target: computed(() => useResponsiveProp(props.target).value ?? '_self'),
   }).value,
   uniqueHash.value,
   'NvButton',
   loading.value ? 'NvButton--loading' : '',
 ]);
 
-// =====================
-// Inyección dinámica de estilos únicos por combinación
-// =====================
-watch(
-  [styleSelector, styles, theme, currentBreakpoint],
-  () => {
-    updateStyles(styleSelector.value, styles.value);
-  },
-  { immediate: true, deep: true },
-);
+watch([styleSelector, styles, theme, currentBreakpoint], () => updateStyles(styleSelector.value, styles.value), {
+  immediate: true,
+  deep: true,
+});
 </script>
 
 <template>

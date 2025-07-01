@@ -1,61 +1,45 @@
-# vn-ui
+# 🧩 NvUI — Vue 3 Component Library
 
-This template should help get you started developing with Vue 3 in Vite.
+![Vue 3](https://img.shields.io/badge/vue-3.x-brightgreen.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue.svg)
+![MIT License](https://img.shields.io/badge/license-MIT-green.svg)
+![WIP](https://img.shields.io/badge/status-in%20progress-yellow.svg)
 
-## Recommended IDE Setup
+> ⚠️ **Work in progress** — NvUI está en desarrollo activo. Feedback y colaboraciones son bienvenidas.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Type Support for `.vue` Imports in TS
+## ✨ ¿Qué es NvUI?
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+**NvUI** es una **librería de componentes UI para Vue 3** altamente personalizable, pensada para aplicaciones modernas y escalables. Su objetivo es ofrecer una base sólida, tipada y adaptable a cualquier diseño, integrando conceptos como:
 
-## Customize configuration
+- 🧩 Componentes modulares con lógica aislada
+- 📱 Props responsivas por breakpoint (`xs`, `sm`, `md`, `lg`, `xl`)
+- 🎨 Temas centralizados (paleta, tipografía, sombras, etc.)
+- 🌊 Efectos `ripple` personalizables
+- ⚡ Generación dinámica de estilos y clases por componente
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+## 📦 Instalación
 
-```sh
-pnpm install
+```bash
+npm install nv-ui
+# o
+yarn add nv-ui
 ```
+---
+📁 Estructura de componentes
+Cada componente sigue una arquitectura clara y escalable:
 
-### Compile and Hot-Reload for Development
-
-```sh
-pnpm dev
 ```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-pnpm build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-pnpm test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-pnpm test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-pnpm build
-pnpm test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
+NvButton/
+├── NvButton.vue                  # Componente principal
+├── types.d.ts                   # Tipos fuertes y responsivos
+├── useButtonStyles.ts           # Estilos dinámicos
+├── useButtonClasses.ts          # Clases por variantes
+├── useButtonGlobalStyles.ts     # Inyección global de estilos base
+├── index.ts                     # Export central
+└── test/
+    └── Button.spec.ts           # Tests unitarios
 ```
